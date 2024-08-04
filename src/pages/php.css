@@ -1,0 +1,326 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/* Base styles */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.php-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  padding: 60px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: perspective(1000px) rotateX(0deg);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-section:hover {
+  transform: perspective(1000px) rotateX(5deg);
+}
+
+.hero-section h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background-color: #ee5253;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Course Overview */
+.course-overview {
+  margin: 60px 0;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.course-overview.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.course-overview h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #2d3436;
+}
+
+.course-overview p {
+  font-size: 1.2em;
+  color: #636e72;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+/* Why Java Section */
+.why-php{
+  background-color: #f8f9fa;
+  padding: 60px 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.why-php h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #2d3436;
+}
+
+.reasons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.reason-item {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 30px;
+  flex: 1 1 calc(33.333% - 30px);
+  min-width: 250px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reason-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reason-item:hover {
+  transform: translateY(-10px) rotate(2deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.reason-item h3 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  color: #2d3436;
+}
+
+.reason-item p {
+  font-size: 1em;
+  color: #636e72;
+}
+
+/* Staggered Animation for Reason Items */
+.reason-item:nth-child(1) { transition-delay: 0.1s; }
+.reason-item:nth-child(2) { transition-delay: 0.2s; }
+.reason-item:nth-child(3) { transition-delay: 0.3s; }
+
+/* Additional Sections */
+.additional-section {
+  margin: 60px 0;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.additional-section.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Course Content */
+.course-content {
+  background-color: #ffffff;
+  padding: 60px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.content-modules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.module {
+  flex: 1 1 calc(33.333% - 30px);
+  min-width: 250px;
+}
+
+.module h3 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #2d3436;
+}
+
+.module ul {
+  padding-left: 20px;
+}
+
+/* Projects Section */
+.projects {
+  background-color: #ffffff;
+  padding: 60px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Why ULearnTech Section */
+.why-ulearntech {
+  background-color: #ffffff;
+  padding: 60px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.reasons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.reason-card {
+  flex: 1 1 calc(33.333% - 30px);
+  min-width: 250px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+}
+
+.reason-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Enroll Section */
+.enroll-section {
+  text-align: center;
+  margin: 60px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .java-page {
+    padding: 15px;
+  }
+
+  .hero-section,
+  .course-overview,
+  .why-php,
+  .course-content,
+  .projects,
+  .why-ulearntech {
+    padding: 40px 30px;
+  }
+
+  .reason-item,
+  .module,
+  .reason-card {
+    flex: 1 1 calc(50% - 30px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 40px 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5em;
+  }
+
+  .hero-section p {
+    font-size: 1em;
+  }
+
+  .course-overview h2,
+  .why-php h2,
+  .course-content h2,
+  .projects h2,
+  .why-ulearntech h2 {
+    font-size: 2em;
+  }
+
+  .reasons-grid,
+  .content-modules,
+  .reasons-container {
+    flex-direction: column;
+  }
+
+  .reason-item,
+  .module,
+  .reason-card {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 2em;
+  }
+
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  .course-overview h2,
+  .why-php h2,
+  .course-content h2,
+  .projects h2,
+  .why-ulearntech h2 {
+    font-size: 1.8em;
+  }
+
+  .reason-item h3,
+  .module h3,
+  .reason-card h3 {
+    font-size: 1.3em;
+  }
+}

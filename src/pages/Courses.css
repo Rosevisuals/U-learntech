@@ -1,0 +1,115 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.courses-page {
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff; 
+  height: 400px;
+}
+
+.courses-header {
+  text-align: center;
+  margin-top: 200px;
+}
+
+.courses-container,
+.courses-container2 {
+  position: relative;
+  top: 180px;
+  color: black;
+}
+
+.course-cards {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+}
+
+.course-cards:hover {
+  transform: translateY(-5px);
+}
+
+.course-info {
+  text-align: center;
+}
+
+.course-info h4 {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.view-course-button {
+  color: #ffffff;
+  text-decoration: none;
+ 
+}
+
+.view-course-button:hover {
+  color: #0056b3;
+}
+
+.about-section {
+  position: relative;
+  top: 250px;
+  color: black;
+  text-align: center;
+}
+
+.about-section p {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-section h2 {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .courses-header {
+    margin-top: 150px;
+  }
+
+  .course-cards {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .about-section {
+    padding: 0 20px;
+  }
+
+  .about-section p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .courses-header {
+    margin-top: 100px;
+  }
+
+  .view-course-button,
+  .enroll-now-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .about-section h2 {
+    font-size: 1.5em;
+  }
+
+  .about-section p {
+    font-size: 1em;
+  }
+}

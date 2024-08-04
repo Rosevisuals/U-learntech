@@ -1,0 +1,121 @@
+.python-reading-page {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+  
+  .content-container {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    position: relative;
+    top: 65px;
+  }
+  
+  .sidebar {
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Enable vertical scroll */
+    position: fixed; /* Fix position to make it scroll independently */
+    top: 65px;
+    left: 0;
+    width: 250px; /* Adjust width as needed */
+    background-color: #f8f9fa; /* Background color */
+    padding: 20px; /* Padding */
+    
+    
+  
+  }
+  
+  .sidebar h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 10px 0;
+  }
+  
+  .sidebar ul li button {
+    text-decoration: none;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li button:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 270px; /* Adjust margin to accommodate sidebar width */
+    background-color: #ffffff; 
+  }
+  
+  .main-content section {
+    margin-bottom: 40px;
+  }
+  
+  .main-content section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .main-content section pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .content-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  }
+  .video-responsive {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .sidebar ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .sidebar ul ul {
+    padding-left: 20px;
+  }
+    
