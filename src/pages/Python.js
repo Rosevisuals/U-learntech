@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './Python.css';
 import { Link } from 'react-router-dom';
 import ReadOnlyCodeSnippet from '../components/ReadOnlyCodeSnippet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Python = () => {
   
@@ -262,12 +263,67 @@ if __name__ == '__main__':
     main()
 `;
   return (
+    <HelmetProvider>
     <div className="python-page">
+      <Helmet>
+      <title>Master Python Programming - From Basics to Advanced Applications | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
+      <meta name="keywords" content="Python, Programming, Data Science, Web Development, Machine Learning, AI, Django, Flask, NumPy, Pandas, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.ulearntech.com/courses/python-programming" />
+      <meta property="og:title" content="Master Python Programming - From Basics to Advanced Applications | U-Learn Tech" />
+      <meta property="og:description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
+      <meta property="og:image" content="https://www.ulearntech.com/images/python-course-og.jpg" />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.ulearntech.com/courses/python-programming" />
+      <meta name="twitter:title" content="Master Python Programming - From Basics to Advanced Applications | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.ulearntech.com/images/python-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master Python Programming - From Basics to Advanced Applications",
+          "description": "Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/python-programming",
+          "courseCode": "PY101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "Python",
+          "teaches": [
+            "Python Fundamentals",
+            "Object-Oriented Programming in Python",
+            "Data Structures and Algorithms",
+            "Web Development with Django and Flask",
+            "Data Science with NumPy and Pandas",
+            "Machine Learning with Scikit-learn",
+            "AI and Deep Learning Basics with TensorFlow",
+            "Python for Automation and Scripting",
+            "Database Interaction with Python",
+            "Python Best Practices and Clean Code"
+          ],
+          "occupationalCategory": "Software Developer, Data Scientist, Web Developer, AI Engineer"
+        })}
+      </script>
+      </Helmet>
       <Header />
       <div className="hero-section">
         <h1>Master Python Programming</h1>
         <p>Become a Python developer by completing a variety of projects!</p>
-        <Link to="/PythonReadingMaterials" className="cta-button">Enroll now</Link>
+        <Link to="/PythonReadingMaterials" className="cta-button">Get Started</Link>
       </div>
 
                 <section className="why-python">
@@ -429,10 +485,11 @@ if __name__ == '__main__':
       <section className="enroll-section">
         <h2>Ready to Start Your Python Journey?</h2>
         <p>Enroll now and take the first step towards becoming a Python expert!</p>
-        <button className="cta-button">Enroll Now</button>
+        <Link to="/PythonReadingMaterials" className="cta-button">Get Started</Link>
       </section>
 
     </div>
+  </HelmetProvider>
   );
 };
 

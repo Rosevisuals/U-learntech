@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter  } from 'react-syntax-highlighter';
 import customTheme from '../customSyntaxTheme';
 import { ArrowUp, Menu, X } from 'lucide-react';
 import './Jv.css';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const sections = [
     {
@@ -7004,7 +7005,54 @@ public class HashMapDemo {
     };
   
     return (
+        <HelmetProvider>
       <div className="java-course">
+        <Helmet>
+        <title>Master Java Programming - From Basics to Advanced | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn Java programming from fundamentals to advanced concepts. Develop robust, scalable applications with our comprehensive Java course at U-Learn Tech." />
+      <meta name="keywords" content="Java, Object-Oriented Programming, JVM, Spring Framework, Android Development, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/java-programming" />
+      <meta name="twitter:title" content="Master Java Programming - From Basics to Advanced | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn Java programming from fundamentals to advanced concepts. Develop robust, scalable applications with our comprehensive Java course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/java-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master Java Programming - From Basics to Advanced",
+          "description": "Learn Java programming from fundamentals to advanced concepts. Develop robust, scalable applications with our comprehensive Java course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/java-programming",
+          "courseCode": "JAVA101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "Java",
+          "teaches": [
+            "Java Syntax", 
+            "Object-Oriented Programming", 
+            "Java Virtual Machine (JVM)", 
+            "Collections Framework", 
+            "Multithreading",
+            "Spring Framework",
+            "Android Development Basics"
+          ],
+          "occupationalCategory": "Software Developer"
+        })}
+      </script>
+        </Helmet>
         <Header />
         <button 
           className="sidebar-toggle"
@@ -7044,6 +7092,7 @@ public class HashMapDemo {
           </button>
         )}
       </div>
+    </HelmetProvider>
     );
   };
   

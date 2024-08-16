@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import './PythonReadingMaterials.css';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const sections = [
   { id: 'introduction', title: 'Introduction', content: 
@@ -6651,7 +6652,57 @@ const PythonReadingMaterials = () => {
   };
 
   return (
+    <HelmetProvider>
     <div className="python-reading-page">
+        <Helmet>
+        <title>Master Python Programming - From Basics to Advanced Applications | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
+      <meta name="keywords" content="Python, Programming, Data Science, Web Development, Machine Learning, AI, Django, Flask, NumPy, Pandas, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/python-programming" />
+      <meta name="twitter:title" content="Master Python Programming - From Basics to Advanced Applications | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/python-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master Python Programming - From Basics to Advanced Applications",
+          "description": "Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/python-programming",
+          "courseCode": "PY101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "Python",
+          "teaches": [
+            "Python Fundamentals",
+            "Object-Oriented Programming in Python",
+            "Data Structures and Algorithms",
+            "Web Development with Django and Flask",
+            "Data Science with NumPy and Pandas",
+            "Machine Learning with Scikit-learn",
+            "AI and Deep Learning Basics with TensorFlow",
+            "Python for Automation and Scripting",
+            "Database Interaction with Python",
+            "Python Best Practices and Clean Code"
+          ],
+          "occupationalCategory": "Software Developer, Data Scientist, Web Developer, AI Engineer"
+        })}
+      </script>
+        </Helmet>
       <Header />
       <div className="content-container">
         <nav className="sidebar">
@@ -6679,6 +6730,7 @@ const PythonReadingMaterials = () => {
         </div>
       </div>
     </div>
+    </HelmetProvider>
   );
 };
 

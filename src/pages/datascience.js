@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { FaChartLine, FaCode, FaLaptopCode, FaHandsHelping, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import './datascience.css'; // Ensure you create this CSS file
@@ -86,6 +86,7 @@ const Datascience = () => {
     ];
 
     return (
+    <HelmetProvider>
         <div className="datascience-page">
             <Helmet>
                 <title>Learn Data Science and Analysis - Comprehensive Guide</title>
@@ -100,7 +101,7 @@ const Datascience = () => {
                             "provider": {
                                 "@type": "Organization",
                                 "name": "U-Learn Tech",
-                                "sameAs": "http://www.ulearntech.com"
+                                "sameAs": "http://www.u-learntech.com"
                             }
                         }
                     `}
@@ -217,6 +218,7 @@ const Datascience = () => {
                 <Link to="/science" className="cta-button">Get Started</Link>
             </section>
         </div>
+    </HelmetProvider>
     );
 };
 

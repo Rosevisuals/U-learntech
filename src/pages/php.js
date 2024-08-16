@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import { FaChartLine, FaCode, FaLaptopCode, FaHandsHelping, FaChalkboardTeacher,  } from "react-icons/fa";
+import { FaChartLine, FaCode, FaLaptopCode, FaHandsHelping, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import './php.css'; // Ensure you create this CSS file
 import Header from '../components/Header';
 import Slider from 'react-slick';
@@ -211,128 +212,179 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["fileToUpload"])) {
     ];
 
     return (
-        <div className="php-page">
-            <Header />
-            <div className="hero-section">
-                <h1>PHP Mastery</h1>
-                <p>Become a PHP developer by completing a variety of projects.</p>
-                <Link to="/ph" className="cta-button">Get Started</Link>
+        <HelmetProvider>
+            <div className="php-page">
+                <Helmet>
+                <title>Master PHP Programming - Web Development and Server-Side Scripting | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course at U-Learn Tech." />
+      <meta name="keywords" content="PHP, Web Development, Server-Side Scripting, MySQL, Laravel, WordPress, RESTful APIs, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/php-programming" />
+      <meta name="twitter:title" content="Master PHP Programming - Web Development and Server-Side Scripting | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/php-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master PHP Programming - Web Development and Server-Side Scripting",
+          "description": "Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/php-programming",
+          "courseCode": "PHP101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "PHP",
+          "teaches": [
+            "PHP Fundamentals",
+            "Object-Oriented Programming in PHP",
+            "MySQL Database Integration",
+            "PHP Data Objects (PDO)",
+            "PHP Security Best Practices",
+            "RESTful API Development with PHP",
+            "Laravel Framework Basics",
+            "WordPress Theme and Plugin Development",
+            "PHP Performance Optimization",
+            "Modern PHP Features and Standards"
+          ],
+          "occupationalCategory": "Web Developer, Backend Developer, Full Stack Developer"
+        })}
+      </script>
+                </Helmet>
+                <Header />
+                <div className="hero-section">
+                    <h1>PHP Mastery</h1>
+                    <p>Become a PHP developer by completing a variety of projects.</p>
+                    <Link to="/ph" className="cta-button">Get Started</Link>
+                </div>
+
+                <section className="course-overview" ref={courseOverviewRef}>
+                    <h2>Course Overview</h2>
+                    <p>This comprehensive PHP course will take you from a beginner to an advanced level.</p>
+                    <p>Equipping you with the skills to build robust and efficient web applications.</p>
+                    <h3>Who This Course Is For</h3>
+                    <p>This course is designed for:</p>
+                    <p>Beginners with basic programming knowledge</p>
+                    <p>Web developers looking to expand their backend skills</p>
+                    <p>Developers interested in server-side programming</p>
+                    <p>Anyone looking to build dynamic websites</p>
+                </section>
+
+                <section className="why-php" ref={whyUlearnTechRef}>
+                    <h2>Why Learn PHP</h2>
+                    <div className="reasons-grid">
+                        {[
+                            { icon: <FaCode />, title: "Widely Used", description: "PHP is a popular language for web development." },
+                            { icon: <FaLaptopCode />, title: "Server-Side Scripting", description: "PHP is designed for server-side scripting, making it a great choice for backend development." },
+                            { icon: <FaChartLine />, title: "High Demand", description: "PHP developers are in high demand, especially for web development projects." }
+                        ].map((reason, index) => (
+                            <div 
+                                key={index}
+                                className="reason-item"
+                                ref={el => reasonItemsRef.current[index] = el}
+                            >
+                                {reason.icon}
+                                <h3>{reason.title}</h3>
+                                <p>{reason.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+                <section className="course-content">
+                    <h2>Course Content</h2>
+                    <div className="content-modules">
+                        <div className="module">
+                            <h3>PHP Basics</h3>
+                            <ul>
+                                <li>Introduction to PHP</li>
+                                <li>Variables and Data Types</li>
+                                <li>Operators and Expressions</li>
+                                <li>Control Flow Statements</li>
+                                <li>Functions and Arrays</li>
+                            </ul>
+                        </div>
+                        <div className="module">
+                            <h3>Advanced PHP</h3>
+                            <ul>
+                                <li>Object-Oriented Programming</li>
+                                <li>Exception Handling</li>
+                                <li>File Handling</li>
+                                <li>Sessions and Cookies</li>
+                                <li>Security Practices</li>
+                            </ul>
+                        </div>
+                        <div className="module">
+                            <h3>PHP Frameworks</h3>
+                            <ul>
+                                <li>Laravel Framework</li>
+                                <li>Symfony Framework</li>
+                                <li>CodeIgniter Framework</li>
+                                <li>Yii Framework</li>
+                                <li>Zend Framework</li>
+                            </ul>
+                        </div>
+                        <div className="module">
+                            <h3>Other Important Areas</h3>
+                            <ul>
+                                <li>PHP Standard Library</li>
+                                <li>RESTful APIs</li>
+                                <li>Testing with PHPUnit</li>
+                                <li>PHP and MySQL</li>
+                                <li>Web Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="projects additional-section" ref={projectsRef}>
+                    <h2>Hands-on Projects</h2>
+                    <Slider {...sliderSettings}>
+                        {projects.map((project, index) => (
+                            <div key={index}>
+                                <h3>{project.title}</h3>
+                                <p>{project.description}</p>
+                                <ReadOnlyCodeSnippet code={project.code} />
+                            </div>
+                        ))}
+                    </Slider>
+                </section>
+                <section className="why-ulearntech additional-section" ref={whyUlearnTechRef}>
+                    <h2>Why Study at U-Learn Tech?</h2>
+                    <div className="reasons-container">
+                        {[
+                            { icon: <FaChalkboardTeacher />, title: "Comprehensive Curriculum", description: "Our courses cover the latest technologies and best practices, ensuring you stay ahead of the curve." },
+                            { icon: <FaHandsHelping />, title: "Hands-On Learning", description: "Engage in practical projects that give you the skills and confidence to succeed in your career." },
+                            { icon: <FaLaptopCode />, title: "Flexible Learning", description: "Study at your own pace with flexible schedules that fit your lifestyle." }
+                        ].map((reason, index) => (
+                            <div key={index} className="reason-card">
+                                {reason.icon}
+                                <h3>{reason.title}</h3>
+                                <p>{reason.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="enroll-section">
+                   <h2>Ready to Start Your PHP Journey?</h2>
+                   <p>Enroll now and take the first step towards becoming a PHP expert!</p>
+                   <Link to="/ph" className="cta-button">Get Started</Link>
+                </section>
+
             </div>
-
-            <section className="course-overview" ref={courseOverviewRef}>
-                <h2>Course Overview</h2>
-                <p>This comprehensive PHP course will take you from a beginner to an advanced level.</p>
-                <p>Equipping you with the skills to build robust and efficient web applications.</p>
-                <h3>Who This Course Is For</h3>
-                <p>This course is designed for:</p>
-                <p>Beginners with basic programming knowledge</p>
-                <p>Web developers looking to expand their backend skills</p>
-                <p>Developers interested in server-side programming</p>
-                <p>Anyone looking to build dynamic websites</p>
-            </section>
-
-            <section className="why-php" ref={whyUlearnTechRef}>
-                <h2>Why Learn PHP</h2>
-                <div className="reasons-grid">
-                    {[
-                        { icon: <FaCode />, title: "Widely Used", description: "PHP is a popular language for web development." },
-                        { icon: <FaLaptopCode />, title: "Server-Side Scripting", description: "PHP is designed for server-side scripting, making it a great choice for backend development." },
-                        { icon: <FaChartLine />, title: "High Demand", description: "PHP developers are in high demand, especially for web development projects." }
-                    ].map((reason, index) => (
-                        <div 
-                            key={index}
-                            className="reason-item"
-                            ref={el => reasonItemsRef.current[index] = el}
-                        >
-                            {reason.icon}
-                            <h3>{reason.title}</h3>
-                            <p>{reason.description}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-            <section className="course-content">
-                <h2>Course Content</h2>
-                <div className="content-modules">
-                    <div className="module">
-                        <h3>PHP Basics</h3>
-                        <ul>
-                            <li>Introduction to PHP</li>
-                            <li>Variables and Data Types</li>
-                            <li>Operators and Expressions</li>
-                            <li>Control Flow Statements</li>
-                            <li>Functions and Arrays</li>
-                        </ul>
-                    </div>
-                    <div className="module">
-                        <h3>Advanced PHP</h3>
-                        <ul>
-                            <li>Object-Oriented Programming</li>
-                            <li>Exception Handling</li>
-                            <li>File Handling</li>
-                            <li>Sessions and Cookies</li>
-                            <li>Security Practices</li>
-                        </ul>
-                    </div>
-                    <div className="module">
-                        <h3>PHP Frameworks</h3>
-                        <ul>
-                            <li>Laravel Framework</li>
-                            <li>Symfony Framework</li>
-                            <li>CodeIgniter Framework</li>
-                            <li>Yii Framework</li>
-                            <li>Zend Framework</li>
-                        </ul>
-                    </div>
-                    <div className="module">
-                        <h3>Other Important Areas</h3>
-                        <ul>
-                            <li>PHP Standard Library</li>
-                            <li>RESTful APIs</li>
-                            <li>Testing with PHPUnit</li>
-                            <li>PHP and MySQL</li>
-                            <li>Web Services</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section className="projects additional-section" ref={projectsRef}>
-                <h2>Hands-on Projects</h2>
-                <Slider {...sliderSettings}>
-                    {projects.map((project, index) => (
-                        <div key={index}>
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
-                            <ReadOnlyCodeSnippet code={project.code} />
-                        </div>
-                    ))}
-                </Slider>
-            </section>
-            <section className="why-ulearntech additional-section" ref={whyUlearnTechRef}>
-                <h2>Why Study at U-Learn Tech?</h2>
-                <div className="reasons-container">
-                    {[
-                        { icon: <FaChalkboardTeacher />, title: "Comprehensive Curriculum", description: "Our courses cover the latest technologies and best practices, ensuring you stay ahead of the curve." },
-                        { icon: <FaHandsHelping />, title: "Hands-On Learning", description: "Engage in practical projects that give you the skills and confidence to succeed in your career." },
-                        { icon: <FaLaptopCode />, title: "Flexible Learning", description: "Study at your own pace with flexible schedules that fit your lifestyle." }
-                    ].map((reason, index) => (
-                        <div key={index} className="reason-card">
-                            {reason.icon}
-                            <h3>{reason.title}</h3>
-                            <p>{reason.description}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <section className="enroll-section">
-               <h2>Ready to Start Your Java Journey?</h2>
-               <p>Enroll now and take the first step towards becoming a Java expert!</p>
-               <Link to="/ph" className="cta-button">Get Started</Link>
-            </section>
-
-        </div>
+        </HelmetProvider>
     );
 };
 

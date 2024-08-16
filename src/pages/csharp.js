@@ -5,8 +5,10 @@ import { FaCode, FaLaptopCode, FaChartLine, FaHandsHelping, FaChalkboardTeacher 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './csharp.css';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import ReadOnlyCodeSnippet from '../components/ReadOnlyCodeSnippet';
+
 
 const CsharpPage = () => {
     const whyUlearnTechRef = useRef(null);
@@ -284,7 +286,45 @@ namespace ChatApplication
   ];
 
   return (
+    <HelmetProvider>
     <div className="csharp-page">
+      <Helmet>
+      <title>Master C# Programming - U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn C# programming from basics to advanced concepts. Build robust applications with our comprehensive C# course at U-Learn Tech." />
+      <meta name="keywords" content="C#, C Sharp, .NET Framework, Object-Oriented Programming, Software Development, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/csharp-programming" />
+      <meta name="twitter:title" content="Master C# Programming - U-Learn Tech" />
+      <meta name="twitter:description" content="Learn C# programming from basics to advanced concepts. Build robust applications with our comprehensive C# course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/csharp-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master C# Programming",
+          "description": "Learn C# programming from basics to advanced concepts. Build robust applications with our comprehensive C# course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/csharp-programming",
+          "courseCode": "CSH101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "C#",
+          "teaches": ["C# Syntax", ".NET Framework", "Object-Oriented Programming", "LINQ", "ASP.NET"]
+        })}
+      </script>
+      </Helmet>
       <Header />
       <div className="hero-section">
         <h1 className='c'>Master C# Programming</h1>
@@ -410,6 +450,7 @@ namespace ChatApplication
       </section>
 
     </div>
+  </HelmetProvider>
   );
 };
 

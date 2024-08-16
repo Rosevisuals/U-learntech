@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const Javascript = () => {
@@ -273,7 +274,56 @@ const Javascript = () => {
     ];
 
     return (
+        <HelmetProvider>
         <div className="javascript-page">
+            <Helmet>
+            <title>Master JavaScript - From Basics to Advanced Web Development | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course at U-Learn Tech." />
+      <meta name="keywords" content="JavaScript, ES6+, DOM Manipulation, Asynchronous JavaScript, React, Node.js, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/javascript-programming" />
+      <meta name="twitter:title" content="Master JavaScript - From Basics to Advanced Web Development | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/javascript-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master JavaScript - From Basics to Advanced Web Development",
+          "description": "Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/javascript-programming",
+          "courseCode": "JS101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "JavaScript",
+          "teaches": [
+            "JavaScript Fundamentals",
+            "ES6+ Features",
+            "DOM Manipulation",
+            "Asynchronous JavaScript",
+            "AJAX and Fetch API",
+            "Object-Oriented JavaScript",
+            "Functional Programming",
+            "React Basics",
+            "Node.js Introduction"
+          ],
+          "occupationalCategory": "Web Developer"
+        })}
+      </script>
+            </Helmet>
             <Header />
             <div className="hero-section">
                 <h1>JavaScript Mastery</h1>
@@ -377,9 +427,10 @@ const Javascript = () => {
             <section className="enroll-section">
                <h2>Ready to Start Your JavaScript Journey?</h2>
                <p>Enroll now and take the first step towards becoming a JavaScript expert!</p>
-               <button className="cta-button">Get Started</button>
+               <Link to="/Script" className="cta-button">Get Started</Link>
             </section>
         </div>
+    </HelmetProvider>
     );
 };
 

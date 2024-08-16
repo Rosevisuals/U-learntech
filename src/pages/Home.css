@@ -1,3 +1,6 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
 /* General Styles */
 body {
   font-family: 'Arial', sans-serif;
@@ -174,6 +177,7 @@ h1, h2, h3 {
   margin: 0;
   background-color: #168aff;
   color: #fff;
+  font-size: 20px;
 }
 
 .course-card p {
@@ -247,6 +251,44 @@ h1, h2, h3 {
   color: #007bff;
   margin-bottom: 1rem;
 }
+/* Default style */
+.unlock {
+  font-size: 2.5em;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 1024px) {
+     .unlock{
+      position: relative;
+      left: -50px;
+     }
+}
+@media (max-width: 768px) {
+  .unlock {
+    font-size: 2em;
+    position: relative;
+    left: -50px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  .unlock {
+    font-size: 1.5em;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 480px) {
+  .unlock {
+    font-size: 1.2em;
+    width: 200px;
+    position: relative;
+    left: -20px;
+  }
+}
 
 .quote {
   font-style: italic;
@@ -287,7 +329,9 @@ h1, h2, h3 {
   margin: 0 auto 15px;
   font-weight: bold;
 }
-
+.choose{
+  font-size: 20px;
+}
 /* CTA Section */
 .cta {
   background-color: #168aff;
@@ -312,14 +356,6 @@ h1, h2, h3 {
   background-color: #27ae60;
 }
 
-/* Footer */
-footer {
-  background-color: #168aff;
-  color: #ecf0f1;
-  position: fixed;
-  width: 114%;
-  margin-right: 100%;
-}
 
 
 /* Responsive Design */
@@ -359,8 +395,8 @@ header{
 
 .section-title {
   text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
+  margin-top: 3rem;
+  font-size: 2rem;
   color: #333;
 }
 
@@ -455,5 +491,79 @@ header{
   
   .section-title {
     font-size: 2rem;
+  }
+}
+
+
+.footer-content {
+  background-color:#168aff ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+ position: relative;
+ top: 20px;
+ right:100px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-links .view-course-button {
+  color: white;
+  text-decoration: none;
+  padding: 8px 15px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 50px;
+}
+
+.footer-links .view-course-button:hover {
+  color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.copy {
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
+  position: relative;
+  right: 150px;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .copy {
+    margin-top: 20px;
+    position: relative;
+    left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-links .view-course-button {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 }

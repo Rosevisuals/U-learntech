@@ -19,8 +19,14 @@ import Csharp from './pages/csharp';
 import Sharp from './pages/sharp';
 import Datascience from './pages/datascience';
 import Science from './pages/science';
+import MachineLearning from './pages/machinelearning';
+import UX from './pages/UX';
+import Design from './pages/design';
+import Help from './pages/help';
+import Privacy from './pages/privacy';
+import Faq from './pages/faq';
+import About from './pages/about';
 import Contact from './pages/contact';
-
 
 const App = () => {
   return (
@@ -47,9 +53,14 @@ const App = () => {
           <Route path='/sharp' element={<Sharp/>}/>
           <Route path="/datascience/:id" element={<Datascience/>}/>
           <Route path='/science' element={<Science/>}/>
-          <Route path='/contact' element={<Contact/>}/>
-          
-          
+          <Route path="/machinelearning/:id" element={<MachineLearning/>}/> 
+          <Route path="/ux/:id" element={<UX/>}/> 
+          <Route path='/design' element={<Design/>}/>
+          <Route path="/help/" element={<Help/>}/>
+          <Route path="/privacy/" element={<Privacy/>}/>
+          <Route path="/faq/" element={<Faq/>}/>
+          <Route path="/about/" element={<About/>}/>
+          <Route path="/contact/" element={<Contact/>}/>
         </Routes>
       </div>
     </Router>

@@ -2,6 +2,7 @@ import React, { useState , useEffect} from 'react';
 import Header from '../components/Header';
 import { ArrowUp,Menu, X } from 'lucide-react';
 import './Script.css';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const sections = [
   {
@@ -2974,7 +2975,61 @@ const JavaScriptCourse = () => {
     };
   
     return (
+        <HelmetProvider>
       <div className="javascript-course">
+        <Helmet>
+        <title>Master JavaScript - From Basics to Advanced Web Development | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course at U-Learn Tech." />
+      <meta name="keywords" content="JavaScript, ES6+, DOM Manipulation, Asynchronous JavaScript, React, Node.js, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.ulearntech.com/courses/javascript-programming" />
+      <meta property="og:title" content="Master JavaScript - From Basics to Advanced Web Development | U-Learn Tech" />
+      <meta property="og:description" content="Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course at U-Learn Tech." />
+      <meta property="og:image" content="https://www.ulearntech.com/images/javascript-course-og.jpg" />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.ulearntech.com/courses/javascript-programming" />
+      <meta name="twitter:title" content="Master JavaScript - From Basics to Advanced Web Development | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.ulearntech.com/images/javascript-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master JavaScript - From Basics to Advanced Web Development",
+          "description": "Learn JavaScript from fundamentals to advanced concepts. Build interactive, dynamic web applications with our comprehensive JavaScript course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/javascript-programming",
+          "courseCode": "JS101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "JavaScript",
+          "teaches": [
+            "JavaScript Fundamentals",
+            "ES6+ Features",
+            "DOM Manipulation",
+            "Asynchronous JavaScript",
+            "AJAX and Fetch API",
+            "Object-Oriented JavaScript",
+            "Functional Programming",
+            "React Basics",
+            "Node.js Introduction"
+          ],
+          "occupationalCategory": "Web Developer"
+        })}
+      </script>
+        </Helmet>
         <Header />
         <button 
           className="sidebar-toggle"
@@ -3014,6 +3069,7 @@ const JavaScriptCourse = () => {
           </button>
         )}
       </div>
+    </HelmetProvider>
     );
   };
   

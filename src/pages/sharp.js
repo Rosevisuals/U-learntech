@@ -5,7 +5,7 @@ import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { ArrowUp, Menu, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import Button from '../components/ui/button';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Code } from 'lucide-react';
 import './sharp.css';
 
@@ -6326,6 +6326,7 @@ class Program
 );
 };
     return (
+    <HelmetProvider>
       <div className="csharp-course">
         <Helmet>
         <title>Learn C# Programming - Comprehensive Guide</title>
@@ -6376,6 +6377,7 @@ class Program
           </button>
         )}
       </div>
+    </HelmetProvider>
     );
   };
   

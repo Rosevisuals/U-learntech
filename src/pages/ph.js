@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import Button from '../components/ui/button';
 import { Code } from 'lucide-react';
 import './ph.css';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const sections = [
     {
@@ -5542,7 +5543,56 @@ const PhpCourse = () => {
       );
     };
     return (
+      <HelmetProvider>
       <div className="kotlin-course">
+        <Helmet>
+        <title>Master PHP Programming - Web Development and Server-Side Scripting | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course at U-Learn Tech." />
+      <meta name="keywords" content="PHP, Web Development, Server-Side Scripting, MySQL, Laravel, WordPress, RESTful APIs, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+     
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/php-programming" />
+      <meta name="twitter:title" content="Master PHP Programming - Web Development and Server-Side Scripting | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/php-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master PHP Programming - Web Development and Server-Side Scripting",
+          "description": "Learn PHP from basics to advanced concepts. Build dynamic websites, RESTful APIs, and robust web applications with our comprehensive PHP course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/php-programming",
+          "courseCode": "PHP101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "PHP",
+          "teaches": [
+            "PHP Fundamentals",
+            "Object-Oriented Programming in PHP",
+            "MySQL Database Integration",
+            "PHP Data Objects (PDO)",
+            "PHP Security Best Practices",
+            "RESTful API Development with PHP",
+            "Laravel Framework Basics",
+            "WordPress Theme and Plugin Development",
+            "PHP Performance Optimization",
+            "Modern PHP Features and Standards"
+          ],
+          "occupationalCategory": "Web Developer, Backend Developer, Full Stack Developer"
+        })}
+      </script>
+        </Helmet>
         <Header />
         <button
           className="sidebar-toggle"
@@ -5573,6 +5623,7 @@ const PhpCourse = () => {
           </button>
         )}
       </div>
+      </HelmetProvider>
     );
   };
   

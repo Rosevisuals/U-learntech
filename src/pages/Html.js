@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Html = () => {
 
@@ -316,7 +317,44 @@ const Html = () => {
 
 
     return (
+        <HelmetProvider>
         <div className="html-page">
+            <Helmet>
+            <title>Master HTML and CSS - Web Development Fundamentals | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn HTML and CSS from scratch. Build responsive, beautiful websites with our comprehensive web development course at U-Learn Tech." />
+      <meta name="keywords" content="HTML, CSS, Web Development, Responsive Design, Frontend, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/html-css-fundamentals" />
+      <meta name="twitter:title" content="Master HTML and CSS - Web Development Fundamentals | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn HTML and CSS from scratch. Build responsive, beautiful websites with our comprehensive web development course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/html-css-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master HTML and CSS - Web Development Fundamentals",
+          "description": "Learn HTML and CSS from scratch. Build responsive, beautiful websites with our comprehensive web development course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/html-css-fundamentals",
+          "courseCode": "WEB101",
+          "educationalLevel": "Beginner to Intermediate",
+          "teaches": ["HTML5", "CSS3", "Responsive Design", "Flexbox", "CSS Grid", "Web Accessibility"],
+          "occupationalCategory": "Web Developer"
+        })}
+      </script>
+            </Helmet>
             <Header/>
             <div className="hero-section">
                 <h1>HTML & CSS Mastery</h1>
@@ -441,6 +479,7 @@ const Html = () => {
                <Link to="/Css" className="cta-button">Get Started</Link>
             </section>
         </div>
+    </HelmetProvider>
     );
 };
 

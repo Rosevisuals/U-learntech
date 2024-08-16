@@ -1,0 +1,98 @@
+/* HelpPage Styles */
+
+#help-support {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
+    margin: 20px auto;
+    max-width: 850px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #help-support h1 {
+    text-align: center;
+    color: #222222;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    font-weight: 700;
+  }
+  
+  #help-support h2 {
+    color: #444444;
+    margin-top: 40px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 8px;
+    font-size: 1.8em;
+    font-weight: 600;
+  }
+  
+  #help-support h3 {
+    color: #555555;
+    margin-top: 25px;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+  
+  #help-support p {
+    margin: 12px 0;
+    color: #666666;
+    font-size: 1.1em;
+  }
+  
+  #help-support ul {
+    padding-left: 25px;
+    list-style-type: square;
+    margin: 15px 0;
+  }
+  
+  #help-support ul li {
+    margin-bottom: 12px;
+    color: #444444;
+  }
+  
+  #help-support a {
+    color: #d23669;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  #help-support a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Additional Styling for Sections */
+  #help-support section {
+    margin-bottom: 40px;
+  }
+  
+  #help-support section#additional-resources ul li::before {
+    content: '→ ';
+    color: #d23669;
+    font-weight: bold;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    #help-support {
+      padding: 20px;
+    }
+  
+    #help-support h1 {
+      font-size: 2em;
+    }
+  
+    #help-support h2 {
+      font-size: 1.5em;
+    }
+  
+    #help-support h3 {
+      font-size: 1.3em;
+    }
+  
+    #help-support p {
+      font-size: 1em;
+    }
+  }
+  

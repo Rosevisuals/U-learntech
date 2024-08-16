@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Kotlin = () => {
     const whyUlearnTechRef = useRef(null);
@@ -251,7 +252,56 @@ fun main() {
     ];
 
     return(
+        <HelmetProvider>
          <div className="kotlin-page">
+            <Helmet>
+            <title>Master Kotlin Programming - Android Development and Beyond | U-Learn Tech</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Learn Kotlin from basics to advanced concepts. Develop modern Android apps and server-side applications with our comprehensive Kotlin course at U-Learn Tech." />
+      <meta name="keywords" content="Kotlin, Android Development, JVM, Coroutines, Multiplatform, Functional Programming, U-Learn Tech" />
+      <meta name="author" content="U-Learn Tech" />
+      
+      
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.u-learntech.com/courses/kotlin-programming" />
+      <meta name="twitter:title" content="Master Kotlin Programming - Android Development and Beyond | U-Learn Tech" />
+      <meta name="twitter:description" content="Learn Kotlin from basics to advanced concepts. Develop modern Android apps and server-side applications with our comprehensive Kotlin course at U-Learn Tech." />
+      <meta name="twitter:image" content="https://www.u-learntech.com/images/kotlin-course-twitter.jpg" />
+
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "Course",
+          "name": "Master Kotlin Programming - Android Development and Beyond",
+          "description": "Learn Kotlin from basics to advanced concepts. Develop modern Android apps and server-side applications with our comprehensive Kotlin course.",
+          "provider": {
+            "@type": "Organization",
+            "name": "U-Learn Tech",
+            "sameAs": "https://www.u-learntech.com"
+          },
+          "url": "https://www.u-learntech.com/courses/kotlin-programming",
+          "courseCode": "KOT101",
+          "educationalLevel": "Beginner to Advanced",
+          "programmingLanguage": "Kotlin",
+          "teaches": [
+            "Kotlin Fundamentals",
+            "Object-Oriented Programming in Kotlin",
+            "Functional Programming in Kotlin",
+            "Coroutines for Asynchronous Programming",
+            "Android App Development with Kotlin",
+            "Kotlin Multiplatform",
+            "Server-side Development with Kotlin",
+            "Kotlin/Native for Cross-platform Development",
+            "Jetpack Compose Basics"
+          ],
+          "occupationalCategory": "Software Developer, Android Developer"
+        })}
+      </script>
+            </Helmet>
             <Header />
             <div className="hero-section">
                 <h1>Kotlin Mastery</h1>
@@ -376,6 +426,7 @@ fun main() {
             </section>
 
          </div>
+        </HelmetProvider>
     );
 };
 

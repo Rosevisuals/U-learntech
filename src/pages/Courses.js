@@ -1,7 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import './Courses.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import futureAIImage from '../images/future-ai.jpg';
 import Header from '../components/Header';
 
@@ -39,12 +41,12 @@ const coursesRecommended = [
   {
     id: 7,
     title: 'Learn to Code with PHP',
-    type:'Php'
+    type: 'Php'
   },
   {
-    id:8,
-    title:'Learn to Code with C#',
-    type:'C#'
+    id: 8,
+    title: 'Learn to Code with C#',
+    type: 'C#'
   }
 ];
 
@@ -64,11 +66,7 @@ const newlyReleasedCourses = [
     title: 'UI/UX Design Principles',
     type: 'ux'
   },
-  {
-    id: 9,
-    title:'Tensor Flow',
-    type:'tensor'
-  },
+  
 ];
 
 const CourseCard = ({ course }) => {
@@ -105,11 +103,9 @@ const CourseCard = ({ course }) => {
       courseLink = `/MachineLearning/${course.id}`;
       break;
     case 'ux':
-      courseLink = `/UIUX/${course.id}`;
+      courseLink = `/UX/${course.id}`;
       break;
-    case 'tensor':
-      courseLink = `/TensorFlow/${course.id}`;
-      break;
+    
     default:
       courseLink = `/courses/${course.id}`;
   }
@@ -118,13 +114,12 @@ const CourseCard = ({ course }) => {
     <div className="course-cards">
       <div className="course-info">
         <h4>{course.title}</h4>
-        <div className="course-buttons">
-          <Link to={courseLink} className="view-course-button">View Course</Link>
-        </div>
+        <Link to={courseLink} className="view-course-button">View Course</Link>
       </div>
     </div>
   );
 };
+
 const Courses = () => {
   const settings = {
     dots: true,
@@ -161,43 +156,81 @@ const Courses = () => {
   };
 
   return (
-    <div className="courses-page" style={{ backgroundImage: `url(${futureAIImage})` }}>
-      <Header />
-      <div className="courses-header">
-        <h1>Explore Our Wide Range of In-Demand Tech Courses</h1>
-      </div>
+    <HelmetProvider>
+      <div className="courses-page" style={{ backgroundImage: `url(${futureAIImage})` }}>
+        <Helmet>
+        <title>U-Learn Tech - Master In-Demand Tech Skills Online</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Explore our wide range of in-demand tech courses, including Python, HTML, CSS, JavaScript, and more. Learn from industry experts at U-Learn Tech." />
+      <meta name="keywords" content="tech courses, Python, HTML, CSS, JavaScript, web development, data science, machine learning, UI/UX design" />
+      <meta name="author" content="U-Learn Tech" />
+      <link rel="canonical" href="https://www.u-learntech.com" />
 
-      <div className="courses-container">
-        <h2>Courses Recommended for You</h2>
-        <Slider {...settings}>
-          {coursesRecommended.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </Slider>
-      </div>
+      
 
-      <div className="courses-container2">
-        <h2>Newly Released Courses</h2>
-        <Slider {...settings}>
-          {newlyReleasedCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </Slider>
-      </div>
+      {/* Schema.org for Google */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "WebSite",
+          "name": "U-Learn Tech",
+          "url": "https://www.u-learntech.com",
+          "description": "U-Learn Tech offers comprehensive online courses in various technology fields, including Python, HTML, CSS, JavaScript, web development, data science, machine learning, and UI/UX design.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.u-learntech.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        })}
+      </script>
+        </Helmet>
+        <Header />
+        <div className="courses-header">
+          <h1 className='explore'>Explore Our Wide Range of In-Demand Tech Courses</h1>
+        </div>
 
-      <div className="about-section">
-        <h2>About Our Courses</h2>
-        <p>
-          At U-Learn Tech, we offer a diverse range of courses to help you achieve your career goals.
-          Our courses are designed by industry experts and cover the latest technologies and best practices.
-        </p>
-        <p>
-          Whether you're a beginner looking to start a new career or a seasoned professional looking to
-          advance your skills, we have something for everyone. Our courses are flexible and can be taken
-          at your own pace, allowing you to balance your learning with other commitments.
-        </p>
+        <div className="courses-container">
+          <h2 className='you'>Courses Recommended for You</h2>
+          <Slider {...settings}>
+            {coursesRecommended.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </Slider>
+        </div>
+
+        <div className="courses-container2">
+          <h2 className='you'>Newly Released Courses</h2>
+          <Slider {...settings}>
+            {newlyReleasedCourses.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </Slider>
+        </div>
+
+        <div className="about-section">
+          <h2>About Our Courses</h2>
+          <p>
+            At U-Learn Tech, we offer a diverse range of courses to help you achieve your career goals.
+            Our courses are designed by industry experts and cover the latest technologies and best practices.
+          </p>
+          <p>
+            Whether you're a beginner looking to start a new career or a seasoned professional looking to
+            advance your skills, we have something for everyone. Our courses are flexible and can be taken
+            at your own pace, allowing you to balance your learning with other commitments.
+          </p>
+        </div>
+        <section className='footer-content'>
+          <div className="footer-links">
+            <Link to='/help' className="view-course-button">Help</Link>
+            <Link to='./faq' className="view-course-button">FAQ</Link>
+            <Link to='./privacy' className="view-course-button">Privacy Policy</Link>
+          </div>
+          <div className="copy">&copy; 2024 U-Learn Tech</div>
+          </section>
       </div>
-    </div>
+      
+  </HelmetProvider>
   );
 };
 
