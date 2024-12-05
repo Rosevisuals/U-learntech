@@ -27,6 +27,8 @@ import Privacy from './pages/privacy';
 import Faq from './pages/faq';
 import About from './pages/about';
 import Contact from './pages/contact';
+import Footer from './components/Footer';
+import Blogpage from './pages/Blogpage';
 
 const App = () => {
   return (
@@ -61,6 +63,8 @@ const App = () => {
           <Route path="/faq/" element={<Faq/>}/>
           <Route path="/about/" element={<About/>}/>
           <Route path="/contact/" element={<Contact/>}/>
+          <Route path="/footer/" element={< Footer/>}/>
+          <Route path="/blogpage" element={<Blogpage/>} />
         </Routes>
       </div>
     </Router>

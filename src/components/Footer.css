@@ -1,4 +1,77 @@
-.footer {
-    background-color: #3a98f6;
-    color: #ecf0f1;
+/* Ensuring the footer width aligns with the content */
+footer {
+  background-color: #000000;
+  color: #fff;
+  padding: 20px 10px;
+  width: 100%;
+  max-width: 1200px; /* Match this with the content width */
+  margin: 0 auto;    /* Center the footer */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 10px;
+  height: 80px;
+}
+
+/* Flexbox or grid to align footer content */
+footer .footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Adjust padding and margin for responsiveness */
+footer .footer-content p,
+footer .footer-content a {
+  margin: 5px 15px;
+  font-size: 14px;
+}
+span,
+footer .footer-content a{
+  position: relative;
+  bottom: 50px;
+  left: 300px;
+}
+@media (max-width: 1200px) {
+  span,
+  footer .footer-content a {
+    bottom: 40px;
+    left: 200px;
   }
+}
+
+@media (max-width: 768px) {
+  span,
+  footer .footer-content a {
+    bottom: 30px;
+    left: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  span,
+  footer .footer-content a {
+    bottom: 20px;
+    left: 0px;
+  }
+}
+
+/* Further adjustment for extra small screens */
+@media (max-width: 320px) {
+  span,
+  footer .footer-content a {
+    bottom: 10px;
+    left: 20px;
+  }
+}
+/* Media query for small screens */
+@media (max-width: 768px) {
+  footer .footer-content {
+    flex-direction: column;
+  }
+}

@@ -8,6 +8,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Footer from "../components/Footer";
+
 
 const MachineLearning = () => {
     const whyUlearnTechRef = useRef(null);
@@ -311,7 +313,7 @@ model.fit(train_images, train_labels, epochs=10,
                <p>Enroll now and take the first step towards becoming a Machine Learning expert!</p>
                <Link to="/machinelearning" className="cta-button">Get Started</Link>
             </section>
-
+            <Footer/>
         </div>
     </HelmetProvider>
     );

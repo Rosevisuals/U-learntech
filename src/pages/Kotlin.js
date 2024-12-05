@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Footer from "../components/Footer";
 
 const Kotlin = () => {
     const whyUlearnTechRef = useRef(null);
@@ -424,7 +425,7 @@ fun main() {
                <p>Enroll now and take the first step towards becoming a Java expert!</p>
                <Link to="/Kt" className="cta-button">Get Started</Link>
             </section>
-
+            <Footer />
          </div>
         </HelmetProvider>
     );

@@ -699,7 +699,8 @@ const sections = [
             <p>Explanation:</p>
             <ul>
               <li><strong>df.dropna(subset=['column_name'])</strong>: Drops rows where 'column_name' has missing values.</li>
-              <li><strong>df['column_name'].fillna(df['column_name'].mean())</strong>: Fills missing values in 'column_name' with the mean of the column.</li>
+              <li><strong>df['column_name']
+              .fillna(df['column_name'].mean())</strong>: Fills missing values in 'column_name' with the mean of the column.</li>
               <li><strong>df[(np.abs(df['column_name'] - df['column_name'].mean()) / df['column_name'].std()) < 3]</strong>: Removes outliers based on the Z-score,</li>
               <p> keeping values within 3 standard deviations from the mean.</p>
             </ul>
@@ -740,7 +741,8 @@ const sections = [
               <li><strong>sns.boxplot(x='categorical_column', y='numerical_column', data=df)</strong>:</li>
               <p> Creates a box plot showing the distribution of 'numerical_column' for each </p>
               <p>category in 'categorical_column'.</p>
-              <li><strong>sns.scatterplot(x='numerical_column_1', y='numerical_column_2', data=df)</strong>:</li> 
+              <li><strong>sns.scatterplot
+              (x='numerical_column_1', y='numerical_column_2', data=df)</strong>:</li> 
               <p>Creates a scatter plot to visualize the relationship </p>
               <p>between 'numerical_column_1' and 'numerical_column_2'.</p>
               <li><strong>sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt='.2f')</strong>: Creates a heatmap of the correlation matrix, showing the correlations </li>

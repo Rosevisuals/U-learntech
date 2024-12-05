@@ -6,9 +6,9 @@ import { ArrowUp, Menu, X } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import Button from '../components/ui/button';
 import { Code } from 'lucide-react';
-
 import './Kt.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import customTheme from '../customSyntaxTheme';
 
 const sections = [
   {
@@ -4965,7 +4965,14 @@ const KotlinCourse = () => {
                 if (part.startsWith('<pre><code class="language-kotlin">')) {
                   const codeContent = part.match(/<code class="language-kotlin">([\s\S]*?)<\/code>/)[1];
                   return (
-                    <SyntaxHighlighter key={index} language="kotlin" style={darcula}>
+                    <SyntaxHighlighter key={index} language="kotlin" style={customTheme} 
+                    customStyle={{
+                        maxHeight: '50%',  // Sets a fixed maximum height for the code block
+                        overflowY: 'auto',   // Allows vertical scrolling
+                        overflowX: 'auto',   // Allows horizontal scrolling if needed
+                        padding: '15px',     // Adds padding inside the code block
+                        borderRadius: '5px', // Optional: Adds rounded corners
+                      }} >
                       {codeContent}
                     </SyntaxHighlighter>
                   );
@@ -4985,7 +4992,14 @@ const KotlinCourse = () => {
                   if (part.startsWith('<pre><code class="language-kotlin">')) {
                     const codeContent = part.match(/<code class="language-kotlin">([\s\S]*?)<\/code>/)[1];
                     return (
-                      <SyntaxHighlighter key={index} language="kotlin" style={darcula}>
+                      <SyntaxHighlighter key={index} language="kotlin" style={customTheme} 
+                      customStyle={{
+                        maxHeight: '100%', // Sets a fixed maximum height for the code block
+                        overflowY: 'auto',   // Allows vertical scrolling
+                        overflowX: 'auto',   // Allows horizontal scrolling if needed
+                        padding: '15px',     // Adds padding inside the code block
+                        borderRadius: '5px', // Optional: Adds rounded corners
+                      }} >
                         {codeContent}
                       </SyntaxHighlighter>
                     );
@@ -5000,7 +5014,6 @@ const KotlinCourse = () => {
     
         return null;
       };
-    
     const handleSectionChange = (sectionId) => {
       setActiveSection(sectionId);
       setIsSidebarOpen(false);

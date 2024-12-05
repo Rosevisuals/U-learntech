@@ -9,8 +9,7 @@ import 'swiper/css/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'swiper/css/pagination';
 import Header from '../components/Header';
-
-
+import Footer from '../components/Footer';
 import './Home.css';
 
 const Home = () => {
@@ -132,7 +131,7 @@ const Home = () => {
                   duration: '20 weeks',
                   level: 'Intermediate',
                   studentsEnrolled: 12000,
-                  image: 'image/study-group-african-people.jpg'
+                  image: 'image/name.jpg'
                 },
                 {
                   title: 'Mobile App Development',
@@ -140,15 +139,15 @@ const Home = () => {
                   duration: '16 weeks',
                   level: 'Intermediate to Advanced',
                   studentsEnrolled: 9000,
-                  image: 'image/study-group-african-people.jpg'
+                  image: 'image/name2.jpg'
                 },
                 {
-                  title: 'Machine Learning & AI',
-                  description: 'Explore neural networks, deep learning, NLP, and computer vision using TensorFlow and PyTorch.',
-                  duration: '22 weeks',
-                  level: 'Advanced',
-                  studentsEnrolled: 7500,
-                  image: 'image/study-group-african-people.jpg'
+                  title: 'Python Programming',
+                  description: 'Master Python for web development, data analysis, automation, and more. Learn essential libraries like Pandas, NumPy, and Django.',
+                  duration: '16 weeks',
+                  level: 'Intermediate',
+                  studentsEnrolled: 12000,
+                  image: 'image/name3.jpg'
                 }
               ].map((course, index) => (
                 <div key={index} className="course-card">
@@ -191,7 +190,7 @@ const Home = () => {
                 {
                   name: "John D.",
                   role: "Web Developer",
-                  quote: "The instructors at U-Learn Tech are amazing. They provided great insights and practical advice.",
+                  quote: "The code snippets  from  U-Learn Tech guided me throughout my frontend journey . From beginner to advanced.",
                   journey: "Coming from a non-tech background, I found the bootcamp challenging but rewarding. The learning environment was very motivating, and the career support was invaluable. I’m now working as a web developer and loving every bit of it.",
                   courseLink: "/courses/web-development",
                   courseTitle: "Web Development",
@@ -247,7 +246,7 @@ const Home = () => {
                       <span className="blog-card-date">July 13, 2024</span>
                       <span className="blog-card-author">By Admin</span>
                     </div>
-                    <Link to="/Blog" className="blog-card-link">Read More</Link>
+                    <Link to="/blogpage" className="blog-card-link">Read More</Link>
                   </div>
                 </article>
 
@@ -262,7 +261,7 @@ const Home = () => {
                       <span className="blog-card-date">July 13, 2024</span>
                       <span className="blog-card-author">By Admin</span>
                     </div>
-                    <Link to="/Blog" className="blog-card-link">Read More</Link>
+                    <Link to="/blogpage" className="blog-card-link">Read More</Link>
                   </div>
                 </article>
 
@@ -282,7 +281,7 @@ const Home = () => {
                 </article>
               </div>
               <div className="blog-cta">
-                <Link to="/Blog" className="view-all-button">View all posts</Link>
+                <Link to="/blogpage" className="view-all-button">View all posts</Link>
               </div>
             </div>
           </section>
@@ -290,17 +289,9 @@ const Home = () => {
           <section className="cta">
             <h2>Ready to Start Your Tech Journey?</h2>
             <p>Join thousands of successful graduates who have transformed their careers with U-Learn Tech</p>
-            <Link to="/signup" className="cta-button">Enroll Now</Link>
+            <Link to="/Courses" className="cta-button">Get Started</Link>
           </section>
-          
-          <div className='footer-content'>
-          <div className="footer-links">
-            <Link to='/help' className="view-course-button">Help</Link>
-            <Link to='/faq' className="view-course-button">FAQ</Link>
-            <Link to='/privacy' className="view-course-button">Privacy Policy</Link>
-          </div>
-          <div className="copy">&copy; 2024 U-Learn Tech</div>
-          </div >
+          <Footer/>
         </main>
       </div>
     </div>  

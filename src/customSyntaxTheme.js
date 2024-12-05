@@ -1,4 +1,3 @@
-// src/customSyntaxTheme.js
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const customTheme = {
@@ -10,6 +9,13 @@ const customTheme = {
   'pre[class*="language-"]': {
     ...tomorrow['pre[class*="language-"]'],
     background: '#111111 ', // Change the background color to navy blue
+    maxWidth: '100%',
+    maxHeigth:'100%', // Ensure it takes full width within its container
+    overflowY: 'auto', // Enable vertical scrolling if content exceeds maxHeight
+    overflowX: 'auto', // Enable horizontal scrolling if content exceeds container width
+    padding: '15px', // Add padding for better visuals
+    borderRadius: '5px', // Optional: Adds rounded corners
+    boxSizing: 'border-box', // Ensures padding and border are included in the element's width and height
   },
   'code[class*="language-"]::selection, code[class*="language-"] *::selection': {
     background: '#111111 ', // Change the selection color to a lighter blue

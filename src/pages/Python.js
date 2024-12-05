@@ -1,6 +1,7 @@
 import React, {useEffect,useRef} from 'react';
 import Slider from 'react-slick';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { FaCode, FaLaptopCode, FaChartLine, FaHandsHelping, FaChalkboardTeacher } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -273,19 +274,7 @@ if __name__ == '__main__':
       <meta name="keywords" content="Python, Programming, Data Science, Web Development, Machine Learning, AI, Django, Flask, NumPy, Pandas, U-Learn Tech" />
       <meta name="author" content="U-Learn Tech" />
       
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://www.ulearntech.com/courses/python-programming" />
-      <meta property="og:title" content="Master Python Programming - From Basics to Advanced Applications | U-Learn Tech" />
-      <meta property="og:description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
-      <meta property="og:image" content="https://www.ulearntech.com/images/python-course-og.jpg" />
-
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content="https://www.ulearntech.com/courses/python-programming" />
-      <meta name="twitter:title" content="Master Python Programming - From Basics to Advanced Applications | U-Learn Tech" />
-      <meta name="twitter:description" content="Learn Python from fundamentals to advanced concepts. Develop versatile skills for data science, web development, AI, and more with our comprehensive Python course at U-Learn Tech." />
-      <meta name="twitter:image" content="https://www.ulearntech.com/images/python-course-twitter.jpg" />
+     
 
       {/* Schema.org for Google */}
       <script type="application/ld+json">
@@ -415,47 +404,7 @@ if __name__ == '__main__':
         </Slider>
       </section>
 
-      <section className="testimonials">
-  <h2>What Our Students Say</h2>
-  <Slider {...sliderSettings}>
-    <div>
-      <p>"This course transformed my career. I'm now a full-time Python developer!"</p>
-      <h4>- Sarah J.</h4>
-    </div>
-    <div>
-      <p>"The projects in this course gave me practical experience that impressed my employers."</p>
-      <h4>- Michael T.</h4>
-    </div>
-    <div>
-      <p>"I started as a complete beginner, and now I'm confident in my Python skills."</p>
-      <h4>- Emily R.</h4>
-    </div>
-    <div>
-      <p>"The instructors were very knowledgeable and always available to help."</p>
-      <h4>- John D.</h4>
-    </div>
-    <div>
-      <p>"I loved the hands-on approach of this course. The projects were challenging but rewarding."</p>
-      <h4>- Alice W.</h4>
-    </div>
-    <div>
-      <p>"The course content is very well structured and easy to follow."</p>
-      <h4>- David K.</h4>
-    </div>
-    <div>
-      <p>"I feel much more confident in my coding skills after completing this course."</p>
-      <h4>- Maria S.</h4>
-    </div>
-    <div>
-      <p>"The community support and networking opportunities were fantastic."</p>
-      <h4>- James L.</h4>
-    </div>
-    <div>
-      <p>"This course helped me land my first job as a developer. Highly recommend it!"</p>
-      <h4>- Linda P.</h4>
-    </div>
-  </Slider>
-</section>
+      
 
      
 <section className="why-ulearntech">
@@ -487,7 +436,7 @@ if __name__ == '__main__':
         <p>Enroll now and take the first step towards becoming a Python expert!</p>
         <Link to="/PythonReadingMaterials" className="cta-button">Get Started</Link>
       </section>
-
+     <Footer/>
     </div>
   </HelmetProvider>
   );

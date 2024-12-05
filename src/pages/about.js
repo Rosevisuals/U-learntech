@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const AboutUsPage = () => {
   return (
@@ -58,6 +59,7 @@ const AboutUsPage = () => {
           Have any questions or want to learn more about us? Feel free to reach out to us at <a href="mailto:support@ulearntech.com">support@ulearntech.com</a>. We’re here to help you with any queries you may have.
         </p>
       </section>
+      <Footer />
     </div>
   );
 };

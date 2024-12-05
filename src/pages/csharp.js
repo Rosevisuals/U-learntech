@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { FaCode, FaLaptopCode, FaChartLine, FaHandsHelping, FaChalkboardTeacher } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -448,7 +449,7 @@ namespace ChatApplication
         <p>Enroll now and take the first step towards becoming a C# expert!</p>
         <Link to="/sharp" className="cta-button">Get Started</Link>
       </section>
-
+<Footer/>
     </div>
   </HelmetProvider>
   );

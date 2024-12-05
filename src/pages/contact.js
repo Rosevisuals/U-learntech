@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const ContactPage = () => {
   return (
     <div id="contact-us" style={{ padding: '20px', maxWidth: '900px', margin: 'auto' }}>
+      <Header />
       <h1>Contact Us</h1>
 
       <section>
@@ -70,7 +73,9 @@ const ContactPage = () => {
           </div>
         </form>
       </section>
+      <Footer/>
     </div>
+   
   );
 };
 

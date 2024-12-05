@@ -6,8 +6,10 @@ import Header from '../components/Header';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
+
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Footer from "../components/Footer";
+
 
 
 const Javascript = () => {
@@ -78,182 +80,177 @@ const Javascript = () => {
     };
 
     const quizapp = `
-    const questions = [
-        {
-            questionText: 'What is the capital of France?',
-            answerOptions: [
-                { answerText: 'Berlin', isCorrect: false },
-                { answerText: 'Madrid', isCorrect: false },
-                { answerText: 'Paris', isCorrect: true },
-                { answerText: 'Lisbon', isCorrect: false },
-            ],
-        },
-        {
-            questionText: 'Who is CEO of Tesla?',
-            answerOptions: [
-                { answerText: 'Jeff Bezos', isCorrect: false },
-                { answerText: 'Elon Musk', isCorrect: true },
-                { answerText: 'Bill Gates', isCorrect: false },
-                { answerText: 'Tony Stark', isCorrect: false },
-            ],
-        },
-        {
-            questionText: 'The iPhone was created by which company?',
-            answerOptions: [
-                { answerText: 'Apple', isCorrect: true },
-                { answerText: 'Intel', isCorrect: false },
-                { answerText: 'Amazon', isCorrect: false },
-                { answerText: 'Microsoft', isCorrect: false },
-            ],
-        },
-        {
-            questionText: 'How many Harry Potter books are there?',
-            answerOptions: [
-                { answerText: '1', isCorrect: false },
-                { answerText: '4', isCorrect: false },
-                { answerText: '6', isCorrect: false },
-                { answerText: '7', isCorrect: true },
-            ],
-        },
-    ];
-    
-    let currentQuestion = 0;
-    let score = 0;
-    
-    const questionCountElement = document.getElementById('question-count');
-    const questionTextElement = document.getElementById('question-text');
-    const answerSectionElement = document.getElementById('answer-section');
-    const scoreSectionElement = document.getElementById('score-section');
-    
-    function showQuestion() {
-        const current = questions[currentQuestion];
-        questionCountElement.textContent = 'Question {currentQuestion + 1} of {questions.length}';
-        questionTextElement.textContent = current.questionText;
-    
-        answerSectionElement.innerHTML = '';
-        current.answerOptions.forEach(option => {
-            const button = document.createElement('button');
-            button.textContent = option.answerText;
-            button.onclick = () => handleAnswer(option.isCorrect);
-            answerSectionElement.appendChild(button);
-        });
-    }
-    
-    function handleAnswer(isCorrect) {
-        if (isCorrect) {
-            score++;
-        }
-    
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            showQuestion();
-        } else {
-            showScore();
-        }
-    }
-    
-    function showScore() {
-        questionCountElement.style.display = 'none';
-        questionTextElement.style.display = 'none';
-        answerSectionElement.style.display = 'none';
-        scoreSectionElement.textContent = 'You scored {score} out of {questions.length}';
-    }
-    
-    showQuestion();
-    
-    `;
+const questions = [
+    {
+        questionText: 'What is the capital of France?',
+        answerOptions: [
+            { answerText: 'Berlin', isCorrect: false },
+            { answerText: 'Madrid', isCorrect: false },
+            { answerText: 'Paris', isCorrect: true },
+            { answerText: 'Lisbon', isCorrect: false },
+        ],
+    },
+    {
+        questionText: 'Who is CEO of Tesla?',
+        answerOptions: [
+            { answerText: 'Jeff Bezos', isCorrect: false },
+            { answerText: 'Elon Musk', isCorrect: true },
+            { answerText: 'Bill Gates', isCorrect: false },
+            { answerText: 'Tony Stark', isCorrect: false },
+        ],
+    },
+    {
+        questionText: 'The iPhone was created by which company?',
+        answerOptions: [
+            { answerText: 'Apple', isCorrect: true },
+            { answerText: 'Intel', isCorrect: false },
+            { answerText: 'Amazon', isCorrect: false },
+            { answerText: 'Microsoft', isCorrect: false },
+        ],
+    },
+    {
+        questionText: 'How many Harry Potter books are there?',
+        answerOptions: [
+            { answerText: '1', isCorrect: false },
+            { answerText: '4', isCorrect: false },
+            { answerText: '6', isCorrect: false },
+            { answerText: '7', isCorrect: true },
+        ],
+    },
+];
 
-    const recipeapp = `
-    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key from a recipe API service
-    const apiUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-    
-    document.getElementById('searchButton').addEventListener('click', searchRecipes);
-    
-    async function searchRecipes() {
-        const query = document.getElementById('searchInput').value;
-        if (!query) return;
-    
-        const url = '{apiUrl}?query={query}&number=10&apiKey={apiKey}'';
-        const response = await fetch(url);
-        const data = await response.json();
-        displayRecipes(data.results);
-    }
-    
-    function displayRecipes(recipes) {
-        const container = document.getElementById('recipesContainer');
-        container.innerHTML = '';
-        
-        recipes.forEach(recipe => {
-            const recipeCard = document.createElement('div');
-            recipeCard.className = 'recipe-card';
-    
-            const recipeImage = document.createElement('img');
-            recipeImage.src = recipe.image;
-            recipeImage.alt = recipe.title;
-    
-            const recipeTitle = document.createElement('h2');
-            recipeTitle.textContent = recipe.title;
-    
-            const recipeDescription = document.createElement('p');
-            recipeDescription.textContent = 'Ready in {recipe.readyInMinutes} minutes. Servings: {recipe.servings}';
-    
-            recipeCard.appendChild(recipeImage);
-            recipeCard.appendChild(recipeTitle);
-            recipeCard.appendChild(recipeDescription);
-    
-            container.appendChild(recipeCard);
-        });
-    }
-    
-    `;
+let currentQuestion = 0;
+let score = 0;
 
-    const weatherApp = `
-    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key from OMDB
-    const apiUrl = 'https://www.omdbapi.com/';
-    
-    document.getElementById('searchButton').addEventListener('click', searchMovies);
-    
-    async function searchMovies() {
-        const query = document.getElementById('searchInput').value;
-        if (!query) return;
-    
-        const url = '{apiUrl}?s={query}&apikey={apiKey}';
-        const response = await fetch(url);
-        const data = await response.json();
-        displayMovies(data.Search);
+function showQuestion() {
+    const current = questions[currentQuestion];
+    document.getElementById('question-count').textContent = \`Question \${currentQuestion + 1} of \${questions.length}\`;
+    document.getElementById('question-text').textContent = current.questionText;
+
+    const answerSection = document.getElementById('answer-section');
+    answerSection.innerHTML = '';
+    current.answerOptions.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option.answerText;
+        button.onclick = () => handleAnswer(option.isCorrect);
+        answerSection.appendChild(button);
+    });
+}
+
+function handleAnswer(isCorrect) {
+    if (isCorrect) {
+        score++;
     }
-    
-    function displayMovies(movies) {
-        const container = document.getElementById('moviesContainer');
-        container.innerHTML = '';
-        
-        movies.forEach(movie => {
-            const movieCard = document.createElement('div');
-            movieCard.className = 'movie-card';
-    
-            const movieImage = document.createElement('img');
-            movieImage.src = movie.Poster !== 'N/A' ? movie.Poster : 'placeholder.jpg'; // Placeholder image if no poster is available
-            movieImage.alt = movie.Title;
-    
-            const movieTitle = document.createElement('h2');
-            movieTitle.textContent = movie.Title;
-    
-            const movieYear = document.createElement('p');
-            movieYear.textContent = 'Year: {movie.Year}';
-    
-            const movieType = document.createElement('p');
-            movieType.textContent = 'Type: {movie.Type}';
-    
-            movieCard.appendChild(movieImage);
-            movieCard.appendChild(movieTitle);
-            movieCard.appendChild(movieYear);
-            movieCard.appendChild(movieType);
-    
-            container.appendChild(movieCard);
-        });
+
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        showScore();
     }
+}
+
+function showScore() {
+    document.getElementById('question-count').style.display = 'none';
+    document.getElementById('question-text').style.display = 'none';
+    document.getElementById('answer-section').style.display = 'none';
+    document.getElementById('score-section').textContent = \`You scored \${score} out of \${questions.length}\`;
+}
+
+showQuestion();
+`;
+
+const recipeapp = `
+const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key from a recipe API service
+const apiUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+
+document.getElementById('searchButton').addEventListener('click', searchRecipes);
+
+async function searchRecipes() {
+    const query = document.getElementById('searchInput').value;
+    if (!query) return;
+
+    const url = \`\${apiUrl}?query=\${query}&number=10&apiKey=\${apiKey}\`;
+    const response = await fetch(url);
+    const data = await response.json();
+    displayRecipes(data.results);
+}
+
+function displayRecipes(recipes) {
+    const container = document.getElementById('recipesContainer');
+    container.innerHTML = '';
     
-    `;
+    recipes.forEach(recipe => {
+        const recipeCard = document.createElement('div');
+        recipeCard.className = 'recipe-card';
+
+        const recipeImage = document.createElement('img');
+        recipeImage.src = recipe.image;
+        recipeImage.alt = recipe.title;
+
+        const recipeTitle = document.createElement('h2');
+        recipeTitle.textContent = recipe.title;
+
+        const recipeDescription = document.createElement('p');
+        recipeDescription.textContent = \`Ready in \${recipe.readyInMinutes} minutes. Servings: \${recipe.servings}\`;
+
+        recipeCard.appendChild(recipeImage);
+        recipeCard.appendChild(recipeTitle);
+        recipeCard.appendChild(recipeDescription);
+
+        container.appendChild(recipeCard);
+    });
+}
+`;
+
+
+const weatherApp = `
+const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key from OMDB
+const apiUrl = 'https://www.omdbapi.com/';
+
+document.getElementById('searchButton').addEventListener('click', searchMovies);
+
+async function searchMovies() {
+    const query = document.getElementById('searchInput').value;
+    if (!query) return;
+
+    const url = \`\${apiUrl}?s=\${query}&apikey=\${apiKey}\`;
+    const response = await fetch(url);
+    const data = await response.json();
+    displayMovies(data.Search);
+}
+
+function displayMovies(movies) {
+    const container = document.getElementById('moviesContainer');
+    container.innerHTML = '';
+    
+    movies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.className = 'movie-card';
+
+        const movieImage = document.createElement('img');
+        movieImage.src = movie.Poster !== 'N/A' ? movie.Poster : 'placeholder.jpg'; // Placeholder image if no poster is available
+        movieImage.alt = movie.Title;
+
+        const movieTitle = document.createElement('h2');
+        movieTitle.textContent = movie.Title;
+
+        const movieYear = document.createElement('p');
+        movieYear.textContent = \`Year: \${movie.Year}\`;
+
+        const movieType = document.createElement('p');
+        movieType.textContent = \`Type: \${movie.Type}\`;
+
+        movieCard.appendChild(movieImage);
+        movieCard.appendChild(movieTitle);
+        movieCard.appendChild(movieYear);
+        movieCard.appendChild(movieType);
+
+        container.appendChild(movieCard);
+    });
+}
+`;
+
 
     const projects = [
         {
@@ -391,16 +388,22 @@ const Javascript = () => {
             </section>
 
             <section className="projects">
-                <h2>Hands-on Projects</h2>
-                <Slider {...sliderSettings}>
-                    {projects.map((project, index) => (
-                        <div key={index}>
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
-                            <ReadOnlyCodeSnippet code={project.code} />
-                        </div>
-                    ))}
-                </Slider>
+            <h2>Hands-on Projects</h2>
+                    <Slider {...sliderSettings}>
+                        {projects.map((project, index) => (
+                            <div key={index}>
+                                <h3>{project.title}</h3>
+                                <p>{project.description}</p>
+                                <div className="code-snippet">
+                                    <pre>
+                                        <code>
+                                            {project.code}
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        ))}
+                    </Slider>
             </section>
 
             <section className="why-ulearntech">
@@ -429,6 +432,7 @@ const Javascript = () => {
                <p>Enroll now and take the first step towards becoming a JavaScript expert!</p>
                <Link to="/Script" className="cta-button">Get Started</Link>
             </section>
+            <Footer/>
         </div>
     </HelmetProvider>
     );

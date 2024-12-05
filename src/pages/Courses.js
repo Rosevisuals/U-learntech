@@ -6,6 +6,7 @@ import './Courses.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import futureAIImage from '../images/future-ai.jpg';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const coursesRecommended = [
   {
@@ -219,17 +220,10 @@ const Courses = () => {
             advance your skills, we have something for everyone. Our courses are flexible and can be taken
             at your own pace, allowing you to balance your learning with other commitments.
           </p>
+          <Footer />
         </div>
-        <section className='footer-content'>
-          <div className="footer-links">
-            <Link to='/help' className="view-course-button">Help</Link>
-            <Link to='./faq' className="view-course-button">FAQ</Link>
-            <Link to='./privacy' className="view-course-button">Privacy Policy</Link>
-          </div>
-          <div className="copy">&copy; 2024 U-Learn Tech</div>
-          </section>
       </div>
-      
+     
   </HelmetProvider>
   );
 };

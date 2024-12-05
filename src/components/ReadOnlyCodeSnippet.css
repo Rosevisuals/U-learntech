@@ -1,0 +1,27 @@
+/* src/components/ReadOnlyCodeSnippet.css */
+.code-snippet {
+    background-color: #2d2d2d; /* Dark background for code */
+    color: #f8f8f2; /* Light text color */
+    padding: 20px; /* Increased padding for better readability */
+    border-radius: 6px;
+    overflow-x: auto; /* Enable horizontal scroll */
+    white-space: pre; /* Preserve formatting and avoid wrapping */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    font-size: 14px; /* Font size for better readability */
+    line-height: 1.6; /* Increased line height for better spacing */
+    border: 1px solid #444; /* Border color matching dark theme */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    margin: 20px 0; /* Spacing around the snippet */
+    width: 100%; /* Set width to 100% of the container */
+    max-width: 1200px; /* Ensure it doesn’t stretch too wide */
+    max-height: 400px; /* Limit the height to make it manageable */
+    overflow-y: auto; /* Add vertical scroll if the content exceeds the height */
+  }
+    
+  .code-snippet code {
+    display: block;
+    line-height: 1.5;
+    white-space: wrap; 
+    width: 150%;/* Ensure text does not wrap */
+  }
+  

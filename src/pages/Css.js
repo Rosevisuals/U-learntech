@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import './Css.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { ArrowUp, Menu, X } from 'lucide-react';
+import customTheme from '../customSyntaxTheme';
+
 const sections = [
   {
     id: 'introduction',
@@ -18,7 +22,7 @@ const sections = [
         </ul>
         <h3>Basic Syntax</h3>
         <p>HTML documents are structured with tags, which are surrounded by angle brackets (<code>&lt;&gt;</code>). For example:</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Page Title&lt;/title&gt;
@@ -50,13 +54,13 @@ const sections = [
         <p>HTML elements are the building blocks of HTML pages. They are represented by tags such as &lt;div&gt;, &lt;h1&gt;, &lt;p&gt;, and so on.</p>
         <h3>Syntax and Example</h3>
         <p>HTML elements are defined by a start tag, some content, and an end tag:</p>
-        <pre><code>&lt;element&gt;Content&lt;/element&gt;</code></pre>
+        <pre><code class="language-html">&lt;element&gt;Content&lt;/element&gt;</code></pre>
         <p>Example:</p>
-        <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+        <pre><code class="language-html">&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
         <p>Explanation: The &lt;p&gt; tag defines a paragraph.</p>
         <h3>Real-Life Example</h3>
         <p>Consider a webpage as a document. You might use different elements like headings for titles, paragraphs for text, and divs for sections. For example:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Webpage&lt;/title&gt;
 &lt;/head&gt;
@@ -69,7 +73,7 @@ const sections = [
         </code></pre>
         <h3>Assignment: Create a Simple Webpage</h3>
         <p>Create a simple webpage that includes a heading, a paragraph, and a division. Use the basic structure provided above.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Simple Webpage&lt;/title&gt;
@@ -92,10 +96,10 @@ const sections = [
         <p>HTML attributes provide additional information about elements. Attributes are always included in the opening tag, and they usually come in name/value pairs like <code>name="value"</code>.</p>
         <h3>Syntax and Example</h3>
         <p>For example, the <code>&lt;a&gt;</code> tag defines a hyperlink. The <code>href</code> attribute specifies the URL of the page the link goes to:</p>
-        <pre><code>&lt;a href="https://www.example.com"&gt;Visit Example.com&lt;/a&gt;</code></pre>
+        <pre><code class="language-html">&lt;a href="https://www.example.com"&gt;Visit Example.com&lt;/a&gt;</code></pre>
         <p>Explanation: The <code>href</code> attribute in the &lt;a&gt; tag specifies the destination URL of the link.</p>
         <p>Headings are defined with the <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> tags:</p>
-        <pre><code>&lt;h1&gt;This is a Heading 1&lt;/h1&gt;
+        <pre><code class="language-html">&lt;h1&gt;This is a Heading 1&lt;/h1&gt;
 &lt;h2&gt;This is a Heading 2&lt;/h2&gt;
 &lt;h3&gt;This is a Heading 3&lt;/h3&gt;
 &lt;h4&gt;This is a Heading 4&lt;/h4&gt;
@@ -105,7 +109,7 @@ const sections = [
         <p>Explanation: The &lt;h1&gt; to &lt;h6&gt; tags define headings, with &lt;h1&gt; being the highest level and &lt;h6&gt; the lowest.</p>
         <h3>Real-Life Example</h3>
         <p>Use &lt;h1&gt; for the main title of a webpage, and &lt;h2&gt; to &lt;h6&gt; for subheadings and section titles:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Blog&lt;/title&gt;
 &lt;/head&gt;
@@ -120,7 +124,7 @@ const sections = [
         </code></pre>
         <h3>Assignment: Use Attributes and Headings</h3>
         <p>Create a webpage with a main heading, subheadings, and a link. Use attributes to add additional information to the elements.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Blog&lt;/title&gt;
@@ -144,14 +148,14 @@ const sections = [
         <p>Links are created using the <code>&lt;a&gt;</code> tag. The most important attribute of the <code>&lt;a&gt;</code> element is the <code>href</code> attribute, which indicates the link's destination.</p>
         <h3>Syntax and Example</h3>
         <p>For example:</p>
-        <pre><code>&lt;a href="https://www.google.com"&gt;Go to Google&lt;/a&gt;</code></pre>
+        <pre><code class="language-html">&lt;a href="https://www.google.com"&gt;Go to Google&lt;/a&gt;</code></pre>
         <p>Explanation: The &lt;a&gt; tag creates a hyperlink that navigates to Google when clicked.</p>
         <p>Images are embedded using the <code>&lt;img&gt;</code> tag. The <code>src</code> attribute specifies the path to the image to be displayed:</p>
         <pre><code>&lt;img src="image.jpg" alt="Description of Image"&gt;</code></pre>
         <p>Explanation: The &lt;img&gt; tag embeds an image in the document, with the <code>src</code> attribute specifying the image file and the <code>alt</code> attribute providing alternative text.</p>
         <h3>Real-Life Example</h3>
         <p>Use links to navigate between pages on your website, and use images to visually enhance the content of your pages:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Gallery&lt;/title&gt;
 &lt;/head&gt;
@@ -165,7 +169,7 @@ const sections = [
         </code></pre>
         <h3>Assignment: Add Links and Images</h3>
         <p>Create a webpage that includes a heading, a link, and an image. Ensure the link opens in a new tab and the image has descriptive alternative text.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Gallery&lt;/title&gt;
@@ -189,14 +193,14 @@ const sections = [
         <p>HTML supports ordered lists (<code>&lt;ol&gt;</code>) and unordered lists (<code>&lt;ul&gt;</code>). List items are defined with the <code>&lt;li&gt;</code> tag:</p>
         <h3>Syntax and Example</h3>
         <p>Example of an unordered list:</p>
-        <pre><code>&lt;ul&gt;
+        <pre><code class="language-html">&lt;ul&gt;
     &lt;li&gt;Item 1&lt;/li&gt;
     &lt;li&gt;Item 2&lt;/li&gt;
     &lt;li&gt;Item 3&lt;/li&gt;
 &lt;/ul&gt;
         </code></pre>
         <p>Example of an ordered list:</p>
-        <pre><code>&lt;ol&gt;
+        <pre><code class="language-html">&lt;ol&gt;
     &lt;li&gt;First item&lt;/li&gt;
     &lt;li&gt;Second item&lt;/li&gt;
     &lt;li&gt;Third item&lt;/li&gt;
@@ -204,7 +208,7 @@ const sections = [
         </code></pre>
         <p>Explanation: Unordered lists use bullet points, while ordered lists use numbers.</p>
         <p>Tables are defined with the <code>&lt;table&gt;</code> tag. A table is divided into rows (<code>&lt;tr&gt;</code>), and each row is divided into data cells (<code>&lt;td&gt;</code>):</p>
-        <pre><code>&lt;table&gt;
+        <pre><code class="language-html">&lt;table&gt;
     &lt;tr&gt;
         &lt;td&gt;Cell 1&lt;/td&gt;
         &lt;td&gt;Cell 2&lt;/td&gt;
@@ -218,7 +222,7 @@ const sections = [
         <p>Explanation: The &lt;table&gt; tag defines the table structure, with rows and cells.</p>
         <h3>Real-Life Example</h3>
         <p>Use lists to group related items, such as a navigation menu, and use tables to display data in a structured format:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Website&lt;/title&gt;
 &lt;/head&gt;
@@ -250,7 +254,7 @@ const sections = [
         </code></pre>
         <h3>Assignment: Create Lists and Tables</h3>
         <p>Create a webpage with a navigation menu using an unordered list and a data table displaying information about a few items.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My Website&lt;/title&gt;
@@ -292,12 +296,12 @@ const sections = [
         <p>CSS describes how HTML elements are to be displayed on screen, paper, or in other media. CSS saves a lot of work. It can control the layout of multiple web pages all at once.</p>
         <h3>Syntax and Example</h3>
         <p>CSS rules are made up of selectors and declaration blocks. The selector points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons. Each declaration includes a CSS property name and a value, separated by a colon.</p>
-        <pre><code>selector {
+        <pre><code class="language-html">selector {
     property: value;
 }
         </code></pre>
         <p>Example:</p>
-        <pre><code>p {
+        <pre><code class="language-html">p {
     color: blue;
     font-size: 20px;
 }
@@ -305,7 +309,7 @@ const sections = [
         <p>Explanation: This CSS rule sets the text color of all &lt;p&gt; elements to blue and the font size to 20 pixels.</p>
         <h3>Real-Life Example</h3>
         <p>Use CSS to style the text on your webpage, change colors, adjust layouts, and more:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Styled Webpage&lt;/title&gt;
     &lt;style&gt;
@@ -329,7 +333,7 @@ const sections = [
         </code></pre>
         <h3>Assignment: Apply Basic CSS Styles</h3>
         <p>Create a webpage and apply CSS styles to change the font family, text color, and font size of different elements.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Styled Webpage&lt;/title&gt;
@@ -368,7 +372,7 @@ const sections = [
           <li><strong>Class Selector:</strong> Selects HTML elements with a specific class attribute.</li>
           <li><strong>ID Selector:</strong> Selects an element based on the id attribute.</li>
         </ul>
-        <pre><code>/* Element Selector */
+        <pre><code class="language-html">/* Element Selector */
 p {
     color: blue;
 }
@@ -386,7 +390,7 @@ p {
         <p>Explanation: The element selector targets all &lt;p&gt; elements, the class selector targets elements with the class "example", and the ID selector targets the element with the ID "unique".</p>
         <h3>Real-Life Example</h3>
         <p>Use different selectors to style various parts of your webpage:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Selectors Example&lt;/title&gt;
     &lt;style&gt;
@@ -412,7 +416,7 @@ p {
         </code></pre>
         <h3>Assignment: Use Different Selectors</h3>
         <p>Create a webpage and use element, class, and ID selectors to style different elements with various properties.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Selectors Example&lt;/title&gt;
@@ -454,7 +458,7 @@ p {
           <li><strong>Border:</strong> A border that goes around the padding and content.</li>
           <li><strong>Margin:</strong> Clears an area outside the border. The margin is transparent.</li>
         </ul>
-        <pre><code>div {
+        <pre><code class="language-html">div {
     margin: 20px;
     border: 5px solid black;
     padding: 10px;
@@ -464,7 +468,7 @@ p {
         <p>Explanation: This CSS rule applies margin, border, and padding to a &lt;div&gt; element.</p>
         <h3>Real-Life Example</h3>
         <p>Use the box model to control the layout and spacing of elements on your webpage:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Box Model Example&lt;/title&gt;
     &lt;style&gt;
@@ -484,7 +488,7 @@ p {
         </code></pre>
         <h3>Assignment: Apply Box Model Properties</h3>
         <p>Create a webpage and use the box model properties to style a &lt;div&gt; element with margin, border, padding, and content.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Box Model Example&lt;/title&gt;
@@ -514,7 +518,7 @@ p {
         <p>Flexbox and Grid are powerful layout modules in CSS.</p>
         <h3>Syntax and Example</h3>
         <p>Flexbox example:</p>
-        <pre><code>.container {
+        <pre><code class="language-html">.container {
     display: flex;
 }
 .item {
@@ -525,7 +529,7 @@ p {
         </code></pre>
         <p>Explanation: The <code>display: flex;</code> property makes the container a flex container, and the <code>flex: 1;</code> property distributes space evenly among flex items.</p>
         <p>Grid example:</p>
-        <pre><code>.grid-container {
+        <pre><code class="language-html">.grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 10px;
@@ -538,7 +542,7 @@ p {
         <p>Explanation: The <code>display: grid;</code> property makes the container a grid container, and <code>grid-template-columns</code> defines the columns layout.</p>
         <h3>Real-Life Example</h3>
         <p>Use Flexbox and Grid to create responsive layouts:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Flexbox and Grid Example&lt;/title&gt;
     &lt;style&gt;
@@ -578,7 +582,7 @@ p {
         </code></pre>
         <h3>Assignment: Use Flexbox and Grid</h3>
         <p>Create a webpage and use Flexbox and Grid to create responsive layouts with multiple items.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Flexbox and Grid Example&lt;/title&gt;
@@ -637,7 +641,7 @@ p {
         <p>Explanation: This media query applies styles to screens with a width of 600px or less, changing the flex direction to column.</p>
         <h3>Real-Life Example</h3>
         <p>Use media queries to create a responsive layout that adjusts to different screen sizes:</p>
-        <pre><code>&lt;html&gt;
+        <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Responsive Design Example&lt;/title&gt;
     &lt;style&gt;
@@ -669,7 +673,7 @@ p {
         </code></pre>
         <h3>Assignment: Create a Responsive Layout</h3>
         <p>Create a webpage that uses media queries to create a responsive layout that adjusts to different screen sizes.</p>
-        <pre><code>&lt;!DOCTYPE html&gt;
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Responsive Design Example&lt;/title&gt;
@@ -976,7 +980,7 @@ p {
 &lt;/html&gt;
     </code></pre></section>`},
     { id: 'weather', title:'Weather App', content:`<section id="weather"><p>Build a weather application that fetches and displays weather information based on the user's location or a searched city.</p>
-    <pre><code>&lt;!DOCTYPE html&gt;
+    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
@@ -1009,30 +1013,102 @@ p {
   &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-    </code></pre></section>`}
+    </code></pre>
+    </section>`}
   ]
   },
 ];
 
 const Css = () => {
   const [activeSection, setActiveSection] = useState('introduction');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  
+  
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.pageYOffset > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   const renderSectionContent = (section) => {
     if (section.id === activeSection) {
+      const contentParts = section.content.split(/(<pre><code class="language-html">[\s\S]*?<\/code><\/pre>)/g);
+
       return (
-        <div key={section.id} dangerouslySetInnerHTML={{ __html: section.content }} />
+        <div key={section.id}>
+          {contentParts.map((part, index) => {
+            if (part.startsWith('<pre><code class="language-html">')) {
+              const codeContent = part.match(/<code class="language-html">([\s\S]*?)<\/code>/)[1];
+              return (
+                <SyntaxHighlighter key={index} language="html" style={customTheme} 
+                customStyle={{
+                    maxHeight: '50%',  // Sets a fixed maximum height for the code block
+                    overflowY: 'auto',   // Allows vertical scrolling
+                    overflowX: 'auto',   // Allows horizontal scrolling if needed
+                    padding: '15px',     // Adds padding inside the code block
+                    borderRadius: '5px', // Optional: Adds rounded corners
+                  }} >
+                  {codeContent}
+                </SyntaxHighlighter>
+              );
+            } else {
+              return <div key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+            }
+          })}
+        </div>
       );
     }
+
     if (section.subSections) {
       return section.subSections.map(subSection => (
         activeSection === subSection.id && (
-          <div key={subSection.id} dangerouslySetInnerHTML={{ __html: subSection.content }} />
+          <div key={subSection.id}>
+            {subSection.content.split(/(<pre><code class="language-python">[\s\S]*?<\/code><\/pre>)/g).map((part, index) => {
+              if (part.startsWith('<pre><code class="language-html">')) {
+                const codeContent = part.match(/<code class="language-html">([\s\S]*?)<\/code>/)[1];
+                return (
+                  <SyntaxHighlighter key={index} language="html" style={customTheme} 
+                  customStyle={{
+                    maxHeight: '100%', // Sets a fixed maximum height for the code block
+                    overflowY: 'auto',   // Allows vertical scrolling
+                    overflowX: 'auto',   // Allows horizontal scrolling if needed
+                    padding: '15px',     // Adds padding inside the code block
+                    borderRadius: '5px', // Optional: Adds rounded corners
+                  }} >
+                    {codeContent}
+                  </SyntaxHighlighter>
+                );
+              } else {
+                return <div key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+              }
+            })}
+          </div>
         )
       ));
     }
+
     return null;
   };
+  
+  const handleSectionChange = (sectionId) => {
+    setActiveSection(sectionId);
+    setIsSidebarOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderInteractiveContent = () => {
+    if (activeSection !== 'introduction') return null;
+  };
   return (
     <HelmetProvider>
     <div className="css-reading-page">
@@ -1074,32 +1150,35 @@ const Css = () => {
       </script>
         </Helmet>
       <Header />
-      <div className="content-container">
-        <nav className="sidebar">
-          <h2>Contents</h2>
-          <ul>
-            {sections.map(section => (
-              <li key={section.id}>
-                <button onClick={() => setActiveSection(section.id)}>{section.title}</button>
-                {section.subSections && (
-                  <ul>
-                    {section.subSections.map(subSection => (
-                      <li key={subSection.id}>
-                        <button onClick={() => setActiveSection(subSection.id)}>{subSection.title}</button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="main-content">
-          {sections.map(section => renderSectionContent(section))}
+      <button
+          className="sidebar-toggle"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+        >
+          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <div className="content-container">
+          <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+            <h2>Contents</h2>
+            <ul>
+              {sections.map(section => (
+                <li key={section.id}>
+                  <button onClick={() => handleSectionChange(section.id)}>{section.title}</button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="main-content">
+            {renderInteractiveContent()}
+            {sections.map(section => renderSectionContent(section))}
+          </div>
         </div>
+        {showScrollTop && (
+          <button className="scroll-to-top" onClick={scrollToTop}>
+            <ArrowUp />
+          </button>
+        )}
       </div>
-    </div>
     </HelmetProvider>
   );
 };

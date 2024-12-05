@@ -8,6 +8,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
+import Footer from "../components/Footer";
+
 
 const Datascience = () => {
     const whyUlearnTechRef = useRef(null);
@@ -217,6 +219,7 @@ const Datascience = () => {
                 <p>Enroll now and take the first step towards becoming a data science expert!</p>
                 <Link to="/science" className="cta-button">Get Started</Link>
             </section>
+            <Footer/>
         </div>
     </HelmetProvider>
     );

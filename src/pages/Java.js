@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ReadOnlyCodeSnippet from "../components/ReadOnlyCodeSnippet";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Footer from "../components/Footer";
 
 const Java = () => {
     
@@ -561,7 +562,7 @@ public class ChatApplication {
                <p>Enroll now and take the first step towards becoming a Java expert!</p>
                <Link to="/Jv" className="cta-button">Get Started</Link>
             </section>
-
+            <Footer/>
         </div>
     </HelmetProvider>
     );

@@ -1,70 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import Header from '../components/Header';
 import './PythonReadingMaterials.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { ArrowUp, Menu, X } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import Button from '../components/ui/button';
+import { Code } from 'lucide-react';
+import customTheme from '../customSyntaxTheme';
 
 const sections = [
-  { id: 'introduction', title: 'Introduction', content: 
+  { id: 'introduction', title: 'Introduction', 
+  content: 
 `<section id="introduction">
-<h2>Introduction</h2>
-<p>Python is a powerful programming language that is widely used in various domains such as web development, data science, artificial intelligence, scientific computing, and more. It is known for its simplicity, readability, and versatility.</p>
-<p>Python is a high-level, general-purpose, and very popular programming language. Python programming language (latest Python 3) is being used in web development, and Machine Learning applications, along with all cutting-edge technology in Software Industry. 
-Python language is being used by almost all tech-giant companies like – Google, Amazon, Facebook, Instagram, Dropbox, Uber… etc.</p>
 
-<p>First we are to go set up our python on our computers.</p>
-<h3>Setting up Python</h3>
-<p>Step 1: </p>
-<p>Download Visual Studio from https://code.visualstudio.com/download.</p>
-<p>Step 2: </p>
-<p>Download Python from https://www.python.org/downloads/.</p>
-<p>Step 3: </p>
-<p>Configure python</p>
-<p>Step 4: </p>
-<p>Check if you have python installed</p>
-<h4> ON WINDOWS </h4>
-<pre><code>
-$ python --version </code></pre>
-<h4>ON A MAC </h4>
-<pre><code>
-$ python3 --version </code></pre>
-<h3>A QUICKSTART </h3>
-<p>Python is an interpreted programming language, this means that as a developer you write Python (.py) files in a text editor and then put those files into the python interpreter to be executed.
-Let's write our first Python file, called hello.py, which can be done in any text editor.
-</p>
-<pre><code>
-hello.py</code></pre>
-<p>Save your file. Open your command line, navigate to the directory and save your file.</p>
-<pre><code>
-cd path-to-your-directory
-</code></pre>
-<p>To run the program in your command line(terminal), </p>
-<h4>On Windows</h4>
-<p>Press Win + R, type cmd, and press Enter.</p>
-<h4>On a mac </h4>
-<p>Press Cmd + Space, type Terminal, and press Enter.</p>
-<p>The output should read:</p>
-<pre><code>
-Hello World!
-</code></pre>
-<h3>Watch this video tutorial to get started with Python</h3>
-<div class="video-responsive">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rfscVS0vtbw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-<h3>Assignment</h3>
-<p>1. Create a python program and name it day1.py</p>
-<p>2. Print the following statement;</p>
-<p>“Hello this is [your_name] and this is my first python program. Looking forward to more coding with python”.</p>
-<p>Note: Make sure the program runs.</p>
-
-</section>` },
-     {id: 'variables' , title:'Variables' ,content:
+</section>`
+},
+     {
+        id: 'variables' , title:'Variables' ,content:
 `<section id="variables">
 <h2>Variables</h2>
 <p>Variables are containers for storing data values. In Python, you don't need to declare the type of a variable; you just assign a value to it.</p>
 
 <h3>Basic Variable Assignment</h3>
 <p>You can assign a value to a variable using the assignment operator <code>=</code>. The variable will take the type of the value it holds.</p>
-<pre><code>
+<pre><code class="language-python">
 x = 5           # Integer
 y = "Hello, World!"  # String
 z = 3.14        # Float
@@ -78,14 +38,14 @@ print(is_active)
 
 <h3>Multiple Assignments</h3>
 <p>Python allows you to assign values to multiple variables in one line:</p>
-<pre><code>
+<pre><code class="language-python">
 a, b, c = 1, 2, 3
 print(a, b, c)
 </code></pre>
 
 <h3>Dynamic Typing</h3>
 <p>Python is dynamically typed, which means you can change the type of a variable by assigning it a value of a different type:</p>
-<pre><code>
+<pre><code class="language-python">
 var = 10           # Integer
 print(var)
 
@@ -103,7 +63,7 @@ print(var)
   <li>The rest of the variable name can contain letters, numbers, or underscores.</li>
   <li>Variable names are case-sensitive.</li>
 </ul>
-<pre><code>
+<pre><code class="language-python">
 my_var = 100
 MyVar = 200
 _var = 300
@@ -117,7 +77,7 @@ print(var123)
 
 <h3>Global and Local Variables</h3>
 <p>Variables defined inside a function are local and those defined outside are global. You can use the <code>global</code> keyword to modify a global variable inside a function:</p>
-<pre><code>
+<pre><code class="language-python">
 global_var = "I am global"
 
 def my_function():
@@ -133,7 +93,7 @@ print(global_var)
 
 <h3>Constants</h3>
 <p>In Python, constants are usually defined using uppercase letters. However, there is no strict rule, and Python doesn't have built-in constant support.</p>
-<pre><code>
+<pre><code class="language-python">
 PI = 3.14159
 GRAVITY = 9.8
 
@@ -143,7 +103,7 @@ print(GRAVITY)
 
 <h3>Using <code>type()</code> Function</h3>
 <p>You can use the <code>type()</code> function to find out the data type of a variable:</p>
-<pre><code>
+<pre><code class="language-python">
 a = 5
 b = 3.14
 c = "Hello"
@@ -157,7 +117,7 @@ print(type(d))  # Output: <class 'bool'>
 
 <h3>Type Casting</h3>
 <p>Python allows you to convert one data type to another. This is called type casting.</p>
-<pre><code>
+<pre><code class="language-python">
 # Convert integer to float
 x = 1
 y = float(x)
@@ -176,7 +136,7 @@ print(num_str)  # Output: "100"
 
 <h3>Unpacking a Collection</h3>
 <p>You can extract the values from a list or tuple into variables. This is called unpacking.</p>
-<pre><code>
+<pre><code class="language-python">
 fruits = ["apple", "banana", "cherry"]
 x, y, z = fruits
 
@@ -187,7 +147,7 @@ print(z)  # Output: cherry
 
 <h3>Variable Scope</h3>
 <p>The scope of a variable is the portion of the program where it is recognized. Variables can be defined inside a function (local scope) or outside a function (global scope).</p>
-<pre><code>
+<pre><code class="language-python">
 def my_function():
     local_var = 10
     print(local_var)
@@ -204,7 +164,7 @@ another_function()
 
 <h3>Deleting Variables</h3>
 <p>You can delete a variable using the <code>del</code> keyword:</p>
-<pre><code>
+<pre><code class="language-python">
 x = 10
 print(x)
 
@@ -226,7 +186,7 @@ del x
   <li><strong>float</strong>: Floating point numbers</li>
   <li><strong>complex</strong>: Complex numbers</li>
 </ul>
-<pre><code>
+<pre><code class="language-python">
 x = 5        # int
 y = 3.14     # float
 z = 1 + 2j   # complex
@@ -238,7 +198,7 @@ print(type(z))
 
 <h3>String Data Type</h3>
 <p>Strings are sequences of characters, enclosed in single, double, or triple quotes:</p>
-<pre><code>
+<pre><code class="language-python">
 str1 = 'Hello'
 str2 = "World"
 str3 = '''This is a multi-line string.'''
@@ -257,7 +217,7 @@ print(str2[1:4])  # Output: orl
 
 <h3>List Data Type</h3>
 <p>Lists are ordered collections of items, which can be of different data types. Lists are mutable, meaning you can change their content:</p>
-<pre><code>
+<pre><code class="language-python">
 my_list = [1, 2, 3, "apple", 3.14, True]
 print(type(my_list))
 print(my_list)
@@ -275,7 +235,7 @@ print(my_list[1:4])  # Output: [3, 'apple', 3.14]
 
 <h3>Tuple Data Type</h3>
 <p>Tuples are ordered collections of items similar to lists, but they are immutable. Once a tuple is created, you cannot change its values:</p>
-<pre><code>
+<pre><code class="language-python">
 my_tuple = (1, 2, 3, "apple", 3.14, True)
 print(type(my_tuple))
 print(my_tuple)
@@ -289,7 +249,7 @@ print(my_tuple[1:4])  # Output: (2, 3, 'apple')
 
 <h3>Set Data Type</h3>
 <p>Sets are unordered collections of unique items. Sets are mutable, but they do not allow duplicate values:</p>
-<pre><code>
+<pre><code class="language-python">
 my_set = {1, 2, 3, "apple", 3.14, True}
 print(type(my_set))
 print(my_set)
@@ -308,7 +268,7 @@ print(my_set)  # Output: {1, 2, 3, 'new item', 'apple', True}
 
 <h3>Dictionary Data Type</h3>
 <p>Dictionaries are unordered collections of key-value pairs. Keys must be unique and immutable, but values can be of any data type:</p>
-<pre><code>
+<pre><code class="language-python">
 my_dict = {"name": "Alice", "age": 25, "city": "New York"}
 print(type(my_dict))
 print(my_dict)
@@ -327,7 +287,7 @@ print(my_dict)
 
 <h3>Boolean Data Type</h3>
 <p>Boolean data type can have one of two values: <code>True</code> or <code>False</code>:</p>
-<pre><code>
+<pre><code class="language-python">
 is_active = True
 is_admin = False
 
@@ -340,7 +300,7 @@ print(is_active or is_admin)  # Output: True
 
 <h3>None Data Type</h3>
 <p>The None keyword represents the absence of a value or a null value:</p>
-<pre><code>
+<pre><code class="language-python">
 value = None
 print(type(value))
 
@@ -354,7 +314,7 @@ if value is None:
   <li><strong>bytearray</strong>: Represents a mutable sequence of bytes</li>
   <li><strong>range</strong>: Represents an immutable sequence of numbers</li>
 </ul>
-<pre><code>
+<pre><code class="language-python">
 # byte
 byte_data = b"Hello"
 print(type(byte_data))
@@ -379,7 +339,7 @@ print(list(range_data))  # Output: [0, 1, 2, 3, 4]
 <h3>Arithmetic Operators</h3>
 <p>Arithmetic operators are used to perform common mathematical operations.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Addition
 print(5 + 3)  # Output: 8
 
@@ -405,7 +365,7 @@ print(5 ** 3)  # Output: 125
 
 <p><strong>Assignment:</strong> Write a program that takes two numbers as input and performs all the arithmetic operations on them. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 a = int(input("Enter the first number: "))
 b = int(input("Enter the second number: "))
 
@@ -421,7 +381,7 @@ print(f"Exponentiation: {a ** b}")
 <h3>Comparison Operators</h3>
 <p>Comparison operators are used to compare two values. They return a Boolean value (True or False).</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Equal to
 print(5 == 3)  # Output: False
 
@@ -444,7 +404,7 @@ print(5 <= 3)  # Output: False
 
 <p><strong>Assignment:</strong> Write a program that takes two numbers as input and compares them using all the comparison operators. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 a = int(input("Enter the first number: "))
 b = int(input("Enter the second number: "))
 
@@ -459,7 +419,7 @@ print(f"{a} <= {b}: {a <= b}")
 <h3>Logical Operators</h3>
 <p>Logical operators are used to combine conditional statements. They include and, or, and not.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # and
 print(True and False)  # Output: False
 
@@ -473,7 +433,7 @@ print(not True)  # Output: False
 
 <p><strong>Assignment:</strong> Write a program that takes two Boolean values as input and combines them using all the logical operators. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 a = input("Enter the first Boolean value (True/False): ") == "True"
 b = input("Enter the second Boolean value (True/False): ") == "True"
 
@@ -485,7 +445,7 @@ print(f"not {a}: {not a}")
 <h3>Bitwise Operators</h3>
 <p>Bitwise operators are used to perform operations on binary numbers.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # AND
 print(5 & 3)  # Output: 1
 
@@ -508,7 +468,7 @@ print(5 >> 1)  # Output: 2
 
 <p><strong>Assignment:</strong> Write a program that takes two numbers as input and performs all the bitwise operations on them. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 a = int(input("Enter the first number: "))
 b = int(input("Enter the second number: "))
 
@@ -523,7 +483,7 @@ print(f"Bitwise Right Shift of {a}: {a >> 1}")
 <h3>Assignment Operators</h3>
 <p>Assignment operators are used to assign values to variables. They include operators like =, +=, -=, *=, /=, %=, **=, //=, &=, |=, ^=, >>=, and <<=.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 a = 5
 
 a += 3  # Equivalent to a = a + 3
@@ -551,7 +511,7 @@ print(a)  # Output: 2.0
 
 <p><strong>Assignment:</strong> Write a program that takes a number as input and performs all the assignment operations on it. Print the results after each operation.</p>
 
-<pre><code>
+<pre><code class="language-python">
 a = int(input("Enter a number: "))
 
 a += 5
@@ -579,7 +539,7 @@ print(f"After //= 2: {a}")
 <h3>Identity Operators</h3>
 <p>Identity operators are used to compare the memory locations of two objects. They include <code>is</code> and <code>is not</code>.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 a = [1, 2, 3]
 b = a
 c = [1, 2, 3]
@@ -592,7 +552,7 @@ print(a is not c)   # Output: True
 
 <p><strong>Assignment:</strong> Write a program that creates two lists, compares them using identity operators, and prints the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 list1 = [1, 2, 3]
 list2 = list1
 list3 = [1, 2, 3]
@@ -605,7 +565,7 @@ print(f"list1 is not list3: {list1 is not list3}")
 <h3>Membership Operators</h3>
 <p>Membership operators are used to test if a sequence is present in an object. They include <code>in</code> and <code>not in</code>.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 a = [1, 2, 3, 4, 5]
 
 print(3 in a)       # Output: True
@@ -616,7 +576,7 @@ print(6 not in a)   # Output: True
 
 <p><strong>Assignment:</strong> Write a program that creates a list of numbers and tests whether specific values are present using membership operators. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 numbers = [10, 20, 30, 40, 50]
 
 print(30 in numbers)
@@ -632,7 +592,7 @@ print(60 not in numbers)
 <h3>Creating Arrays</h3>
 <p>To create an array, you need to import the <code>array</code> module and specify the type code for the array. The type code specifies the type of elements the array can hold.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -644,7 +604,7 @@ print(arr)  # Output: array('i', [1, 2, 3, 4, 5])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of floating-point numbers and prints it.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of floats
@@ -656,7 +616,7 @@ print(arr)  # Output: array('f', [1.1, 2.2, 3.3, 4.4, 5.5])
 <h3>Accessing Array Elements</h3>
 <p>You can access array elements using their index. The index of the first element is 0.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -670,7 +630,7 @@ print(arr[2])  # Output: 3
 
 <p><strong>Assignment:</strong> Write a program that creates an array of strings and prints each element using a loop.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of characters
@@ -684,7 +644,7 @@ for i in range(len(arr)):
 <h3>Modifying Array Elements</h3>
 <p>You can modify array elements by accessing them through their index and assigning a new value.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -700,7 +660,7 @@ print(arr)  # Output: array('i', [1, 20, 3, 40, 5])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of floating-point numbers, modifies some elements, and prints the modified array.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of floats
@@ -716,7 +676,7 @@ print(arr)  # Output: array('f', [10.1, 2.2, 3.3, 4.4, 50.5])
 <h3>Appending and Extending Arrays</h3>
 <p>You can add elements to an array using the <code>append()</code> and <code>extend()</code> methods.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -734,7 +694,7 @@ print(arr)  # Output: array('i', [1, 2, 3, 4, 5, 6, 7])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of integers, appends new elements, and extends it with another array. Print the final array.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -752,7 +712,7 @@ print(f"After extend: {arr}")
 <h3>Inserting and Removing Elements</h3>
 <p>You can insert elements at a specific position using the <code>insert()</code> method and remove elements using the <code>remove()</code> and <code>pop()</code> methods.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -775,7 +735,7 @@ print(arr)  # Output: array('i', [1, 3, 4])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of characters, inserts a new character at a specific position, removes a character by value, and prints the modified array.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of characters
@@ -793,7 +753,7 @@ print(f"After remove: {arr}")
 <h3>Array Slicing</h3>
 <p>Array slicing allows you to access a subset of elements in an array. You can use the colon operator to specify the start, stop, and step of the slice.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -809,7 +769,7 @@ print(arr[::2])  # Output: array('i', [1, 3, 5, 7, 9])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of integers and demonstrates different slicing operations. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -825,7 +785,7 @@ print(f"Slice [::2]: {arr[::2]}")
 <h3>Array Methods</h3>
 <p>Arrays have various methods that you can use to perform operations like searching, counting, and reversing elements.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -847,7 +807,7 @@ print(f"Reversed array: {arr}")  # Output: array('i', [2, 5, 4, 3, 2, 1])
 
 <p><strong>Assignment:</strong> Write a program that creates an array of integers, counts the occurrences of a specific value, finds the index of a value, and reverses the array. Print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import array
 
 # Create an array of integers
@@ -869,7 +829,7 @@ print(f"Reversed array: {arr}")
 <h3>Multidimensional Arrays</h3>
 <p>Multidimensional arrays can be created using lists of lists. They are often used to represent matrices or tables.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Create a 2D array (matrix)
 matrix = [
     [1, 2, 3],
@@ -891,7 +851,7 @@ for row in matrix:
 
 <p><strong>Assignment:</strong> Write a program that creates a 2D array and prints its elements in matrix form. Then, modify specific elements and print the modified array.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Create a 2D array (matrix)
 matrix = [
     [1, 2, 3],
@@ -926,7 +886,7 @@ for row in matrix:
 <h3>If Statements</h3>
 <p>If statements are used to execute a block of code only if a condition is true. They help in decision-making by allowing the program to choose different paths of execution based on the conditions provided.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 if condition:
     # code block to be executed if the condition is true
 </code></pre>
@@ -940,7 +900,7 @@ else:
     # code block to be executed if none of the conditions above are true
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 x = 10
 if x > 5:
     print("x is greater than 5")
@@ -955,7 +915,7 @@ else:
 
 <p><strong>Assignment 1:</strong> Write a program that checks if a number stored in the variable <code>y</code> is positive, negative, or zero, and prints an appropriate message for each case.</p>
 
-<pre><code>
+<pre><code class="language-python">
 y = int(input("Enter a number: "))
 if y > 0:
     print("The number is positive")
@@ -967,7 +927,7 @@ else:
 
 <p><strong>Assignment 2:</strong> Write a program that checks the grade of a student stored in the variable <code>grade</code>. If the grade is 90 or above, print "A". If it is between 80 and 89, print "B". If it is between 70 and 79, print "C". If it is between 60 and 69, print "D". Otherwise, print "F".</p>
 
-<pre><code>
+<pre><code class="language-python">
 grade = int(input("Enter the grade: "))
 if grade >= 90:
     print("A")
@@ -984,12 +944,12 @@ else:
 <h3>For Loops</h3>
 <p>For loops are used to iterate over a sequence (such as a list, tuple, dictionary, set, or string). They allow you to execute a block of code multiple times, once for each item in the sequence.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 for item in sequence:
     # code block to be executed for each item
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Iterating over a list
 fruits = ["apple", "banana", "cherry"]
 for fruit in fruits:
@@ -1001,7 +961,7 @@ for fruit in fruits:
 
 <p><strong>Assignment 1:</strong> Write a program that prints each character of a string stored in the variable <code>word</code> on a new line.</p>
 
-<pre><code>
+<pre><code class="language-python">
 word = "Python"
 for char in word:
     print(char)
@@ -1009,7 +969,7 @@ for char in word:
 
 <p><strong>Assignment 2:</strong> Write a program that iterates through the numbers 1 to 10 and prints whether each number is odd or even.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 11):
     if i % 2 == 0:
         print(f"{i} is even")
@@ -1020,12 +980,12 @@ for i in range(1, 11):
 <h3>While Loops</h3>
 <p>While loops are used to execute a block of code as long as a condition is true. They are useful when the number of iterations is not known beforehand.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 while condition:
     # code block to be executed as long as the condition is true
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Example of while loop
 count = 0
 while count < 5:
@@ -1038,7 +998,7 @@ while count < 5:
 
 <p><strong>Assignment 1:</strong> Write a program that keeps asking the user for input and prints it until the user types "stop".</p>
 
-<pre><code>
+<pre><code class="language-python">
 user_input = ""
 while user_input != "stop":
     user_input = input("Enter something (type 'stop' to end): ")
@@ -1047,7 +1007,7 @@ while user_input != "stop":
 
 <p><strong>Assignment 2:</strong> Write a program that calculates the sum of numbers entered by the user until they enter 0. Print the total sum after the loop ends.</p>
 
-<pre><code>
+<pre><code class="language-python">
 total_sum = 0
 number = int(input("Enter a number (0 to end): "))
 
@@ -1061,13 +1021,13 @@ print(f"Total sum: {total_sum}")
 <h3>Nested Loops</h3>
 <p>Nested loops are loops inside other loops. This allows you to perform more complex iterations, such as iterating over multi-dimensional data structures.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 for outer_item in outer_sequence:
     for inner_item in inner_sequence:
         # code block to be executed for each combination of outer_item and inner_item
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Example of nested loops
 for i in range(3):
     for j in range(2):
@@ -1079,7 +1039,7 @@ for i in range(3):
 
 <p><strong>Assignment 1:</strong> Write a program that prints a multiplication table for numbers 1 to 5.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 6):
     for j in range(1, 6):
         print(f"{i} x {j} = {i * j}")
@@ -1087,7 +1047,7 @@ for i in range(1, 6):
 </code></pre>
 
 <p><strong>Assignment 2:</strong> Write a program that prints a pattern of stars like this:</p>
-<pre><code>
+<pre><code class="language-python">
 *
 **
 ***
@@ -1095,7 +1055,7 @@ for i in range(1, 6):
 *****
 </code></pre>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 6):
     for j in range(i):
         print("*", end="")
@@ -1105,7 +1065,7 @@ for i in range(1, 6):
 <h3>Break and Continue Statements</h3>
 <p>The <code>break</code> statement is used to exit a loop prematurely. The <code>continue</code> statement is used to skip the current iteration and continue with the next iteration.</p>
 <p>Break Example:</p>
-<pre><code>
+<pre><code class="language-python">
 for i in range(10):
     if i == 5:
         break
@@ -1114,7 +1074,7 @@ for i in range(10):
 <p><strong>Explanation:</strong> The loop runs from 0 to 9, but the <code>break</code> statement exits the loop when <code>i</code> equals 5, so only numbers 0 to 4 are printed.</p>
 
 <p>Continue Example:</p>
-<pre><code>
+<pre><code class="language-python">
 for i in range(10):
     if i % 2 == 0:
         continue
@@ -1126,7 +1086,7 @@ for i in range(10):
 
 <p><strong>Assignment 1:</strong> Write a program that prints numbers from 1 to 10, but stops if it encounters a number greater than 7, and skips even numbers.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 11):
     if i > 7:
         break
@@ -1137,7 +1097,7 @@ for i in range(1, 11):
 
 <p><strong>Assignment 2:</strong> Write a program that iterates through the numbers 1 to 10 and prints the numbers. If a number is divisible by 3, it should not be printed.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 11):
     if i % 3 == 0:
         continue
@@ -1147,14 +1107,14 @@ for i in range(1, 11):
 <h3>Else Clause with Loops</h3>
 <p>Python allows an optional <code>else</code> clause with loops. The <code>else</code> block is executed when the loop completes normally (without encountering a <code>break</code> statement).</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 for item in sequence:
     # code block
 else:
     # code block to be executed when the loop completes normally
 </code></pre>
 <p>For Loop Example:</p>
-<pre><code>
+<pre><code class="language-python">
 for i in range(5):
     print(i)
 else:
@@ -1163,7 +1123,7 @@ else:
 <p><strong>Explanation:</strong> The loop runs from 0 to 4, and then the <code>else</code> block is executed because the loop completed normally without encountering a <code>break</code> statement.</p>
 
 <p>While Loop Example:</p>
-<pre><code>
+<pre><code class="language-python">
 count = 0
 while count < 5:
     print(count)
@@ -1177,7 +1137,7 @@ else:
 
 <p><strong>Assignment 1:</strong> Write a program that iterates through numbers 1 to 5, prints them, and after the loop completes, print "Finished loop without break". If a number is greater than 4, use <code>break</code> to exit the loop early.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(1, 6):
     if i > 4:
         break
@@ -1188,7 +1148,7 @@ else:
 
 <p><strong>Assignment 2:</strong> Write a program that iterates through the letters of a string and prints them. If it encounters the letter 'e', it should exit the loop. If it completes the loop without encountering 'e', it should print "Completed without finding 'e'".</p>
 
-<pre><code>
+<pre><code class="language-python">
 word = "hello"
 for letter in word:
     if letter == 'e':
@@ -1201,12 +1161,12 @@ else:
 <h3>Pass Statement</h3>
 <p>The <code>pass</code> statement is a null operation; it does nothing. It is used as a placeholder for future code.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 if condition:
     pass  # placeholder for future code
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 for i in range(5):
     if i == 3:
         pass  # Placeholder for future code
@@ -1218,7 +1178,7 @@ for i in range(5):
 
 <p><strong>Assignment:</strong> Write a program that iterates through numbers 0 to 4 and uses <code>pass</code> when the number is 2. For other numbers, print the number.</p>
 
-<pre><code>
+<pre><code class="language-python">
 for i in range(5):
     if i == 2:
         pass  # Placeholder for future code
@@ -1229,14 +1189,14 @@ for i in range(5):
 <h3>Try-Except Block</h3>
 <p>The <code>try</code> block lets you test a block of code for errors. The <code>except</code> block lets you handle the error. This is useful for handling exceptions and preventing the program from crashing due to unexpected errors.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 try:
     # code block that may raise an exception
 except ExceptionType:
     # code block to handle the exception
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 try:
     # Code that may raise an exception
     x = 10 / 0
@@ -1246,7 +1206,7 @@ except ZeroDivisionError:
 </code></pre>
 <p><strong>Explanation:</strong> The <code>try</code> block contains code that may raise an exception. If a <code>ZeroDivisionError</code> occurs, the <code>except</code> block is executed, printing an error message. This prevents the program from crashing and allows for graceful error handling.</p>
 
-<pre><code>
+<pre><code class="language-python">
 try:
     # Code that may raise an exception
     result = int("abc")
@@ -1260,7 +1220,7 @@ except ValueError as e:
 
 <p><strong>Assignment 1:</strong> Write a program that prompts the user to enter a number. If the user enters a non-numeric value, handle the exception and print "Invalid input. Please enter a number."</p>
 
-<pre><code>
+<pre><code class="language-python">
 try:
     user_input = int(input("Enter a number: "))
     print(f"You entered: {user_input}")
@@ -1270,7 +1230,7 @@ except ValueError:
 
 <p><strong>Assignment 2:</strong> Write a program that tries to open a file called <code>data.txt</code> and read its content. If the file does not exist, handle the exception and print "File not found".</p>
 
-<pre><code>
+<pre><code class="language-python">
 try:
     with open('data.txt', 'r') as file:
         content = file.read()
@@ -1289,13 +1249,13 @@ except FileNotFoundError:
 <h3>Defining Functions</h3>
 <p>To define a function, use the <code>def</code> keyword, followed by the function name and parentheses. Inside the parentheses, you can specify parameters.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 def function_name(parameters):
     # code block
     return result  # Optional
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 def greet(name):
     return f"Hello, {name}!"
 
@@ -1308,7 +1268,7 @@ print(greet("Bob"))
 
 <p><strong>Assignment 1:</strong> Write a function called <code>add_numbers</code> that takes two parameters and returns their sum. Call the function with different sets of numbers and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def add_numbers(a, b):
     return a + b
 
@@ -1318,7 +1278,7 @@ print(add_numbers(-2, 7))  # Output: 5
 
 <p><strong>Assignment 2:</strong> Write a function called <code>convert_to_fahrenheit</code> that takes a Celsius temperature as a parameter and returns the equivalent Fahrenheit temperature. Call the function with different temperatures and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def convert_to_fahrenheit(celsius):
     return celsius * 9/5 + 32
 
@@ -1329,7 +1289,7 @@ print(convert_to_fahrenheit(25))   # Output: 77.0
 <h3>Function Parameters</h3>
 <p>Functions can take parameters, which are specified in the parentheses of the function definition. Parameters allow you to pass data to functions.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 def multiply(a, b):
     return a * b
 
@@ -1342,7 +1302,7 @@ print(multiply(7, 3))  # Output: 21
 
 <p><strong>Assignment 1:</strong> Write a function called <code>subtract_numbers</code> that takes two parameters and returns their difference. Call the function with different sets of numbers and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def subtract_numbers(a, b):
     return a - b
 
@@ -1352,7 +1312,7 @@ print(subtract_numbers(5, 9))   # Output: -4
 
 <p><strong>Assignment 2:</strong> Write a function called <code>calculate_area</code> that takes the length and width of a rectangle as parameters and returns the area. Call the function with different sets of dimensions and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def calculate_area(length, width):
     return length * width
 
@@ -1363,7 +1323,7 @@ print(calculate_area(7, 2))  # Output: 14
 <h3>Default Parameters</h3>
 <p>You can define default values for function parameters. If a default parameter is not provided when the function is called, the default value is used.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 def greet(name="Guest"):
     return f"Hello, {name}!"
 
@@ -1376,7 +1336,7 @@ print(greet("Alice"))  # Output: Hello, Alice!
 
 <p><strong>Assignment 1:</strong> Write a function called <code>divide_numbers</code> that takes two parameters and returns their division. The second parameter should have a default value of 1. Call the function with different sets of numbers and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def divide_numbers(a, b=1):
     return a / b
 
@@ -1386,7 +1346,7 @@ print(divide_numbers(10, 2))  # Output: 5.0
 
 <p><strong>Assignment 2:</strong> Write a function called <code>calculate_discount</code> that takes a price and a discount percentage as parameters. The discount percentage should have a default value of 10%. The function should return the price after applying the discount. Call the function with different sets of prices and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def calculate_discount(price, discount=10):
     return price * (1 - discount / 100)
 
@@ -1397,7 +1357,7 @@ print(calculate_discount(100, 20))   # Output: 80.0
 <h3>Keyword Arguments</h3>
 <p>Keyword arguments allow you to specify arguments by their parameter names when calling a function. This makes the function call more readable and allows you to provide arguments in any order.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 def describe_person(name, age, city):
     return f"{name} is {age} years old and lives in {city}."
 
@@ -1410,7 +1370,7 @@ print(describe_person(city="Los Angeles", name="Bob", age=25))
 
 <p><strong>Assignment 1:</strong> Write a function called <code>format_address</code> that takes three parameters: <code>street</code>, <code>city</code>, and <code>postal_code</code>. Use keyword arguments to call the function with different addresses and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def format_address(street, city, postal_code):
     return f"{street}, {city}, {postal_code}"
 
@@ -1420,7 +1380,7 @@ print(format_address(postal_code="90210", city="Beverly Hills", street="456 Elm 
 
 <p><strong>Assignment 2:</strong> Write a function called <code>calculate_bmi</code> that takes <code>weight</code> (in kg) and <code>height</code> (in meters) as parameters. Use keyword arguments to call the function and print the BMI values. The BMI is calculated as weight divided by the square of the height.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def calculate_bmi(weight, height):
     return weight / (height ** 2)
 
@@ -1431,7 +1391,7 @@ print(calculate_bmi(height=1.6, weight=60))   # Output: 23.44
 <h3>Arbitrary Arguments</h3>
 <p>Sometimes, you may not know how many arguments will be passed to a function. You can use <code>*args</code> to accept an arbitrary number of positional arguments and <code>**kwargs</code> to accept an arbitrary number of keyword arguments.</p>
 <p>Example (Positional Arguments):</p>
-<pre><code>
+<pre><code class="language-python">
 def sum_numbers(*args):
     return sum(args)
 
@@ -1441,7 +1401,7 @@ print(sum_numbers(4, 5, 6, 7, 8))  # Output: 30
 <p><strong>Explanation:</strong> The function <code>sum_numbers</code> accepts an arbitrary number of positional arguments using <code>*args</code> and returns their sum.</p>
 
 <p>Example (Keyword Arguments):</p>
-<pre><code>
+<pre><code class="language-python">
 def print_details(**kwargs):
     for key, value in kwargs.items():
         print(f"{key}: {value}")
@@ -1455,7 +1415,7 @@ print_details(name="Bob", profession="Developer")
 
 <p><strong>Assignment 1:</strong> Write a function called <code>calculate</code> that accepts an arbitrary number of numbers and returns their product. Use <code>*args</code> to accept the numbers. Call the function with different sets of numbers and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def calculate(*args):
     product = 1
     for num in args:
@@ -1468,7 +1428,7 @@ print(calculate(1, 5, 7, 9))   # Output: 315
 
 <p><strong>Assignment 2:</strong> Write a function called <code>describe_student</code> that accepts arbitrary keyword arguments representing a student's details (name, age, grade, etc.). Use <code>**kwargs</code> to accept the details and print them. Call the function with different sets of details and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 def describe_student(**kwargs):
     for key, value in kwargs.items():
         print(f"{key}: {value}")
@@ -1480,11 +1440,11 @@ describe_student(name="Emma", age=17, grade="12th", city="New York")
 <h3>Lambda Functions</h3>
 <p>Lambda functions are small anonymous functions defined using the <code>lambda</code> keyword. They can have any number of arguments but only one expression.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 lambda arguments: expression
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python"> 
 # Regular function
 def add(a, b):
     return a + b
@@ -1500,7 +1460,7 @@ print(add(3, 5))  # Output: 8
 
 <p><strong>Assignment 1:</strong> Write a lambda function that takes a number and returns its square. Call the function with different numbers and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 square = lambda x: x ** 2
 
 print(square(4))   # Output: 16
@@ -1509,7 +1469,7 @@ print(square(7))   # Output: 49
 
 <p><strong>Assignment 2:</strong> Write a lambda function that takes two strings and returns their concatenation. Call the function with different strings and print the results.</p>
 
-<pre><code>
+<pre><code class="language-python">
 concat = lambda a, b: a + " " + b
 
 print(concat("Hello", "World"))  # Output: "Hello World"
@@ -1526,7 +1486,7 @@ print(concat("Python", "Programming"))  # Output: "Python Programming"
 <p>A class is a blueprint for creating objects. Each object is an instance of a class. Classes define attributes (data) and methods (functions) that the objects created from the class can use.</p>
 <p>Real-life example: Think of a class as a blueprint for a car. The blueprint defines properties like color, make, and model, and actions like start, stop, and drive. Each car built from this blueprint is an object of the Car class.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 class ClassName:
     def __init__(self, parameters):
         # Initialize attributes
@@ -1534,7 +1494,7 @@ class ClassName:
         # Method implementation
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 class Dog:
     def __init__(self, name, age):
         self.name = name
@@ -1550,7 +1510,7 @@ print(dog1.bark())
 
 <p><strong>Assignment 1:</strong> Create a class called <code>Car</code> with attributes <code>make</code>, <code>model</code>, and <code>year</code>. Add a method called <code>start_engine</code> that returns a string indicating that the car's engine has started. Create an instance of the class and call the <code>start_engine</code> method.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Car:
     def __init__(self, make, model, year):
         self.make = make
@@ -1566,7 +1526,7 @@ print(car1.start_engine())
 
 <p><strong>Assignment 2:</strong> Create a class called <code>Book</code> with attributes <code>title</code>, <code>author</code>, and <code>pages</code>. Add a method called <code>description</code> that returns a string describing the book. Create an instance of the class and call the <code>description</code> method.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Book:
     def __init__(self, title, author, pages):
         self.title = title
@@ -1584,12 +1544,12 @@ print(book1.description())
 <p>Inheritance allows a class (child class) to inherit attributes and methods from another class (parent class). This promotes code reuse and establishes a hierarchical relationship between classes.</p>
 <p>Real-life example: Consider a base class Vehicle that has general attributes and methods like speed and drive. A Car class and a Bike class can inherit from Vehicle, each adding specific features unique to cars and bikes, respectively.</p>
 <p>Syntax:</p>
-<pre><code>
+<pre><code class="language-python">
 class DerivedClass(BaseClass):
     # Additional attributes and methods
 </code></pre>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 class Animal:
     def __init__(self, name):
         self.name = name
@@ -1614,7 +1574,7 @@ print(cat.speak())
 
 <p><strong>Assignment 1:</strong> Create a base class called <code>Shape</code> with a method <code>area</code> that raises a <code>NotImplementedError</code>. Create a subclass called <code>Rectangle</code> that inherits from <code>Shape</code> and implements the <code>area</code> method to return the area of the rectangle. Create an instance of <code>Rectangle</code> and call the <code>area</code> method.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Shape:
     def area(self):
         raise NotImplementedError("Subclasses must implement this method")
@@ -1633,7 +1593,7 @@ print(rect.area())  # Output: 15
 
 <p><strong>Assignment 2:</strong> Create a base class called <code>Employee</code> with attributes <code>name</code> and <code>salary</code>. Add a method <code>work</code> that raises a <code>NotImplementedError</code>. Create subclasses <code>Developer</code> and <code>Designer</code> that inherit from <code>Employee</code> and implement the <code>work</code> method. Create instances of each subclass and call their <code>work</code> methods.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Employee:
     def __init__(self, name, salary):
         self.name = name
@@ -1660,7 +1620,7 @@ print(des.work())
 <p>Encapsulation is the concept of bundling data (attributes) and methods (functions) that operate on that data within a single unit or class. It restricts access to certain components to prevent accidental modification and provides a way to control how data is accessed or modified.</p>
 <p>Real-life example: Consider a bank account. You can deposit and withdraw money, but you cannot directly change the account balance without going through these methods. This ensures that the balance is always updated correctly.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -1684,7 +1644,7 @@ print(person.get_age())
 
 <p><strong>Assignment 1:</strong> Create a class called <code>BankAccount</code> with private attributes <code>balance</code> and <code>account_number</code>. Add methods to deposit and withdraw money, and to get the current balance. Ensure that withdrawals do not exceed the available balance.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class BankAccount:
     def __init__(self, account_number, balance=0):
         self.__account_number = account_number
@@ -1712,7 +1672,7 @@ print(account.get_balance())  # Output: 75
 
 <p><strong>Assignment 2:</strong> Create a class called <code>Student</code> with private attributes <code>name</code> and <code>grades</code>. Add methods to add a grade, get the average grade, and get the student's name. Ensure that grades are between 0 and 100.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Student:
     def __init__(self, name):
         self.__name = name
@@ -1741,7 +1701,7 @@ print(f"{student.get_name()}'s average grade: {student.get_average_grade()}")
 <p>Polymorphism allows methods to do different things based on the object it is acting upon. This can be achieved through method overriding or by defining methods with the same name in different classes.</p>
 <p>Real-life example: Consider a base class Employee with a method work. A Developer class and a Designer class can inherit from Employee, each implementing their own version of the work method. When calling the work method on an object, the specific implementation is executed based on the object's class.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 class Bird:
     def fly(self):
         return "Flying"
@@ -1763,7 +1723,7 @@ make_bird_fly(penguin)
 
 <p><strong>Assignment 1:</strong> Create a base class called <code>Instrument</code> with a method <code>play</code>. Create subclasses called <code>Guitar</code> and <code>Drum</code> that inherit from <code>Instrument</code> and override the <code>play</code> method. Write a function that takes an <code>Instrument</code> object and calls its <code>play</code> method. Create instances of <code>Guitar</code> and <code>Drum</code> and pass them to the function.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Instrument:
     def play(self):
         raise NotImplementedError("Subclasses must implement this method")
@@ -1788,7 +1748,7 @@ play_instrument(drum)
 
 <p><strong>Assignment 2:</strong> Create a base class called <code>Vehicle</code> with a method <code>move</code>. Create subclasses called <code>Car</code> and <code>Bicycle</code> that inherit from <code>Vehicle</code> and override the <code>move</code> method. Write a function that takes a <code>Vehicle</code> object and calls its <code>move</code> method. Create instances of <code>Car</code> and <code>Bicycle</code> and pass them to the function.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Vehicle:
     def move(self):
         raise NotImplementedError("Subclasses must implement this method")
@@ -1815,7 +1775,7 @@ move_vehicle(bicycle)
 <p>In Python, methods are functions that are defined within a class and are associated with an object. Functions, on the other hand, are independent and not tied to any object. Methods are called on an object, while functions are called on their own.</p>
 <p>Real-life example: Think of a method as a specific instruction that a device (object) can perform, like a coffee machine brewing coffee. A function is a general instruction, like adding two numbers, that can be used anywhere in a program.</p>
 <p>Example of a function:</p>
-<pre><code>
+<pre><code class="language-python">
 def add(a, b):
     return a + b
 
@@ -1823,7 +1783,7 @@ result = add(3, 5)
 print(result)  # Output: 8
 </code></pre>
 <p>Example of a method:</p>
-<pre><code>
+<pre><code class="language-python">
 class Calculator:
     def add(self, a, b):
         return a + b
@@ -1839,7 +1799,7 @@ print(result)  # Output: 8
 
 <p><strong>Assignment:</strong> Write a class called <code>Circle</code> with an attribute <code>radius</code>. Add a method called <code>area</code> that calculates and returns the area of the circle. Also, write a standalone function that calculates the area of a circle given its radius. Compare the usage of the method and the function.</p>
 
-<pre><code>
+<pre><code class="language-python">
 import math
 
 class Circle:
@@ -1871,7 +1831,7 @@ print(circle_area(5))  # Output: 78.53981633974483
 <p>To open a file, use the <code>open()</code> function, which returns a file object. You can specify the mode in which the file should be opened, such as read ('r'), write ('w'), append ('a'), and others. It is a good practice to close the file after performing operations on it to free up system resources.</p>
 <p>Real-life example: Think of a file as a notebook. You can open the notebook to read from it or write new information. After you are done, you close the notebook.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Opening a file
 file = open('file.txt', 'w')
 file.write("Hello, World!")
@@ -1887,7 +1847,7 @@ file.close()
 
 <p><strong>Assignment 1:</strong> Create a file called <code>data.txt</code> and write the text "Python is fun!" to it. Then, open the file in read mode and print its content.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Writing to a file
 file = open('data.txt', 'w')
 file.write("Python is fun!")
@@ -1904,7 +1864,7 @@ file.close()
 <p>Using the <code>with</code> statement to work with files is a best practice in Python. It ensures that the file is properly closed after its suite finishes, even if an exception is raised.</p>
 <p>Real-life example: Using a <code>with</code> statement to open a file is like borrowing a book from a library. You are guaranteed to return it (close it) when you are done reading or writing.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Writing to a file using with statement
 with open('file.txt', 'w') as file:
     file.write("Hello, World!")
@@ -1918,7 +1878,7 @@ with open('file.txt', 'r') as file:
 
 <p><strong>Assignment 2:</strong> Using the <code>with</code> statement, write "Learning file handling in Python" to a file called <code>example.txt</code>. Then, read the content of the file and print it.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Writing to a file using with statement
 with open('example.txt', 'w') as file:
     file.write("Learning file handling in Python")
@@ -1932,7 +1892,7 @@ with open('example.txt', 'r') as file:
 <h3>Reading and Writing Multiple Lines</h3>
 <p>You can read from and write multiple lines to a file using methods like <code>readlines()</code> and <code>writelines()</code>.</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Writing multiple lines to a file
 lines_to_write = ["First line\n", "Second line\n", "Third line\n"]
 with open('file.txt', 'w') as file:
@@ -1948,7 +1908,7 @@ with open('file.txt', 'r') as file:
 
 <p><strong>Assignment 3:</strong> Create a file called <code>notes.txt</code> and write the following lines to it: "Line 1: Python\nLine 2: JavaScript\nLine 3: Java". Then, read the file line by line and print each line.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Writing multiple lines to a file
 lines_to_write = ["Line 1: Python\n", "Line 2: JavaScript\n", "Line 3: Java\n"]
 with open('notes.txt', 'w') as file:
@@ -1964,7 +1924,7 @@ with open('notes.txt', 'r') as file:
 <h3>Appending to a File</h3>
 <p>To append data to an existing file without overwriting its content, open the file in append mode ('a').</p>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Appending to a file
 with open('file.txt', 'a') as file:
     file.write("Appending a new line.\n")
@@ -1978,7 +1938,7 @@ with open('file.txt', 'r') as file:
 
 <p><strong>Assignment 4:</strong> Create a file called <code>log.txt</code> and write "Log entry 1\n". Then, append "Log entry 2\n" and "Log entry 3\n" to the file. Finally, read and print the content of the file.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Writing to a file
 with open('log.txt', 'w') as file:
     file.write("Log entry 1\n")
@@ -2004,7 +1964,7 @@ with open('log.txt', 'r') as file:
     <li><code>'b'</code>: Binary mode - Opens a file in binary mode (used for non-text files like images).</li>
 </ul>
 <p>Example:</p>
-<pre><code>
+<pre><code class="language-python">
 # Example demonstrating different file modes
 with open('binaryfile.bin', 'wb') as file:
     file.write(b'\x00\x01\x02\x03')
@@ -2017,7 +1977,7 @@ with open('binaryfile.bin', 'rb') as file:
 
 <p><strong>Assignment 5:</strong> Create a binary file called <code>data.bin</code> and write the bytes <code>b'\x10\x20\x30\x40'</code> to it. Then, read and print the content of the file.</p>
 
-<pre><code>
+<pre><code class="language-python">
 # Writing to a binary file
 with open('data.bin', 'wb') as file:
     file.write(b'\x10\x20\x30\x40')
@@ -2036,7 +1996,7 @@ with open('data.bin', 'rb') as file:
 
 <h4>__init__</h4>
 <p>The <code>__init__</code> method is the constructor method in Python. It is called when an instance (object) of the class is created.</p>
-<pre><code>
+<pre><code class="language-python">
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -2050,7 +2010,7 @@ print(person.age)   # Output: 30
 
 <h4>__str__ and __repr__</h4>
 <p>The <code>__str__</code> method is called by the <code>str()</code> function and the <code>print</code> statement to get a string representation of an object. The <code>__repr__</code> method is called by the <code>repr()</code> function and the interactive interpreter to get an official string representation of an object.</p>
-<pre><code>
+<pre><code class="language-python">
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -2070,7 +2030,7 @@ print(repr(person))   # Output: Person('Alice', 30)
 
 <h4>__len__</h4>
 <p>The <code>__len__</code> method is called by the <code>len()</code> function to return the length of an object.</p>
-<pre><code>
+<pre><code class="language-python">
 class CustomList:
     def __init__(self, items):
         self.items = items
@@ -2087,7 +2047,7 @@ print(len(my_list))  # Output: 5
 <p>The <code>__eq__</code> method is called by the equality operator <code>==</code>
 to compare two objects for equality.</p>
 
-<pre><code>
+<pre><code class="language-python">
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -2119,7 +2079,7 @@ print(person1 == person3)  # Output: False
 </ul>
 <h4>Assignment 1</h4>
 <p>Create a class called <code>Rectangle</code> with attributes <code>width</code> and <code>height</code>. Implement the <code>__str__</code>, <code>__repr__</code>, and <code>__eq__</code> methods. Test the class by creating instances and comparing them.</p>
-<pre><code>
+<pre><code class="language-python">
 class Rectangle:
     def __init__(self, width, height):
         self.width = width
@@ -2144,7 +2104,7 @@ print(rect1 == rect3) # Output: False
 
 <h4>Assignment 2</h4>
 <p>Create a class called <code>CustomString</code> that wraps around a regular string. Implement the <code>__len__</code>, <code>__add__</code>, and <code>__eq__</code> methods to allow length calculation, string concatenation, and comparison, respectively.</p>
-<pre><code>
+<pre><code class="language-python">
 class CustomString:
     def __init__(self, string):
         self.string = string
@@ -2184,7 +2144,7 @@ def __repr__(self):
   
   <h4>Lists</h4>
   <p>Lists are ordered, mutable collections of elements. They allow duplicate members.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Creating a list
 fruits = ['apple', 'banana', 'cherry']
 
@@ -2216,7 +2176,7 @@ print(shopping_list)  // Output: ['milk', 'bread', 'eggs', 'butter']
 
   <h4>Tuples</h4>
   <p>Tuples are ordered, immutable collections of elements. They allow duplicate members.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Creating a tuple
 colors = ('red', 'green', 'blue')
 
@@ -2241,7 +2201,7 @@ print(f"The coordinates are {coordinates}")  // Output: The coordinates are (10.
 
   <h4>Sets</h4>
   <p>Sets are unordered collections of unique elements. They do not allow duplicate members.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Creating a set
 unique_numbers = {1, 2, 3, 4, 5}
 
@@ -2274,7 +2234,7 @@ print(common_students)  // Output: {'Mary', 'Steve'}
 
   <h4>Dictionaries</h4>
   <p>Dictionaries are unordered collections of key-value pairs. Keys must be unique and immutable, while values can be of any data type.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Creating a dictionary
 student = {
 'name': 'John Doe',
@@ -2314,7 +2274,7 @@ print(phone_book['Alice'])  // Output: 123-456-7890
   <p>Sometimes, built-in data structures are not sufficient for certain tasks. In such cases, you can create custom data structures.</p>
   
   <h4>Linked List</h4>
-  <pre><code>
+  <pre><code class="language-python">
 class Node:
 def __init__(self, data=None):
   self.data = data
@@ -2352,7 +2312,7 @@ ll.display()  // Output: [1, 2, 3]
   <p><strong>Explanation:</strong> A linked list is a linear data structure where each element points to the next. It's like a chain of elements where you can traverse from one element to the next.</p>
 
   <h4>Stack</h4>
-  <pre><code>
+  <pre><code class="language-python">
 class Stack:
 def __init__(self):
   self.items = []
@@ -2386,7 +2346,7 @@ print(stack.size()) # Output: 2
   <p><strong>Explanation:</strong> A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. It's like a stack of plates where you can only take the top plate.</p>
 
   <h4>Queue</h4>
-  <pre><code>
+  <pre><code class="language-python">
 class Queue:
 def __init__(self):
   self.items = []
@@ -2421,7 +2381,7 @@ print(queue.size())     # Output: 2
   <p>Sorting algorithms arrange the elements of a list in a certain order (usually ascending or descending).</p>
   
   <h5>Bubble Sort</h5>
-  <pre><code>
+  <pre><code class="language-python">
 def bubble_sort(arr):
 n = len(arr)
 for i in range(n):
@@ -2437,7 +2397,7 @@ print("Sorted array is:", arr)  # Output: Sorted array is: [11, 12, 22, 25, 34, 
   <p><strong>Explanation:</strong> Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The process is repeated until the list is sorted.</p>
 
   <h5>Quick Sort</h5>
-  <pre><code>
+  <pre><code class="language-python">
 def quick_sort(arr):
 if len(arr) <= 1:
   return arr
@@ -2457,7 +2417,7 @@ print("Sorted array is:", quick_sort(arr))  # Output: Sorted array is: [1, 1, 2,
   <p>Search algorithms are used to find an element in a data structure.</p>
   
   <h5>Linear Search</h5>
-  <pre><code>
+  <pre><code class="language-python">
 def linear_search(arr, target):
 for i in range(len(arr)):
   if arr[i] == target:
@@ -2473,7 +2433,7 @@ print("Element found at index:", result)  # Output: Element found at index: 3
   <p><strong>Explanation:</strong> Linear Search sequentially checks each element of the list until the target element is found or the list ends.</p>
 
   <h5>Binary Search</h5>
-  <pre><code>
+  <pre><code class="language-python">
 def binary_search(arr, target):
 low = 0
 high = len(arr) - 1
@@ -2500,7 +2460,7 @@ print("Element found at index:", result)  # Output: Element found at index: 3
 
   <h3>Assignment 1</h3>
   <p>Create a list of your favorite movies, a tuple of your top 3 favorite colors, a set of unique numbers from 1 to 10, and a dictionary with information about a book (title, author, and year). Print each data structure.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // List of favorite movies
 movies = ['Inception', 'The Matrix', 'Interstellar']
 print(movies)
@@ -2524,7 +2484,7 @@ print(book)
 
   <h3>Assignment 2</h3>
   <p>Create a dictionary that stores information about three different books. Each book should have a title, author, and year of publication. Print out the title of each book and the year it was published.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Dictionary with information about three books
 books = {
 'book1': {'title': '1984', 'author': 'George Orwell', 'year': 1949},
@@ -2539,7 +2499,7 @@ print(f"{value['title']} was published in {value['year']}")
 
   <h3>Assignment 3</h3>
   <p>Implement a linked list, stack, and queue in Python. Create a linked list with elements 1, 2, and 3, push 4 and 5 onto a stack, and enqueue 6 and 7 into a queue. Print the elements of each data structure.</p>
-  <pre><code>
+  <pre><code class="language-python">
 // Linked List Implementation
 class Node:
 def __init__(self, data=None):
@@ -2635,7 +2595,7 @@ print(queue.items)  // Output: [7, 6]
         
         <h3>Lists</h3>
         <p>Lists are ordered, mutable collections of elements. They allow duplicate members.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Creating a list
 fruits = ['apple', 'banana', 'cherry']
 
@@ -2661,7 +2621,7 @@ print(squares)  // Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
         <h3>Tuples</h3>
         <p>Tuples are ordered, immutable collections of elements. They allow duplicate members.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Creating a tuple
 colors = ('red', 'green', 'blue')
 
@@ -2681,7 +2641,7 @@ print(profession)  // Output: Engineer
 
         <h3>Sets</h3>
         <p>Sets are unordered collections of unique elements. They do not allow duplicate members.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Creating a set
 unique_numbers = {1, 2, 3, 4, 5}
 
@@ -2707,7 +2667,7 @@ print(a.difference(b))   // Output: {1, 2}
 
         <h3>Dictionaries</h3>
         <p>Dictionaries are unordered collections of key-value pairs. Keys must be unique and immutable, while values can be of any data type.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Creating a dictionary
 student = {
     'name': 'John Doe',
@@ -2740,7 +2700,7 @@ print(squares)  // Output: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
         
         <h3>Assignment 1</h3>
         <p>Create a list of your favorite movies, a tuple of your top 3 favorite colors, a set of unique numbers from 1 to 10, and a dictionary with information about a book (title, author, and year). Print each data structure.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // List of favorite movies
 movies = ['Inception', 'The Matrix', 'Interstellar']
 print(movies)
@@ -2764,7 +2724,7 @@ print(book)
 
         <h3>Assignment 2</h3>
         <p>Create a dictionary that stores information about three different books. Each book should have a title, author, and year of publication. Print out the title of each book and the year it was published.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Dictionary with information about three books
 books = {
     'book1': {'title': '1984', 'author': 'George Orwell', 'year': 1949},
@@ -2784,7 +2744,7 @@ for key, value in books.items():
         <h3>Linked List</h3>
         <p>A linked list is a linear data structure where each element is a separate object called a node. Each node contains data and a reference (or link) to the next node in the sequence.</p>
         
-        <pre><code>
+        <pre><code class="language-python">
 class Node:
     def __init__(self, data=None):
         self.data = data
@@ -2826,7 +2786,7 @@ ll.display()  # Output: [1, 2, 3]
         <h3>Stack</h3>
         <p>A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. The most recently added element is the first to be removed.</p>
         
-        <pre><code>
+        <pre><code class="language-python">
 class Stack:
     def __init__(self):
         self.items = []
@@ -2864,7 +2824,7 @@ print(stack.size()) # Output: 2
         <h3>Queue</h3>
         <p>A queue is a linear data structure that follows the First In, First Out (FIFO) principle. The oldest added element is the first to be removed.</p>
         
-        <pre><code>
+        <pre><code class="language-python">
 class Queue:
     def __init__(self):
         self.items = []
@@ -2897,7 +2857,7 @@ print(queue.size())     # Output: 2
         <h3>Tree</h3>
         <p>A tree is a hierarchical data structure that consists of nodes, with a single node as the root from which all other nodes descend. Each node can have multiple children but only one parent (except for the root, which has no parent).</p>
         
-        <pre><code>
+        <pre><code class="language-python">
 class TreeNode:
     def __init__(self, data=None):
         self.data = data
@@ -2931,7 +2891,7 @@ root.display()
         <h3>Graph</h3>
         <p>A graph is a collection of nodes (vertices) connected by edges. Graphs can be either directed or undirected, depending on whether the edges have a direction.</p>
         
-        <pre><code>
+        <pre><code class="language-python">
 class Graph:
     def __init__(self):
         self.nodes = {}
@@ -2965,7 +2925,7 @@ graph.display()
 
         <h3>Assignment 1</h3>
         <p>Implement a linked list, stack, and queue in Python. Create a linked list with elements 1, 2, and 3, push 4 and 5 onto a stack, and enqueue 6 and 7 into a queue. Print the elements of each data structure.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Linked List Implementation
 class Node:
     def __init__(self, data=None):
@@ -3056,7 +3016,7 @@ print(queue.items)  // Output: [7, 6]
 
         <h3>Assignment 2</h3>
         <p>Implement a tree and a graph in Python. Create a tree with a root node and two children, each having one child. Create a graph with three nodes connected to each other. Print the structure of the tree and the graph.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Tree Implementation
 class TreeNode:
     def __init__(self, data=None):
@@ -3122,7 +3082,7 @@ graph.display()
 
         <h4>Bubble Sort</h4>
         <p>Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The process is repeated until the list is sorted.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def bubble_sort(arr):
     n = len(arr)
     for i in range(n):
@@ -3141,7 +3101,7 @@ print("Sorted array is:", arr)  # Output: Sorted array is: [11, 12, 22, 25, 34, 
 
         <h4>Quick Sort</h4>
         <p>Quick Sort is a divide-and-conquer algorithm that selects a pivot element and partitions the array into three sub-arrays: elements less than the pivot, elements equal to the pivot, and elements greater than the pivot. It then recursively sorts the sub-arrays.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def quick_sort(arr):
     if len(arr) <= 1:
         return arr
@@ -3164,7 +3124,7 @@ print("Sorted array is:", quick_sort(arr))  # Output: Sorted array is: [1, 1, 2,
 
         <h4>Linear Search</h4>
         <p>Linear Search sequentially checks each element of the list until the target element is found or the list ends.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def linear_search(arr, target):
     for i in range(len(arr)):
         if arr[i] == target:
@@ -3183,7 +3143,7 @@ print("Element found at index:", result)  # Output: Element found at index: 3
 
         <h4>Binary Search</h4>
         <p>Binary Search works on sorted arrays. It repeatedly divides the search interval in half. If the value of the target is less than the value in the middle of the interval, the search continues in the lower half, or else it continues in the upper half. The process repeats until the target is found or the interval is empty.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def binary_search(arr, target):
     low = 0
     high = len(arr) - 1
@@ -3212,7 +3172,7 @@ print("Element found at index:", result)  # Output: Element found at index: 3
 
         <h3>Assignment 1</h3>
         <p>Implement Bubble Sort and Quick Sort algorithms in Python. Create a list of unsorted numbers, sort them using both algorithms, and print the sorted lists.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Bubble Sort Implementation
 def bubble_sort(arr):
     n = len(arr)
@@ -3242,7 +3202,7 @@ print("Quick Sorted array is:", quick_sort(unsorted_arr))
 
         <h3>Assignment 2</h3>
         <p>Implement Linear Search and Binary Search algorithms in Python. Create a list of numbers and search for a specific number using both algorithms. Print the index of the number if found.</p>
-        <pre><code>
+        <pre><code class="language-python">
 // Linear Search Implementation
 def linear_search(arr, target):
     for i in range(len(arr)):
@@ -3311,7 +3271,7 @@ print("Binary Search - Element found at index:", binary_result)
         <p>Here are some brief examples to give you a taste of what's to come:</p>
         
         <h4>Decorators</h4>
-        <pre><code>
+        <pre><code class="language-python">
 def my_decorator(func):
     def wrapper():
         print("Something is happening before the function is called.")
@@ -3328,7 +3288,7 @@ say_hello()
         <p><strong>Explanation:</strong> This decorator adds functionality before and after the 'say_hello' function, similar to adding extra steps before and after a core task.</p>
 
         <h4>Generators</h4>
-        <pre><code>
+        <pre><code class="language-python">
 def generate_numbers():
     for i in range(10):
         yield i
@@ -3339,7 +3299,7 @@ for number in generate_numbers():
         <p><strong>Explanation:</strong> Generators produce items one at a time and only when needed, which is efficient for handling large datasets without consuming much memory.</p>
 
         <h4>Context Managers</h4>
-        <pre><code>
+        <pre><code class="language-python">
 with open('sample.txt', 'r') as file:
     content = file.read()
     print(content)
@@ -3347,21 +3307,21 @@ with open('sample.txt', 'r') as file:
         <p><strong>Explanation:</strong> Using a context manager ensures that resources are properly managed, similar to borrowing a library book and ensuring it's returned on time.</p>
 
         <h4>List Comprehensions</h4>
-        <pre><code>
+        <pre><code class="language-python">
 squares = [x ** 2 for x in range(10)]
 print(squares)
         </code></pre>
         <p><strong>Explanation:</strong> List comprehensions allow you to create lists in a concise and readable manner, like using a shortcut to perform a repetitive task efficiently.</p>
 
         <h4>Lambda Functions</h4>
-        <pre><code>
+        <pre><code class="language-python">
 add = lambda x, y: x + y
 print(add(2, 3))  # Output: 5
         </code></pre>
         <p><strong>Explanation:</strong> Lambda functions are small, anonymous functions useful for quick operations, similar to jotting down a quick note instead of a formal document.</p>
 
         <h4>Metaclasses</h4>
-        <pre><code>
+        <pre><code class="language-python">
 class Meta(type):
     def __new__(cls, name, bases, dct):
         print(f"Creating class {name}")
@@ -3373,7 +3333,7 @@ class MyClass(metaclass=Meta):
         <p><strong>Explanation:</strong> Metaclasses allow customization of class creation, similar to using a mold to shape an object in a specific way.</p>
 
         <h4>Concurrency (Threads and Asyncio)</h4>
-        <pre><code>
+        <pre><code class="language-python">
 import threading
 
 def print_numbers():
@@ -3402,7 +3362,7 @@ subSections: [
         <p>Decorators are functions that take another function as an argument and extend its behavior without explicitly modifying it. They are often used for logging, enforcing access control, instrumentation, caching, and more.</p>
         
         <h3>Basic Example</h3>
-        <pre><code>
+        <pre><code class="language-python">
 def my_decorator(func):
     def wrapper():
         print("Something is happening before the function is called.")
@@ -3422,7 +3382,7 @@ say_hello()
         <p>Imagine you have a coffee machine that can make different types of coffee. You can enhance its functionality by adding extra features like adding sugar or milk. Decorators work similarly by adding extra features to a function.</p>
 
         <h3>Using Decorators with Arguments</h3>
-        <pre><code>
+        <pre><code class="language-python">
 def repeat(num_times):
     def decorator_repeat(func):
         def wrapper(*args, **kwargs):
@@ -3440,7 +3400,7 @@ greet("Alice")
         <p><strong>Explanation:</strong> This example demonstrates how to create a decorator with arguments. The <code>repeat</code> decorator repeats the execution of the <code>greet</code> function three times.</p>
 
         <h3>Using Multiple Decorators</h3>
-        <pre><code>
+        <pre><code class="language-python">
 def uppercase(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
@@ -3464,7 +3424,7 @@ print(greet("Alice"))
 
         <h3>Class Decorators</h3>
         <p>Decorators can also be used with classes. This allows you to add functionality to all methods of a class.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def log_methods(cls):
     for key, value in cls.__dict__.items():
         if callable(value):
@@ -3495,7 +3455,7 @@ p.greet()
 
         <h3>Assignment</h3>
         <p>1. Create a decorator called <code>timer</code> that measures the time a function takes to execute. Apply this decorator to a function that performs a task, such as calculating the factorial of a number.</p>
-        <pre><code>
+        <pre><code class="language-python">
 import time
 
 def timer(func):
@@ -3518,7 +3478,7 @@ print(factorial(10))
         </code></pre>
 
         <p>2. Create a decorator called <code>authenticate</code> that checks if a user is authenticated before allowing them to execute a function. If the user is not authenticated, print a message indicating that access is denied.</p>
-        <pre><code>
+        <pre><code class="language-python">
 def authenticate(func):
     def wrapper(user, *args, **kwargs):
         if user.get("authenticated"):
@@ -3552,7 +3512,7 @@ view_account_details(user)
       <p>An iterator is an object that contains a countable number of values. It can be iterated upon, meaning you can traverse through all the values. In Python, an iterator is an object which implements the iterator protocol, consisting of the methods <code>__iter__()</code> and <code>__next__()</code>.</p>
       
       <h4>Iterator Example</h4>
-      <pre><code>
+      <pre><code class="language-python">
 # Creating an iterator
 class MyNumbers:
   def __iter__(self):
@@ -3579,7 +3539,7 @@ for x in myiter:
       <p>Generators are a simple way of creating iterators. They are written like regular functions but use the <code>yield</code> statement whenever they want to return data. Each time <code>next()</code> is called on it, the generator resumes where it left off (it remembers all the data values and which statement was last executed).</p>
       
       <h4>Generator Example</h4>
-      <pre><code>
+      <pre><code class="language-python">
 def my_generator():
   for i in range(1, 11):
       yield i
@@ -3594,7 +3554,7 @@ for num in my_generator():
       
       <h3>Generator Expressions</h3>
       <p>Generator expressions are a compact way to create generators. They are similar to list comprehensions but with parentheses instead of square brackets.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Generator expression
 my_generator = (x * x for x in range(10))
 for value in my_generator:
@@ -3603,7 +3563,7 @@ for value in my_generator:
       <p><strong>Explanation:</strong> This generator expression generates squares of numbers from 0 to 9. It is similar to a list comprehension but generates values one by one, making it more memory efficient.</p>
       
       <h3>Using Generators for File I/O</h3>
-      <pre><code>
+      <pre><code class="language-python">
 def read_large_file(file_path):
   with open(file_path, 'r') as file:
       while True:
@@ -3619,7 +3579,7 @@ for line in read_large_file('large_file.txt'):
       
       <h3>Assignment 1</h3>
       <p>Create a generator function that yields the Fibonacci sequence up to a given number of terms. Print the generated sequence.</p>
-      <pre><code>
+      <pre><code class="language-python">
 def fibonacci(n):
   a, b = 0, 1
   for _ in range(n):
@@ -3632,7 +3592,7 @@ for num in fibonacci(10):
       
       <h3>Assignment 2</h3>
       <p>Create an iterator class that generates the squares of numbers from 1 to 10. Iterate over the object and print each value.</p>
-      <pre><code>
+      <pre><code class="language-python">
 class SquareNumbers:
   def __iter__(self):
       self.num = 1
@@ -3662,7 +3622,7 @@ for square in squares:
     <p>Context managers allow you to allocate and release resources precisely when you want to. The most common use of context managers is to manage the opening and closing of files.</p>
     
     <h3>Basic Example</h3>
-    <pre><code>
+    <pre><code class="language-python">
 # Using a context manager to open a file
 with open('example.txt', 'r') as file:
 content = file.read()
@@ -3675,7 +3635,7 @@ print(content)
     
     <h3>Creating a Context Manager</h3>
     <p>You can create a context manager by defining a class with <code>__enter__</code> and <code>__exit__</code> methods.</p>
-    <pre><code>
+    <pre><code class="language-python">
 class MyContextManager:
 def __enter__(self):
     print("Entering the context")
@@ -3691,7 +3651,7 @@ print("Inside the context")
     
     <h3>Contextlib Module</h3>
     <p>Python's <code>contextlib</code> module provides utilities for working with context managers. The <code>@contextmanager</code> decorator can be used to define a context manager using a generator function.</p>
-    <pre><code>
+    <pre><code class="language-python">
 from contextlib import contextmanager
 
 @contextmanager
@@ -3706,7 +3666,7 @@ print("Inside the context")
     <p><strong>Explanation:</strong> The <code>@contextmanager</code> decorator allows you to define a context manager using a generator function. The code before the <code>yield</code> statement is executed when entering the context, and the code after the <code>yield</code> statement is executed when exiting the context.</p>
     
     <h3>Using Context Managers for File I/O</h3>
-    <pre><code>
+    <pre><code class="language-python">
 # Writing to a file using a context manager
 with open('example.txt', 'w') as file:
 file.write('Hello, world!')
@@ -3720,7 +3680,7 @@ print(content)
     
     <h3>Assignment 1</h3>
     <p>Create a context manager that times the execution of a block of code. Use this context manager to measure the time it takes to calculate the sum of numbers from 1 to 1,000,000.</p>
-    <pre><code>
+    <pre><code class="language-python">
 import time
 
 class TimerContextManager:
@@ -3739,7 +3699,7 @@ print(f"Total sum: {total}")
     
     <h3>Assignment 2</h3>
     <p>Create a context manager that logs the entry and exit of a block of code to a file. Use this context manager to log messages when entering and exiting a block of code that writes "Hello, world!" to a file.</p>
-    <pre><code>
+    <pre><code class="language-python">
 from contextlib import contextmanager
 
 @contextmanager
@@ -3766,7 +3726,7 @@ with open('example.txt', 'w') as file:
     <p>The expression can be any valid Python expression, including calling functions and methods.</p>
 
     <h3>Basic Example</h3>
-    <pre><code>
+    <pre><code class="language-python">
 # Creating a list of squares using a for-loop
 squares = []
 for x in range(10):
@@ -3781,7 +3741,7 @@ print(squares)
 
     <h3>Real-Life Example</h3>
     <p>Imagine you have a list of prices in different currencies, and you want to convert them all to a single currency. List comprehensions make it easy to apply the conversion in a single line of code.</p>
-    <pre><code>
+    <pre><code class="language-python">
 prices_in_usd = [10, 20, 30, 40]
 exchange_rate = 1.1  # Example exchange rate to EUR
 prices_in_eur = [price * exchange_rate for price in prices_in_usd]
@@ -3790,7 +3750,7 @@ print(prices_in_eur)  # Output: [11.0, 22.0, 33.0, 44.0]
 
     <h3>Using <code>if</code> Clauses</h3>
     <p>List comprehensions can also include <code>if</code> clauses to filter items.</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Creating a list of even numbers using a for-loop
 evens = []
 for x in range(20):
@@ -3806,7 +3766,7 @@ print(evens)
 
     <h3>Nesting List Comprehensions</h3>
     <p>You can also nest list comprehensions to create lists of lists.</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Creating a matrix using nested for-loops
 matrix = []
 for i in range(3):
@@ -3824,7 +3784,7 @@ print(matrix)
 
     <h3>Real-Life Example</h3>
     <p>Imagine you have a list of names, and you want to create a list of initials. List comprehensions make it easy to extract the first letter of each name in a single line of code.</p>
-    <pre><code>
+    <pre><code class="language-python">
 names = ["Alice", "Bob", "Charlie"]
 initials = [name[0] for name in names]
 print(initials)  # Output: ['A', 'B', 'C']
@@ -3832,7 +3792,7 @@ print(initials)  # Output: ['A', 'B', 'C']
 
     <h3>Using List Comprehensions with Functions</h3>
     <p>List comprehensions can also be used with functions to apply a function to each item in a list.</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Defining a function to convert Fahrenheit to Celsius
 def fahrenheit_to_celsius(f):
 return (f - 32) * 5 / 9
@@ -3848,7 +3808,7 @@ print(celsius_temperatures)  # Output: [0.0, 7.222222222222222, 17.7777777777777
 
     <h3>Advanced List Comprehensions</h3>
     <p>List comprehensions can also handle more complex operations, such as flattening a list of lists.</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Flattening a list of lists using a nested for-loop
 list_of_lists = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 flattened = []
@@ -3865,7 +3825,7 @@ print(flattened)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     <h3>Real-Life Example</h3>
     <p>Consider you have a list of sentences, and you want to create a list of words from all the sentences. List comprehensions make it easy to split each sentence into words and combine them into a single list.</p>
-    <pre><code>
+    <pre><code class="language-python">
 sentences = ["Hello world", "Python is great", "List comprehensions are powerful"]
 words = [word for sentence in sentences for word in sentence.split()]
 print(words)  # Output: ['Hello', 'world', 'Python', 'is', 'great', 'List', 'comprehensions', 'are', 'powerful']
@@ -3873,7 +3833,7 @@ print(words)  # Output: ['Hello', 'world', 'Python', 'is', 'great', 'List', 'com
 
     <h3>Using <code>if</code> and <code>else</code> Clauses</h3>
     <p>You can also include <code>if</code> and <code>else</code> clauses in list comprehensions for more complex conditional logic.</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Creating a list of even and odd labels using a for-loop
 labels = []
 for x in range(10):
@@ -3891,7 +3851,7 @@ print(labels)
 
     <h3>Assignment 1</h3>
     <p>Create a list comprehension that generates a list of the first 10 cube numbers (e.g., 0, 1, 8, 27, ...).</p>
-    <pre><code>
+    <pre><code class="language-python">
 # List comprehension to generate the first 10 cube numbers
 cubes = [x ** 3 for x in range(10)]
 print(cubes)  # Output: [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
@@ -3899,7 +3859,7 @@ print(cubes)  # Output: [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
 
     <h3>Assignment 2</h3>
     <p>Given a list of words, create a list comprehension that returns a list of the lengths of those words.</p>
-    <pre><code>
+    <pre><code class="language-python">
 words = ["Python", "list", "comprehension", "example"]
 # List comprehension to get the lengths of the words
 word_lengths = [len(word) for word in words]
@@ -3908,7 +3868,7 @@ print(word_lengths)  # Output: [6, 4, 13, 7]
 
     <h3>Assignment 3</h3>
     <p>Create a list comprehension that filters out negative numbers from a given list of numbers.</p>
-    <pre><code>
+    <pre><code class="language-python">
 numbers = [-10, -5, 0, 5, 10]
 # List comprehension to filter out negative numbers
 positive_numbers = [num for num in numbers if num >= 0]
@@ -3917,7 +3877,7 @@ print(positive_numbers)  # Output: [0, 5, 10]
 
     <h3>Assignment 4</h3>
     <p>Create a nested list comprehension that generates a multiplication table (from 1 to 10).</p>
-    <pre><code>
+    <pre><code class="language-python">
 # Nested list comprehension to generate a multiplication table
 multiplication_table = [[i * j for j in range(1, 11)] for i in range(1, 11)]
 for row in multiplication_table:
@@ -3949,14 +3909,14 @@ print(row)
 
       <h3>Opening and Closing Files</h3>
       <p>Before you can read from or write to a file, you need to open it. The built-in <code>open()</code> function is used to open a file, and it returns a file object. You should always close a file after you're done with it to free up system resources.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Opening a file
 file = open('example.txt', 'r')  # 'r' mode is for reading
 # Perform file operations
 file.close()
       </code></pre>
       <p>Using the <code>with</code> statement ensures that the file is properly closed after its suite finishes, even if an exception is raised.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Using the 'with' statement to open and close a file
 with open('example.txt', 'r') as file:
   # Perform file operations
@@ -3972,7 +3932,7 @@ with open('example.txt', 'r') as file:
         <li><code>readline()</code>: Reads one line from the file.</li>
         <li><code>readlines()</code>: Reads all lines from the file and returns a list.</li>
       </ul>
-      <pre><code>
+      <pre><code class="language-python">
 # Reading the entire file content
 with open('example.txt', 'r') as file:
   content = file.read()
@@ -3998,7 +3958,7 @@ with open('example.txt', 'r') as file:
         <li><code>write()</code>: Writes a string to the file.</li>
         <li><code>writelines()</code>: Writes a list of strings to the file.</li>
       </ul>
-      <pre><code>
+      <pre><code class="language-python">
 # Writing a string to a file
 with open('example.txt', 'w') as file:
   file.write('Hello, world!')
@@ -4012,7 +3972,7 @@ with open('example.txt', 'w') as file:
 
       <h3>Using Context Managers for File I/O</h3>
       <p>Using context managers (the <code>with</code> statement) ensures that files are properly closed after their suite finishes, even if an exception is raised.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Using the 'with' statement for file I/O
 with open('example.txt', 'w') as file:
   file.write('Hello, world!')
@@ -4024,7 +3984,7 @@ with open('example.txt', 'r') as file:
 
       <h3>Handling File Exceptions</h3>
       <p>When working with files, it's important to handle exceptions that may occur. For example, the file you're trying to read might not exist.</p>
-      <pre><code>
+      <pre><code class="language-python">
 try:
   with open('nonexistent_file.txt', 'r') as file:
       content = file.read()
@@ -4039,7 +3999,7 @@ except FileNotFoundError:
 
       <h4>CSV Files</h4>
       <p>CSV (Comma-Separated Values) is a common file format for tabular data. Python's built-in <code>csv</code> module makes it easy to read and write CSV files.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import csv
 
 # Writing to a CSV file
@@ -4058,7 +4018,7 @@ with open('example.csv', 'r') as csvfile:
 
       <h4>JSON Files</h4>
       <p>JSON (JavaScript Object Notation) is a popular data interchange format. Python's built-in <code>json</code> module makes it easy to read and write JSON files.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import json
 
 # Writing to a JSON file
@@ -4079,7 +4039,7 @@ with open('example.json', 'r') as jsonfile:
 
       <h3>Assignment 1</h3>
       <p>Write a Python program that reads from a text file, counts the number of words, and prints the count. Use a context manager to open and close the file.</p>
-      <pre><code>
+      <pre><code class="language-python">
 def count_words(file_path):
   with open(file_path, 'r') as file:
       content = file.read()
@@ -4092,7 +4052,7 @@ count_words('example.txt')
 
       <h3>Assignment 2</h3>
       <p>Write a Python program that reads a CSV file and prints each row in a readable format. Use a context manager to open and close the file.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import csv
 
 def read_csv(file_path):
@@ -4106,7 +4066,7 @@ read_csv('example.csv')
       
       <h3>Assignment 3</h3>
       <p>Write a Python program that reads a JSON file, updates a value, and writes the updated data back to the JSON file. Use a context manager to open and close the file.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import json
 
 def update_json(file_path, key, new_value):
@@ -4140,7 +4100,7 @@ update_json('example.json', 'age', 35)
           <p>CSV (Comma-Separated Values) is a common file format for storing tabular data. Python's built-in <code>csv</code> module makes it easy to read from and write to CSV files.</p>
   
           <h4>Writing to a CSV File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import csv
   
   # Writing to a CSV file
@@ -4152,7 +4112,7 @@ update_json('example.json', 'age', 35)
           </code></pre>
   
           <h4>Reading from a CSV File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import csv
   
   # Reading from a CSV file
@@ -4166,7 +4126,7 @@ update_json('example.json', 'age', 35)
           <p>JSON (JavaScript Object Notation) is a popular data interchange format. Python's built-in <code>json</code> module makes it easy to read from and write to JSON files.</p>
   
           <h4>Writing to a JSON File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import json
   
   # Writing to a JSON file
@@ -4180,7 +4140,7 @@ update_json('example.json', 'age', 35)
           </code></pre>
   
           <h4>Reading from a JSON File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import json
   
   # Reading from a JSON file
@@ -4193,7 +4153,7 @@ update_json('example.json', 'age', 35)
           <p>XML (eXtensible Markup Language) is a widely used format for storing and transporting data. Python's <code>xml.etree.ElementTree</code> module provides methods to parse and create XML data.</p>
   
           <h4>Writing to an XML File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import xml.etree.ElementTree as ET
   
   # Creating an XML structure
@@ -4211,7 +4171,7 @@ update_json('example.json', 'age', 35)
           </code></pre>
   
           <h4>Reading from an XML File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import xml.etree.ElementTree as ET
   
   # Reading from an XML file
@@ -4229,7 +4189,7 @@ update_json('example.json', 'age', 35)
           <p>Excel is a widely used spreadsheet format. Python's <code>pandas</code> library provides robust methods for reading from and writing to Excel files.</p>
   
           <h4>Writing to an Excel File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import pandas as pd
   
   # Creating a DataFrame
@@ -4245,7 +4205,7 @@ update_json('example.json', 'age', 35)
           </code></pre>
   
           <h4>Reading from an Excel File</h4>
-          <pre><code>
+          <pre><code class="language-python">
   import pandas as pd
   
   # Reading from an Excel file
@@ -4255,7 +4215,7 @@ update_json('example.json', 'age', 35)
   
           <h3>Assignment 1</h3>
           <p>Write a Python program that reads data from a CSV file and writes the data to a JSON file. Use context managers to handle file operations.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import csv
   import json
   
@@ -4272,7 +4232,7 @@ update_json('example.json', 'age', 35)
   
           <h3>Assignment 2</h3>
           <p>Write a Python program that reads data from a JSON file and writes the data to an XML file. Use context managers to handle file operations.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import json
   import xml.etree.ElementTree as ET
   
@@ -4294,7 +4254,7 @@ update_json('example.json', 'age', 35)
   
           <h3>Assignment 3</h3>
           <p>Write a Python program that reads data from an Excel file and writes the data to a CSV file. Use context managers to handle file operations.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import pandas as pd
   
   def excel_to_csv(excel_file_path, csv_file_path):
@@ -4338,7 +4298,7 @@ update_json('example.json', 'age', 35)
 
       <h3>Installing Libraries</h3>
       <p>The most common way to install Python libraries is using pip, the Python package installer. Pip allows you to install libraries from the Python Package Index (PyPI) and other sources.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Installing a library using pip
 pip install requests
       </code></pre>
@@ -4346,7 +4306,7 @@ pip install requests
 
       <h3>Importing Libraries</h3>
       <p>Once a library is installed, you can import it into your Python script using the <code>import</code> statement.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Importing a library
 import requests
 
@@ -4365,7 +4325,7 @@ print(response.json())
         <li><code>sys</code>: System-specific parameters and functions</li>
         <li><code>re</code>: Regular expressions</li>
       </ul>
-      <pre><code>
+      <pre><code class="language-python">
 import math
 import datetime
 import os
@@ -4401,7 +4361,7 @@ print(matches)  # Output: ['This', 'example', 'sentence', 'with', 'some', 'long'
         <li><code>requests</code>: HTTP requests</li>
         <li><code>beautifulsoup4</code>: Web scraping</li>
       </ul>
-      <pre><code>
+      <pre><code class="language-python">
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -4433,7 +4393,7 @@ print(soup.h1.text)  # Output: Title
 
       <h3>Managing Dependencies with Virtual Environments</h3>
       <p>Virtual environments are a way to isolate your project's dependencies, ensuring that your project uses the correct versions of libraries without interfering with other projects. You can create a virtual environment using the <code>venv</code> module.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Creating a virtual environment
 python -m venv myenv
 
@@ -4450,7 +4410,7 @@ pip install requests
 
       <h3>Assignment 1</h3>
       <p>Write a Python program that uses the <code>requests</code> library to fetch data from a public API and print the JSON response. Ensure you install the <code>requests</code> library using pip.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import requests
 
 def fetch_data(api_url):
@@ -4463,7 +4423,7 @@ fetch_data('https://api.example.com/data')
 
       <h3>Assignment 2</h3>
       <p>Write a Python program that uses the <code>pandas</code> library to create a DataFrame from a dictionary and save it to a CSV file. Ensure you install the <code>pandas</code> library using pip.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import pandas as pd
 
 def create_dataframe(data, csv_file):
@@ -4477,7 +4437,7 @@ create_dataframe(data, 'example.csv')
 
       <h3>Assignment 3</h3>
       <p>Write a Python program that uses the <code>matplotlib</code> library to plot a simple line graph. Ensure you install the <code>matplotlib</code> library using pip.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import matplotlib.pyplot as plt
 
 def plot_graph(x, y):
@@ -4512,7 +4472,7 @@ plot_graph(x, y)
   
           <h3>NumPy</h3>
           <p>NumPy (Numerical Python) is a library for numerical computing. It provides support for large multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing NumPy
   pip install numpy
   
@@ -4530,7 +4490,7 @@ plot_graph(x, y)
   
           <h3>Pandas</h3>
           <p>Pandas is a powerful library for data manipulation and analysis. It provides data structures like DataFrames, which are ideal for handling tabular data.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Pandas
   pip install pandas
   
@@ -4549,7 +4509,7 @@ plot_graph(x, y)
   
           <h3>Matplotlib</h3>
           <p>Matplotlib is a plotting library for creating static, animated, and interactive visualizations in Python. It is widely used for generating plots, histograms, bar charts, and more.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Matplotlib
   pip install matplotlib
   
@@ -4566,7 +4526,7 @@ plot_graph(x, y)
   
           <h3>Requests</h3>
           <p>Requests is a simple and elegant library for making HTTP requests. It is widely used for interacting with web APIs.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Requests
   pip install requests
   
@@ -4581,7 +4541,7 @@ plot_graph(x, y)
   
           <h3>BeautifulSoup</h3>
           <p>BeautifulSoup is a library for parsing HTML and XML documents. It is commonly used for web scraping, allowing you to extract data from web pages.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing BeautifulSoup
   pip install beautifulsoup4
   
@@ -4597,7 +4557,7 @@ plot_graph(x, y)
   
           <h3>SciPy</h3>
           <p>SciPy is a library used for scientific and technical computing. It builds on NumPy and provides a large number of higher-level functions that operate on arrays and matrices.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing SciPy
   pip install scipy
   
@@ -4615,7 +4575,7 @@ plot_graph(x, y)
   
           <h3>Scikit-learn</h3>
           <p>Scikit-learn is a machine learning library that provides simple and efficient tools for data analysis and modeling. It includes various algorithms for classification, regression, clustering, and more.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Scikit-learn
   pip install scikit-learn
   
@@ -4646,7 +4606,7 @@ plot_graph(x, y)
   
           <h3>Assignment 1</h3>
           <p>Write a Python program that uses the <code>requests</code> library to fetch data from a public API and print the JSON response. Ensure you install the <code>requests</code> library using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import requests
   
   def fetch_data(api_url):
@@ -4659,7 +4619,7 @@ plot_graph(x, y)
   
           <h3>Assignment 2</h3>
           <p>Write a Python program that uses the <code>pandas</code> library to create a DataFrame from a dictionary and save it to a CSV file. Ensure you install the <code>pandas</code> library using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import pandas as pd
   
   def create_dataframe(data, csv_file):
@@ -4673,7 +4633,7 @@ plot_graph(x, y)
   
           <h3>Assignment 3</h3>
           <p>Write a Python program that uses the <code>matplotlib</code> library to plot a simple line graph. Ensure you install the <code>matplotlib</code> library using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import matplotlib.pyplot as plt
   
   def plot_graph(x, y):
@@ -4690,7 +4650,7 @@ plot_graph(x, y)
   
           <h3>Assignment 4</h3>
           <p>Write a Python program that uses the <code>beautifulsoup4</code> library to scrape the title and paragraph from a simple HTML page. Ensure you install the <code>beautifulsoup4</code> library using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   from bs4 import BeautifulSoup
   
   def scrape_html(html_content):
@@ -4720,7 +4680,7 @@ plot_graph(x, y)
   
           <h3>Django</h3>
           <p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. It includes many built-in features such as an ORM (Object-Relational Mapping), an admin interface, and authentication.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Django
   pip install django
   
@@ -4734,7 +4694,7 @@ plot_graph(x, y)
           <p><strong>Explanation:</strong> The commands above install Django, create a new Django project named "myproject", and start the development server. You can access the server at <code>http://127.0.0.1:8000/</code>.</p>
   
           <h4>Creating a Simple Django App</h4>
-          <pre><code>
+          <pre><code class="language-python">
   # Creating a new app
   python manage.py startapp myapp
   
@@ -4782,7 +4742,7 @@ plot_graph(x, y)
   
           <h3>Flask</h3>
           <p>Flask is a lightweight WSGI web application framework. It is designed with simplicity and flexibility in mind, allowing developers to create web applications with minimal setup.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Flask
   pip install flask
   
@@ -4801,7 +4761,7 @@ plot_graph(x, y)
           <p><strong>Explanation:</strong> The code above installs Flask and creates a simple Flask application that returns "Hello, World!" when accessed at the root URL. The development server is started with <code>app.run(debug=True)</code>.</p>
   
           <h4>Creating a Flask App with Templates and Static Files</h4>
-          <pre><code>
+          <pre><code class="language-python">
   # Creating a Flask app with templates and static files
   from flask import Flask, render_template
   
@@ -4851,7 +4811,7 @@ plot_graph(x, y)
   
           <h3>FastAPI</h3>
           <p>FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints. It is designed for high performance and ease of use, making it a great choice for building RESTful APIs.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing FastAPI and Uvicorn (an ASGI server)
   pip install fastapi uvicorn
   
@@ -4871,7 +4831,7 @@ plot_graph(x, y)
           <p><strong>Explanation:</strong> The code above installs FastAPI and Uvicorn, then creates a simple FastAPI application that returns a JSON response with "Hello, World!" when accessed at the root URL. The Uvicorn server is started with <code>uvicorn.run(app, host='127.0.0.1', port=8000)</code>.</p>
   
           <h4>Creating a FastAPI App with Path Parameters and Request Body</h4>
-          <pre><code>
+          <pre><code class="language-python">
   # Creating a FastAPI app with path parameters and request body
   from fastapi import FastAPI
   from pydantic import BaseModel
@@ -4903,7 +4863,7 @@ plot_graph(x, y)
   
           <h3>Assignment 1</h3>
           <p>Write a Python program that creates a simple Django app with a view that returns "Hello, Django!". Ensure you install Django using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Install Django
   pip install django
   
@@ -4944,7 +4904,7 @@ plot_graph(x, y)
   
           <h3>Assignment 2</h3>
           <p>Write a Python program that creates a simple Flask app with a route that returns "Hello, Flask!". Ensure you install Flask using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Install Flask
   pip install flask
   
@@ -4963,7 +4923,7 @@ plot_graph(x, y)
   
           <h3>Assignment 3</h3>
           <p>Write a Python program that creates a simple FastAPI app with a route that returns a JSON response with "Hello, FastAPI!". Ensure you install FastAPI and Uvicorn using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Install FastAPI and Uvicorn
   pip install fastapi uvicorn
   
@@ -4997,7 +4957,7 @@ plot_graph(x, y)
   
           <h3>Unittest</h3>
           <p>Unittest is a built-in Python module for writing and running tests. It is inspired by the JUnit framework from Java and is suitable for both small and large projects.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Using Unittest
   import unittest
   
@@ -5032,7 +4992,7 @@ plot_graph(x, y)
   
           <h3>Pytest</h3>
           <p>Pytest is a powerful testing framework that makes it easy to write simple and scalable test cases. It is known for its simple syntax, powerful fixtures, and rich plugin architecture.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Installing Pytest
   pip install pytest
   
@@ -5066,7 +5026,7 @@ plot_graph(x, y)
   
           <h3>Doctest</h3>
           <p>Doctest is a module that tests interactive Python examples in docstrings. It is useful for ensuring that code examples in documentation are correct and up-to-date.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Using Doctest
   def add(a, b):
       """
@@ -5098,7 +5058,7 @@ plot_graph(x, y)
   
           <h3>Assignment 1</h3>
           <p>Write a Python program that uses Unittest to test a function that calculates the factorial of a number. Ensure you install Unittest using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   import unittest
   
   def factorial(n):
@@ -5121,7 +5081,7 @@ plot_graph(x, y)
   
           <h3>Assignment 2</h3>
           <p>Write a Python program that uses Pytest to test a function that reverses a string. Ensure you install Pytest using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   # Install Pytest
   pip install pytest
   
@@ -5139,7 +5099,7 @@ plot_graph(x, y)
   
           <h3>Assignment 3</h3>
           <p>Write a Python program that uses Doctest to test a function that checks if a number is prime. Ensure you install Doctest using pip.</p>
-          <pre><code>
+          <pre><code class="language-python">
   def is_prime(n):
       """
       Checks if a number is prime.
@@ -5193,7 +5153,7 @@ plot_graph(x, y)
 
       <h3>SQL Basics</h3>
       <p>SQL is a standard language for interacting with relational databases. Here are some basic SQL commands:</p>
-      <pre><code>
+      <pre><code class="language-python">
 -- Creating a table
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
@@ -5217,7 +5177,7 @@ DELETE FROM users WHERE name = 'Alice';
 
       <h3>Using SQLite with Python</h3>
       <p>SQLite is a lightweight, file-based database that is easy to set up and use. It is included with Python, so no additional installation is required.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import sqlite3
 
 # Connecting to SQLite
@@ -5242,7 +5202,7 @@ conn.close()
 
       <h3>Using PostgreSQL with Python</h3>
       <p>PostgreSQL is a powerful, open-source relational database system. To use PostgreSQL with Python, you need to install the <code>psycopg2</code> library.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Installing psycopg2
 pip install psycopg2
 
@@ -5277,7 +5237,7 @@ conn.close()
 
       <h3>Using SQLAlchemy</h3>
       <p>SQLAlchemy is a powerful ORM (Object-Relational Mapping) library for Python. It provides a high-level abstraction over relational databases, allowing you to work with Python objects instead of raw SQL queries.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Installing SQLAlchemy
 pip install sqlalchemy
 
@@ -5321,7 +5281,7 @@ session.close()
 
       <h3>Assignment 1</h3>
       <p>Write a Python program that uses SQLite to create a table for storing book information (title, author, year), insert a few records, and query all records.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import sqlite3
 
 # Connecting to SQLite
@@ -5347,7 +5307,7 @@ conn.close()
 
       <h3>Assignment 2</h3>
       <p>Write a Python program that uses PostgreSQL to create a table for storing employee information (name, position, salary), insert a few records, and query all records. Ensure you install <code>psycopg2</code> using pip.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import psycopg2
 
 # Connecting to PostgreSQL
@@ -5379,7 +5339,7 @@ conn.close()
 
       <h3>Assignment 3</h3>
       <p>Write a Python program that uses SQLAlchemy to create a table for storing product information (name, description, price), insert a few records, and query all records. Ensure you install SQLAlchemy using pip.</p>
-      <pre><code>
+      <pre><code class="language-python">
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -5450,11 +5410,11 @@ session.close()
           <li><a href="https://git-scm.com/download/linux">Linux</a></li>
         </ul>
         <p>After installing Git, you can verify the installation by running the following command in your terminal or command prompt:</p>
-        <pre><code>git --version</code></pre>
+        <pre><code class="language-python">git --version</code></pre>
 
         <h3>Basic Git Commands</h3>
         <p>Here are some basic Git commands to get you started:</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Configuring Git with your user name and email
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
@@ -5487,7 +5447,7 @@ git pull origin main
 
         <h3>Working with Remote Repositories</h3>
         <p>Remote repositories allow you to collaborate with others by sharing your code on platforms like GitHub, GitLab, and Bitbucket. Here are some commands for working with remote repositories:</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Adding a remote repository
 git remote add origin https://github.com/user/repository.git
 
@@ -5507,7 +5467,7 @@ git remote -v
 
         <h3>Branching and Merging</h3>
         <p>Branches allow you to work on different features or fixes without affecting the main codebase. Merging combines changes from different branches. Here are some commands for branching and merging:</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Creating a new branch
 git branch feature-branch
 
@@ -5543,7 +5503,7 @@ git branch
 
         <h3>Assignment 1</h3>
         <p>Write a series of Git commands to create a new repository, add a file, commit the changes, and push it to a new GitHub repository.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Initialize a new Git repository
 git init
 
@@ -5565,7 +5525,7 @@ git push -u origin main
 
         <h3>Assignment 2</h3>
         <p>Write a series of Git commands to create a new branch, make changes to a file, commit the changes, and merge the branch back into the main branch.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Create a new branch
 git branch feature-branch
 
@@ -5593,7 +5553,7 @@ git branch -d feature-branch
 
         <h3>Assignment 3</h3>
         <p>Write a series of Git commands to clone an existing repository, create a new branch, make changes, push the branch to GitHub, and create a pull request on GitHub.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Clone an existing repository
 git clone https://github.com/user/existing-repository.git
 
@@ -5668,7 +5628,7 @@ git push -u origin feature-branch
 
       <h3>Virtual Environments</h3>
       <p>Virtual environments are used to create isolated Python environments for different projects, ensuring that each project has its own dependencies and does not interfere with others.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Creating a virtual environment
 python -m venv myenv
 
@@ -5688,7 +5648,7 @@ deactivate
 
       <h3>Python Package Management</h3>
       <p>Python package management is crucial for managing dependencies in your projects. The most commonly used package manager is <code>pip</code>. Here are some basic commands:</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Installing a package
 pip install package-name
 
@@ -5708,7 +5668,7 @@ pip install -r requirements.txt
 
       <h3>Assignment 1</h3>
       <p>Write a series of steps to set up a new Python project using PyCharm, including creating a virtual environment and installing necessary packages.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Download and install PyCharm
 # Step 2: Open PyCharm and create a new project
 # Step 3: Create a virtual environment
@@ -5722,7 +5682,7 @@ pip install package-name
 
       <h3>Assignment 2</h3>
       <p>Write a Python script that sets up a virtual environment, installs the Flask package, and lists all installed packages.</p>
-      <pre><code>
+      <pre><code class="language-python">
 import os
 import subprocess
 
@@ -5743,7 +5703,7 @@ subprocess.run(['pip', 'list'])
 
       <h3>Assignment 3</h3>
       <p>Write a series of Git commands to create a new repository, add a file, commit the changes, and push it to a new GitHub repository.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Initialize a new Git repository
 git init
 
@@ -5808,7 +5768,7 @@ git push -u origin main
           <li><strong>GitHub Actions:</strong> A CI/CD service integrated with GitHub that allows you to automate workflows directly in your GitHub repository.</li>
         </ul>
         <p>Example: Setting Up a CI Pipeline with GitHub Actions</p>
-        <pre><code>
+        <pre><code class="language-python">
 # .github/workflows/ci.yml
 name: CI
 
@@ -5851,7 +5811,7 @@ jobs:
 
         <h3>Assignment 1</h3>
         <p>Write a series of steps to set up a Trello board for a software development project, including creating lists for different stages of the workflow and adding tasks.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Step 1: Create a Trello account at trello.com
 # Step 2: Create a new board for your project
 # Step 3: Add lists for different stages (To Do, In Progress, Done)
@@ -5860,7 +5820,7 @@ jobs:
 
         <h3>Assignment 2</h3>
         <p>Write a GitHub Actions workflow file to automate testing for a Python project, including steps for checking out the code, setting up Python, installing dependencies, and running tests.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # .github/workflows/ci.yml
 name: CI
 
@@ -5887,7 +5847,7 @@ jobs:
 
         <h3>Assignment 3</h3>
         <p>Write a series of steps to implement Scrum for a software development project, including defining roles, creating a product backlog, planning sprints, and conducting daily stand-up meetings.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Step 1: Create a Scrum team (Product Owner, Scrum Master, Development Team)
 # Step 2: Define a product backlog with user stories and prioritize them
 # Step 3: Plan sprints (2-4 weeks) with tasks from the backlog
@@ -5929,7 +5889,7 @@ jobs:
         <li><strong>DigitalOcean:</strong> A cloud infrastructure provider that offers virtual private servers (VPS) for deploying applications.</li>
       </ul>
       <p>Example: Deploying to Heroku</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Install the Heroku CLI
 # Follow the instructions at https://devcenter.heroku.com/articles/heroku-cli
 
@@ -5964,7 +5924,7 @@ heroku open
         <li>Start the application and ensure it runs smoothly.</li>
       </ol>
       <p>Example: Setting Up a VPS on DigitalOcean</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Create a new Droplet on DigitalOcean
 # Follow the instructions at https://www.digitalocean.com/docs/droplets/how-to/create/
 
@@ -6009,7 +5969,7 @@ gunicorn --bind 0.0.0.0:8000 app:app
 
       <h3>Deploying with Docker</h3>
       <p>Docker is a tool that allows you to package your application and its dependencies into a container, making it easy to deploy and run consistently across different environments.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Install Docker
 # Follow the instructions at https://docs.docker.com/get-docker/
 
@@ -6041,7 +6001,7 @@ docker run -d -p 8000:8000 my-app
         <li><strong>Microsoft Azure App Service:</strong> A platform for building, deploying, and scaling web apps.</li>
       </ul>
       <p>Example: Deploying to AWS Elastic Beanstalk</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Install the Elastic Beanstalk CLI
 pip install awsebcli
 
@@ -6059,7 +6019,7 @@ eb open
       <h3>Continuous Deployment</h3>
       <p>Continuous Deployment (CD) is a practice where code changes are automatically deployed to production after passing automated tests. CD ensures that new features and fixes are delivered to users quickly and reliably.</p>
       <p>Example: Setting Up Continuous Deployment with GitHub Actions</p>
-      <pre><code>
+      <pre><code class="language-python">
 # .github/workflows/deploy.yml
 name: Deploy
 
@@ -6094,7 +6054,7 @@ deploy:
 
       <h3>Assignment 1</h3>
       <p>Write a series of steps to deploy a Python web application to Heroku, including installing the Heroku CLI, creating a new app, adding a Procfile, and pushing your code.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Step 1: Install the Heroku CLI
 # Follow the instructions at https://devcenter.heroku.com/articles/heroku-cli
 
@@ -6119,7 +6079,7 @@ heroku open
 
       <h3>Assignment 2</h3>
       <p>Write a Dockerfile for a Python web application and provide the steps to build and run the Docker container.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # Dockerfile
 FROM python:3.8-slim-buster
 
@@ -6142,7 +6102,7 @@ docker run -d -p 8000:8000 my-app
 
       <h3>Assignment 3</h3>
       <p>Write a GitHub Actions workflow file for continuous deployment of a Python web application to Heroku.</p>
-      <pre><code>
+      <pre><code class="language-python">
 # .github/workflows/deploy.yml
 name: Deploy
 
@@ -6206,7 +6166,7 @@ deploy:
 
         <h3>Input Validation and Sanitization</h3>
         <p>Validating and sanitizing user input is crucial to prevent security vulnerabilities such as SQL injection and XSS attacks.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Example: Validating and sanitizing user input in Python
 import re
 
@@ -6223,7 +6183,7 @@ else:
 
         <h3>Authentication and Authorization</h3>
         <p>Authentication verifies the identity of users, while authorization determines what actions users are allowed to perform. Implementing strong authentication and authorization mechanisms is vital for application security.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Example: Implementing authentication using Flask
 from flask import Flask, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6255,7 +6215,7 @@ if __name__ == '__main__':
 
         <h3>Data Encryption</h3>
         <p>Encrypting sensitive data helps protect it from unauthorized access. Python provides libraries such as <code>cryptography</code> and <code>PyCryptodome</code> for implementing encryption.</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Example: Encrypting and decrypting data using cryptography
 from cryptography.fernet import Fernet
 
@@ -6302,7 +6262,7 @@ print("Decrypted:", decrypted_data.decode())
           <li><strong>Security Audits:</strong> Reviewing security policies, practices, and configurations.</li>
         </ul>
         <p>Example: Using Bandit for Static Analysis</p>
-        <pre><code>
+        <pre><code class="language-python">
 # Install Bandit
 pip install bandit
 
@@ -6313,7 +6273,7 @@ bandit -r path/to/your/project
 
         <h3>Assignment 1</h3>
         <p>Write a Python function that validates an email address using regular expressions and returns whether it is valid or not.</p>
-        <pre><code>
+        <pre><code class="language-python">
 import re
 
 def is_valid_email(email):
@@ -6327,7 +6287,7 @@ print(is_valid_email("invalid-email"))     # Output: False
 
         <h3>Assignment 2</h3>
         <p>Write a Python script that encrypts and decrypts a given text using the <code>cryptography</code> library.</p>
-        <pre><code>
+        <pre><code class="language-python">
 from cryptography.fernet import Fernet
 
 # Generate a key
@@ -6352,7 +6312,7 @@ print("Decrypted:", decrypted)
 
         <h3>Assignment 3</h3>
         <p>Write a Python script that uses environment variables to securely store and retrieve a database connection string.</p>
-        <pre><code>
+        <pre><code class="language-python">
 import os
 
 # Set an environment variable (this would typically be done outside the script, e.g., in a .env file or the system environment)
@@ -6395,7 +6355,7 @@ print("Database URL:", database_url)
 
         <h3>Creating RESTful APIs with Flask</h3>
         <p>Flask is a lightweight web framework for Python that makes it easy to create RESTful APIs. Below is an example of how to create a simple RESTful API using Flask:</p>
-        <pre><code>
+        <pre><code class="language-python">
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -6445,7 +6405,7 @@ if __name__ == '__main__':
 
         <h3>Consuming APIs with Requests</h3>
         <p>The <code>requests</code> library in Python makes it easy to send HTTP requests and interact with APIs. Below is an example of how to consume an API using the <code>requests</code> library:</p>
-        <pre><code>
+        <pre><code class="language-python">
 import requests
 
 # Sending a GET request
@@ -6466,7 +6426,7 @@ if response.status_code == 201:
 
         <h3>Using FastAPI for Building APIs</h3>
         <p>FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints. Below is an example of how to create a simple API using FastAPI:</p>
-        <pre><code>
+        <pre><code class="language-python">
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -6515,7 +6475,7 @@ if __name__ == '__main__':
 
         <h3>Assignment 1</h3>
         <p>Write a Python script using Flask to create an API with endpoints to manage a list of users (create, read, update, delete).</p>
-        <pre><code>
+        <pre><code class="language-python">
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -6564,7 +6524,7 @@ if __name__ == '__main__':
 
         <h3>Assignment 2</h3>
         <p>Write a Python script using the <code>requests</code> library to consume an API that provides weather information. Fetch the current weather for a given city and display the results.</p>
-        <pre><code>
+        <pre><code class="language-python">
 import requests
 
 # Replace with your actual API key
@@ -6584,7 +6544,7 @@ else:
 
         <h3>Assignment 3</h3>
         <p>Write a Python script using FastAPI to create an API with endpoints to manage a list of products (create, read, update, delete).</p>
-        <pre><code>
+        <pre><code class="language-python">
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -6634,23 +6594,215 @@ if __name__ == '__main__':
 ];
 const PythonReadingMaterials = () => {
   const [activeSection, setActiveSection] = useState('introduction');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeTab, setActiveTab] = useState('setup');
+  const [activeIdeTab, setActiveIdeTab] = useState('vs-code');
+  const [showCode, setShowCode] = useState(false);
+  
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.pageYOffset > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const renderSectionContent = (section) => {
     if (section.id === activeSection) {
+      const contentParts = section.content.split(/(<pre><code class="language-python">[\s\S]*?<\/code><\/pre>)/g);
+
       return (
-        <div key={section.id} dangerouslySetInnerHTML={{ __html: section.content }} />
+        <div key={section.id}>
+          {contentParts.map((part, index) => {
+            if (part.startsWith('<pre><code class="language-python">')) {
+              const codeContent = part.match(/<code class="language-python">([\s\S]*?)<\/code>/)[1];
+              return (
+                <SyntaxHighlighter key={index} language="python" style={customTheme} 
+                customStyle={{
+                    maxHeight: '50%',  // Sets a fixed maximum height for the code block
+                    overflowY: 'auto',   // Allows vertical scrolling
+                    overflowX: 'auto',   // Allows horizontal scrolling if needed
+                    padding: '15px',     // Adds padding inside the code block
+                    borderRadius: '5px', // Optional: Adds rounded corners
+                  }} >
+                  {codeContent}
+                </SyntaxHighlighter>
+              );
+            } else {
+              return <div key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+            }
+          })}
+        </div>
       );
     }
+
     if (section.subSections) {
       return section.subSections.map(subSection => (
         activeSection === subSection.id && (
-          <div key={subSection.id} dangerouslySetInnerHTML={{ __html: subSection.content }} />
+          <div key={subSection.id}>
+            {subSection.content.split(/(<pre><code class="language-python">[\s\S]*?<\/code><\/pre>)/g).map((part, index) => {
+              if (part.startsWith('<pre><code class="language-python">')) {
+                const codeContent = part.match(/<code class="language-python">([\s\S]*?)<\/code>/)[1];
+                return (
+                  <SyntaxHighlighter key={index} language="python" style={customTheme} 
+                  customStyle={{
+                    maxHeight: '100%', // Sets a fixed maximum height for the code block
+                    overflowY: 'auto',   // Allows vertical scrolling
+                    overflowX: 'auto',   // Allows horizontal scrolling if needed
+                    padding: '15px',     // Adds padding inside the code block
+                    borderRadius: '5px', // Optional: Adds rounded corners
+                  }} >
+                    {codeContent}
+                  </SyntaxHighlighter>
+                );
+              } else {
+                return <div key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+              }
+            })}
+          </div>
         )
       ));
     }
+
     return null;
   };
 
+const handleSectionChange = (sectionId) => {
+      setActiveSection(sectionId);
+      setIsSidebarOpen(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  
+    const renderInteractiveContent = () => {
+      if (activeSection !== 'introduction') return null;
+  
+      return (
+        <div className="python-introduction">
+          <h2 className="text-3xl font-bold mb-6">Introduction to Python</h2>
+          <p className="mb-4">Python is a versatile and powerful programming language known for its simplicity and readability. It’s widely used for web development, data science, automation, and more.</p>
+          
+          <h3 className="text-2xl font-semibold mb-4">Key Features of Python:</h3>
+          <ul className="list-disc list-inside mb-6">
+            <li>Easy-to-read syntax</li>
+            <li>Dynamic typing</li>
+            <li>Comprehensive standard library</li>
+            <li>Interpreted language</li>
+            <li>Extensive community support</li>
+            <li>Versatile across different domains</li>
+          </ul>
+      
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="setup">Environment Setup</TabsTrigger>
+              <TabsTrigger value="usage">Using IDEs</TabsTrigger>
+              <TabsTrigger value="hello-world">Hello World</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="setup">
+              <h3 className="text-2xl font-semibold mb-4">Setting Up Your Python Development Environment</h3>
+              <p className="mb-4">To start developing with Python, you'll need an Integrated Development Environment (IDE) or a text editor. Here are three popular options:</p>
+              
+              <Tabs value={activeIdeTab} onValueChange={setActiveIdeTab}>
+                <TabsList>
+                  <TabsTrigger value="pycharm">PyCharm</TabsTrigger>
+                  <TabsTrigger value="vscode">VS Code</TabsTrigger>
+                  <TabsTrigger value="jupyter">Jupyter Notebook</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="pycharm">
+                  <h4 className="text-xl font-semibold mt-4">PyCharm</h4>
+                  <p className="mb-4">PyCharm is a popular IDE for Python development with powerful features for web development, data science, and more.</p>
+                  <ol className="list-decimal list-inside ml-4 space-y-2">
+                    <li>Visit the <a href="https://www.jetbrains.com/pycharm/download/" className="text-blue-600 hover:underline">PyCharm download page</a>.</li>
+                    <li>Download the appropriate version for your operating system.</li>
+                    <li>Run the installer and follow the installation wizard.</li>
+                    <li>Start a new Python project by selecting "Create New Project".</li>
+                  </ol>
+                </TabsContent>
+      
+                <TabsContent value="vscode">
+                  <h4 className="text-xl font-semibold mt-4">Visual Studio Code</h4>
+                  <p className="mb-4">VS Code is a lightweight, versatile text editor that can be set up for Python development with the right extensions.</p>
+                  <ol className="list-decimal list-inside ml-4 space-y-2">
+                    <li>Download VS Code from the <a href="https://code.visualstudio.com/download" className="text-blue-600 hover:underline">official website</a>.</li>
+                    <li>Install the Python extension from the Extensions view.</li>
+                    <li>Configure the Python interpreter in VS Code.</li>
+                    <li>Start writing Python scripts!</li>
+                  </ol>
+                </TabsContent>
+      
+                <TabsContent value="jupyter">
+                  <h4 className="text-xl font-semibold mt-4">Jupyter Notebook</h4>
+                  <p className="mb-4">Jupyter Notebook is widely used for data science and machine learning projects, offering an interactive environment.</p>
+                  <ol className="list-decimal list-inside ml-4 space-y-2">
+                    <li>Install Anaconda, which comes with Jupyter Notebook.</li>
+                    <li>Open Jupyter Notebook from the Anaconda Navigator.</li>
+                    <li>Create a new Python notebook.</li>
+                    <li>Start coding in an interactive environment!</li>
+                  </ol>
+                </TabsContent>
+              </Tabs>
+            </TabsContent>
+            
+            <TabsContent value="usage">
+              <h3 className="text-2xl font-semibold mb-4">Using IDEs for Python Development</h3>
+              <p className="mb-4">Once you have your IDE or text editor set up, here's how to start a new Python project:</p>
+              
+              <h4 className="text-xl font-semibold mt-4">In PyCharm / VS Code:</h4>
+              <ol className="list-decimal list-inside ml-4 space-y-2 mb-4">
+                <li>Open the IDE and click on "New Project".</li>
+                <li>Select "Python" as the project type.</li>
+                <li>Choose a project name and location.</li>
+                <li>Click "Create" to set up the project.</li>
+              </ol>
+      
+              <h4 className="text-xl font-semibold mt-4">In Jupyter Notebook:</h4>
+              <ol className="list-decimal list-inside ml-4 space-y-2">
+                <li>Create a new notebook in your desired directory.</li>
+                <li>Select "Python" as the kernel.</li>
+                <li>Start coding interactively in cells!</li>
+              </ol>
+            </TabsContent>
+            
+            <TabsContent value="hello-world">
+              <h3 className="text-2xl font-semibold mb-4">Your First Python Program: Hello World</h3>
+              <p className="mb-4">Let's write a simple "Hello World" program in Python:</p>
+              
+              <Button 
+                onClick={() => setShowCode(!showCode)}
+                className="mb-4"
+              >
+                <Code className="mr-2 h-4 w-4" /> {showCode ? "Hide" : "Show"} Code
+              </Button>
+              
+              {showCode && (
+                <SyntaxHighlighter language="python" style={customTheme}>
+                  {`print("Hello, Python World!")`}
+                </SyntaxHighlighter>
+              )}
+              
+              <h4 className="text-xl font-semibold mt-6">Understanding the Code:</h4>
+              <ul className="list-disc list-inside ml-4 space-y-2">
+                <li><code>print()</code>: Function that outputs text to the console.</li>
+              </ul>
+              
+              <p className="mt-4">This simple program demonstrates several key features of Python:</p>
+              <ul className="list-disc list-inside ml-4 space-y-2">
+                <li>Python uses indentation to define code blocks.</li>
+                <li>Python has a simple and clean syntax.</li>
+              </ul>
+            </TabsContent>
+          </Tabs>
+        </div>
+      );
+    };
   return (
     <HelmetProvider>
     <div className="python-reading-page">
@@ -6704,32 +6856,35 @@ const PythonReadingMaterials = () => {
       </script>
         </Helmet>
       <Header />
-      <div className="content-container">
-        <nav className="sidebar">
-          <h2>Contents</h2>
-          <ul>
-            {sections.map(section => (
-              <li key={section.id}>
-                <button onClick={() => setActiveSection(section.id)}>{section.title}</button>
-                {section.subSections && (
-                  <ul>
-                    {section.subSections.map(subSection => (
-                      <li key={subSection.id}>
-                        <button onClick={() => setActiveSection(subSection.id)}>{subSection.title}</button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="main-content">
-          {sections.map(section => renderSectionContent(section))}
+      <button
+          className="sidebar-toggle"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+        >
+          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <div className="content-container">
+          <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+            <h2>Contents</h2>
+            <ul>
+              {sections.map(section => (
+                <li key={section.id}>
+                  <button onClick={() => handleSectionChange(section.id)}>{section.title}</button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="main-content">
+            {renderInteractiveContent()}
+            {sections.map(section => renderSectionContent(section))}
+          </div>
         </div>
+        {showScrollTop && (
+          <button className="scroll-to-top" onClick={scrollToTop}>
+            <ArrowUp />
+          </button>
+        )}
       </div>
-    </div>
     </HelmetProvider>
   );
 };
